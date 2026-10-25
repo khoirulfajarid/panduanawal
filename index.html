@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProductReceiver — Portal Serah Terima Produk Digital Resmi</title>
+  <meta name="description" content="Portal serah terima produk digital resmi, panduan aktivasi kelas, token akses, dan komunitas belajar eksklusif." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN + Nimbus Cloud Handover Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'on-secondary-container': '#004d6a',
+            'surface-container-high': '#e2e7ff',
+            'primary-fixed-dim': '#93ccff',
+            'on-error': '#ffffff',
+            'on-secondary-fixed': '#001e2c',
+            'surface-container-low': '#f2f3ff',
+            'on-primary-container': '#fdfcff',
+            'inverse-primary': '#93ccff',
+            'error': '#ba1a1a',
+            'on-primary-fixed': '#001d31',
+            'tertiary-fixed-dim': '#4edea3',
+            'primary-fixed': '#cce5ff',
+            'error-container': '#ffdad6',
+            'on-primary': '#ffffff',
+            'inverse-on-surface': '#eef0ff',
+            'inverse-surface': '#283044',
+            'background': '#faf8ff',
+            'surface-bright': '#faf8ff',
+            'on-secondary': '#ffffff',
+            'on-tertiary': '#ffffff',
+            'surface-container-highest': '#dae2fd',
+            'secondary-container': '#40c2fd',
+            'surface': '#faf8ff',
+            'secondary-fixed-dim': '#7bd0ff',
+            'on-error-container': '#93000a',
+            'surface-container-lowest': '#ffffff',
+            'tertiary-container': '#00855b',
+            'tertiary': '#006947',
+            'outline-variant': '#bfc7d2',
+            'primary-container': '#007bb9',
+            'on-tertiary-fixed-variant': '#005236',
+            'outline': '#707881',
+            'on-tertiary-container': '#f5fff6',
+            'surface-variant': '#dae2fd',
+            'secondary': '#00668a',
+            'surface-dim': '#d2d9f4',
+            'on-secondary-fixed-variant': '#004c69',
+            'on-background': '#131b2e',
+            'on-primary-fixed-variant': '#004b73',
+            'on-surface': '#131b2e',
+            'primary': '#006194',
+            'on-surface-variant': '#3f4850',
+            'tertiary-fixed': '#6ffbbe',
+            'surface-tint': '#006398',
+            'secondary-fixed': '#c4e7ff',
+            'surface-container': '#eaedff',
+            'on-tertiary-fixed': '#002113'
+          },
+          borderRadius: {
+            DEFAULT: '1rem',
+            lg: '2rem',
+            xl: '3rem',
+            full: '9999px'
+          },
+          spacing: {
+            'space-xl': '2.5rem',
+            'space-lg': '1.5rem',
+            'space-md': '1rem',
+            'space-sm': '0.5rem',
+            'space-xs': '0.25rem',
+            'gutter': '1.5rem',
+            'gutter-mobile': '1rem',
+            'margin': '2rem',
+            'margin-mobile': '1rem',
+            'margin-desktop': '3rem'
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+            'headline-lg': ['Plus Jakarta Sans', 'sans-serif'],
+            'headline-md': ['Plus Jakarta Sans', 'sans-serif'],
+            'headline-sm': ['Plus Jakarta Sans', 'sans-serif'],
+            'body-lg': ['Plus Jakarta Sans', 'sans-serif'],
+            'body-md': ['Plus Jakarta Sans', 'sans-serif'],
+            'body-sm': ['Plus Jakarta Sans', 'sans-serif'],
+            'label-lg': ['Plus Jakarta Sans', 'sans-serif'],
+            'label-md': ['Plus Jakarta Sans', 'sans-serif'],
+            'caption': ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Stylesheet Kustom Nimbus Cloud Handover -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Google Identity Services (OAuth 2.0 Resmi) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="font-sans text-[15px] leading-6 text-on-surface antialiased selection:bg-primary-fixed selection:text-primary">
+
+  <!-- ========================================================================
+       LAYER INTERAKTIF: CUSTOM MAGNETIC CURSOR & KUCING IMUT ANABUL ESCORT
+       ======================================================================== -->
+  <div id="pr-cursor-dot" aria-hidden="true"></div>
+  <div id="pr-cursor-ring" aria-hidden="true"></div>
+
+  <div id="anabul-cursor-escort" aria-hidden="true">
+    <span class="anabul-heart-pop">🐾✨</span>
+    <div class="anabul-float-body">
+      <svg class="w-12 h-12 drop-shadow-[0_8px_16px_rgba(2,132,199,0.28)]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ekor Kucing Bergoyang -->
+        <path class="anabul-tail" d="M46 45 C56 42, 60 31, 54 26 C51 24, 48 28, 50 33" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round"/>
+        <path class="anabul-tail" d="M46 45 C56 42, 60 31, 54 26" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+        <!-- Telinga Kiri & Kanan -->
+        <g class="anabul-ear-left">
+          <polygon points="14,11 26,22 11,26" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="1.5" stroke-linejoin="round"/>
+          <polygon points="16,14 23,21 14,23" fill="#FDA4AF"/>
+        </g>
+        <g>
+          <polygon points="50,11 53,26 38,22" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="1.5" stroke-linejoin="round"/>
+          <polygon points="48,14 50,23 41,21" fill="#FDA4AF"/>
+        </g>
+        <!-- Badan Mungil -->
+        <ellipse cx="32" cy="48" rx="13" ry="9" fill="#FFFFFF" stroke="#E0F2FE" stroke-width="1.5"/>
+        <!-- Kepala Bulat Empuk -->
+        <circle cx="32" cy="31" r="18" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="1.5"/>
+        <!-- Pipi Merona -->
+        <ellipse cx="20" cy="35" rx="3.2" ry="1.8" fill="#FECDD3" opacity="0.85"/>
+        <ellipse cx="44" cy="35" rx="3.2" ry="1.8" fill="#FECDD3" opacity="0.85"/>
+        <!-- Mata Berkedip & Melirik -->
+        <g class="anabul-eyes-blink" id="anabul-pupils">
+          <circle cx="25" cy="30" r="3.4" fill="#006194"/>
+          <circle cx="39" cy="30" r="3.4" fill="#006194"/>
+          <circle cx="26.1" cy="28.8" r="1.2" fill="#FFFFFF"/>
+          <circle cx="40.1" cy="28.8" r="1.2" fill="#FFFFFF"/>
+        </g>
+        <!-- Hidung & Mulut Kawaii (:3) -->
+        <polygon points="32,35.5 30.2,33.5 33.8,33.5" fill="#FB7185"/>
+        <path d="M28.5 37 Q30.3 39.2 32 37 Q33.7 39.2 35.5 37" stroke="#006194" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+        <!-- Kumis Halus -->
+        <line x1="11" y1="32" x2="18" y2="33" stroke="#94A3B8" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="11" y1="36" x2="18" y2="35.5" stroke="#94A3B8" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="46" y1="33" x2="53" y2="32" stroke="#94A3B8" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="46" y1="35.5" x2="53" y2="36" stroke="#94A3B8" stroke-width="1.3" stroke-linecap="round"/>
+        <!-- Kalung Biru & Lonceng Emas -->
+        <path d="M21 44 C26 47, 38 47, 43 44" stroke="#0284C7" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="32" cy="46.5" r="3.2" fill="#F59E0B" stroke="#FEF3C7" stroke-width="1"/>
+        <!-- Tassel Kaki Mungil -->
+        <ellipse cx="26" cy="55" rx="3.5" ry="2.3" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="1.2"/>
+        <ellipse cx="38" cy="55" rx="3.5" ry="2.3" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="1.2"/>
+      </svg>
+    </div>
+    <div class="anabul-shadow-oval"></div>
+  </div>
+
+  <!-- ========================================================================
+       ZONE 1: PUBLIC CUSTOMER ONBOARDING PORTAL (OPEN ACCESS VIA LYNK.ID)
+       ======================================================================== -->
+  <div id="public-view" class="min-h-screen flex flex-col relative">
+
+    <!-- Floating Glassmorphism Top Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-40 pt-3 px-4 sm:px-6 no-print">
+      <div class="h-16 sm:h-20 max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 bg-white/85 backdrop-blur-xl rounded-full border border-sky-100 shadow-[0_12px_32px_-8px_rgba(14,165,233,0.14)]">
+        <!-- Brand & Verified Badge -->
+        <div class="flex items-center gap-2.5">
+          <div id="brand-logo-secret" class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-primary to-secondary-container text-white flex items-center justify-center shadow-sm cursor-pointer select-none" title="ProductReceiver Official">
+            <span class="material-symbols-outlined text-[20px]">redeem</span>
+          </div>
+          <span id="nav-brand-name" class="text-lg sm:text-xl font-bold text-primary tracking-tight">ProductReceiver</span>
+          <span id="nav-verified-pill" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-tertiary text-xs font-semibold rounded-full border border-emerald-200/60">
+            <span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+            <span>Terverifikasi Lynk.id</span>
+          </span>
+        </div>
+
+        <!-- Smooth Scroll Navigation Pills -->
+        <nav class="hidden lg:flex items-center gap-1 p-1.5 bg-surface-container-low rounded-full border border-sky-100/80">
+          <a href="#video-panduan" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full text-on-surface-variant hover:text-primary transition-all">Video Panduan</a>
+          <a href="#portal-section" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full bg-primary text-white shadow-sm transition-all">Portal &amp; Token</a>
+          <a href="#komunitas" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full text-on-surface-variant hover:text-primary transition-all">Komunitas</a>
+          <a href="#medsos" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full text-on-surface-variant hover:text-primary transition-all">Medsos</a>
+          <a href="#hak-paket" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full text-on-surface-variant hover:text-primary transition-all">Hak Paket</a>
+          <a href="#disclaimer" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full text-on-surface-variant hover:text-primary transition-all">Disclaimer</a>
+        </nav>
+
+        <!-- Right Controls: Toggle Anabul Escort & Discreet Admin Lock -->
+        <div class="flex items-center gap-2">
+          <button id="btn-toggle-anabul" type="button" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-sky-50 hover:bg-sky-100 text-primary text-xs font-semibold transition-all border border-sky-200/70" title="Aktifkan/Matikan Kucing Anabul Pengikut Kursor">
+            <span class="material-symbols-outlined text-[16px]">pets</span>
+            <span id="anabul-toggle-label">Anabul Aktif</span>
+          </button>
+          <button id="btn-open-admin-auth" type="button" class="w-10 h-10 rounded-full bg-surface-container hover:bg-primary hover:text-white flex items-center justify-center text-on-surface-variant transition-all shadow-xs" title="Login Super Admin">
+            <span class="material-symbols-outlined text-[18px]">lock</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Onboarding Content -->
+    <main class="flex-1 w-full pt-24 sm:pt-28 pb-24 relative overflow-hidden">
+      <!-- Atmospheric Sky Blue Cloud Glow Blobs -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[520px] bg-gradient-to-b from-sky-300/25 via-sky-100/40 to-transparent blur-3xl -z-10 pointer-events-none rounded-full"></div>
+      <div class="absolute top-96 -left-36 w-96 h-96 bg-sky-200/35 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+      <div class="absolute top-[1500px] -right-36 w-[480px] h-[480px] bg-cyan-200/25 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+      <!-- HERO & SAPAAN TERIMA KASIH -->
+      <section id="hero-section" class="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-10 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/80 backdrop-blur-md text-primary text-xs font-semibold border border-sky-200/80 shadow-xs">
+          <span class="w-2 h-2 rounded-full bg-sky-500 animate-ping"></span>
+          <span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+          <span id="hero-badge-text">Portal Serah Terima Resmi Lynk.id</span>
+        </div>
+
+        <h1 class="mt-5 text-3xl sm:text-5xl font-extrabold text-on-surface tracking-tight leading-[1.16] max-w-4xl">
+          <span id="hero-title-main">Terima Kasih Atas Pembelian Anda!</span><br class="hidden sm:inline" />
+          <span id="hero-title-highlight" class="bg-gradient-to-r from-primary via-sky-600 to-secondary-container bg-clip-text text-transparent">Selamat Datang di Kelas Eksklusif</span>
+        </h1>
+
+        <p id="hero-body-text" class="mt-4 text-base sm:text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+          Aset digital Anda telah siap. Ikuti langkah terstruktur di bawah ini untuk menonton video orientasi, menyalin token akses kelas, bergabung ke grup diskusi, dan mengklaim seluruh fasilitas Anda.
+        </p>
+
+        <!-- Social Proof Alumni Pill -->
+        <div class="mt-7 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 bg-white/95 backdrop-blur-xl px-5 sm:px-6 py-2.5 rounded-full border border-sky-100 shadow-[0_12px_32px_-8px_rgba(14,165,233,0.16)]">
+          <div class="flex items-center text-amber-400">
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">star</span>
+          </div>
+          <div class="hidden sm:block h-4 w-px bg-sky-200"></div>
+          <span id="hero-rating-text" class="text-sm font-bold text-on-surface">500+ Alumni Puas</span>
+          <div class="flex -space-x-2 overflow-hidden">
+            <div class="w-7 h-7 rounded-full ring-2 ring-white bg-sky-600 text-white text-[11px] font-bold flex items-center justify-center">AR</div>
+            <div class="w-7 h-7 rounded-full ring-2 ring-white bg-emerald-600 text-white text-[11px] font-bold flex items-center justify-center">DN</div>
+            <div class="w-7 h-7 rounded-full ring-2 ring-white bg-amber-500 text-white text-[11px] font-bold flex items-center justify-center">KP</div>
+            <div id="hero-extra-count" class="px-2 h-7 rounded-full ring-2 ring-white bg-primary-fixed text-[10px] font-bold text-primary flex items-center justify-center">+480</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODUL CONTAINER -->
+      <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 space-y-12">
+
+        <!-- SECTION VIDEO PANDUAN ORIENTASI MEMBER (MULTI-VIDEO YOUTUBE EMBED) -->
+        <section id="video-panduan" class="flex flex-col space-y-4 scroll-mt-24">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-red-600 text-white flex items-center justify-center shadow-sm shrink-0">
+              <span class="material-symbols-outlined text-[20px]">play_arrow</span>
+            </span>
+            <div>
+              <span id="tut-sec-subtitle" class="text-[11px] text-red-600 tracking-wider uppercase font-bold">Video Orientasi • Wajib Tonton</span>
+              <h2 id="tut-sec-title" class="text-xl sm:text-2xl font-bold text-on-surface">Video Panduan Orientasi Member &amp; Ketentuan Belajar</h2>
+            </div>
+          </div>
+
+          <div class="nimbus-card rounded-3xl p-5 sm:p-7 space-y-5">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-sky-100 pb-4">
+              <div>
+                <h3 id="tut-box-title" class="text-lg font-bold text-on-surface">Pusat Tutorial &amp; Panduan Visual Resmi</h3>
+                <p id="tut-sec-body" class="text-sm text-on-surface-variant mt-0.5">
+                  Tonton video panduan singkat di bawah ini sebelum memulai untuk memahami alur aktivasi token, tata tertib komunitas, dan ketentuan lisensi materi.
+                </p>
+              </div>
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-red-50 text-red-600 text-xs font-bold rounded-full border border-red-200/60 self-start md:self-auto shrink-0">
+                <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+                <span class="material-symbols-outlined text-[16px]">smart_display</span>
+                <span id="tut-count-badge">3 Video Tutorial Tersedia</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <!-- Player Utama (8 Kolom) -->
+              <div class="lg:col-span-8 flex flex-col space-y-4">
+                <div id="yt-main-player-wrap" class="yt-aspect-frame shadow-lg ring-1 ring-sky-200/70">
+                  <!-- Iframe YouTube di-render dinamis oleh app.js -->
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1">
+                  <div>
+                    <h4 id="yt-active-title" class="text-base sm:text-lg font-bold text-on-surface">Memuat Video Panduan...</h4>
+                    <p id="yt-active-desc" class="text-xs sm:text-sm text-on-surface-variant mt-0.5"></p>
+                  </div>
+                  <a id="yt-open-direct" href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-sky-50 hover:bg-sky-100 text-primary text-xs font-bold shrink-0 self-start transition">
+                    <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                    <span>Buka di YouTube</span>
+                  </a>
+                </div>
+
+                <!-- Timecodes / Lompat Menit -->
+                <div id="yt-timecodes-box" class="bg-surface-container-low/80 p-4 rounded-2xl border border-sky-100 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-on-surface flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-primary text-[17px]">schedule</span>
+                      <span>Timeline &amp; Rangkuman Cepat (Timecodes)</span>
+                    </span>
+                    <span class="text-[11px] text-primary font-semibold">Klik menit untuk melompat</span>
+                  </div>
+                  <div id="yt-timecodes-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1"></div>
+                </div>
+              </div>
+
+              <!-- Daftar Playlist Multi-Video (4 Kolom) -->
+              <div class="lg:col-span-4 flex flex-col justify-between space-y-3">
+                <div class="space-y-2.5">
+                  <div class="flex items-center justify-between pb-1">
+                    <span class="text-sm font-bold text-on-surface">Daftar Playlist Panduan</span>
+                    <span id="yt-playlist-meta" class="text-xs text-on-surface-variant">Pilih video untuk memutar</span>
+                  </div>
+                  <div id="yt-playlist-list" class="space-y-2.5 max-h-[380px] overflow-y-auto pr-1">
+                    <!-- Item playlist di-render dinamis -->
+                  </div>
+                </div>
+
+                <div id="yt-playlist-cta-wrap" class="pt-2">
+                  <a id="yt-playlist-cta" href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="nimbus-btn w-full py-3 px-4 rounded-2xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-bold flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-red-600 text-[18px]">subscriptions</span>
+                    <span id="yt-playlist-cta-label">Buka Seluruh Playlist di YouTube</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 1: MASUK PORTAL KELAS & MULTI-TOKEN AKSES -->
+        <section id="portal-section" class="flex flex-col space-y-5 scroll-mt-24">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center shadow-sm shrink-0">1</span>
+            <div>
+              <span id="portal-sec-subtitle" class="text-[11px] text-primary tracking-wider uppercase font-bold">Langkah 01</span>
+              <h2 id="portal-sec-title" class="text-xl sm:text-2xl font-bold text-on-surface">Masuk Portal Kelas &amp; Salin Token Akses</h2>
+            </div>
+          </div>
+
+          <!-- High-Contrast Sky Blue Action Banner -->
+          <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-primary-container to-secondary p-6 sm:p-9 text-white shadow-[0_20px_48px_-12px_rgba(2,132,199,0.3)] flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-2 z-10 text-center md:text-left">
+              <span id="portal-banner-badge" class="inline-block px-3.5 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold">
+                Direct Link Learning Management System
+              </span>
+              <h3 id="portal-banner-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight">Akses Portal Belajar Utama</h3>
+              <p id="portal-sec-body" class="text-sm sm:text-base text-white/90 max-w-xl leading-relaxed">
+                Buka link portal belajar resmi berikut di tab baru browser Anda, lalu salin dan tempelkan kode token akses yang sesuai di bawah.
+              </p>
+            </div>
+            <div class="z-10 flex flex-col sm:flex-row items-center gap-2.5 shrink-0 w-full md:w-auto">
+              <a id="portal-main-cta" href="https://lynk.id" target="_blank" rel="noopener noreferrer" class="nimbus-btn w-full sm:w-auto px-7 py-4 bg-white text-primary hover:bg-sky-50 rounded-full text-sm font-extrabold shadow-lg inline-flex items-center justify-center gap-2">
+                <span id="portal-cta-label">BUKA PORTAL KELAS SEKARANG</span>
+                <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+              </a>
+              <button id="btn-show-portal-qr" type="button" class="w-full sm:w-auto px-4 py-4 bg-white/15 hover:bg-white/25 backdrop-blur-md text-white rounded-full text-xs font-bold inline-flex items-center justify-center gap-1.5 transition" title="Tampilkan QR Code Portal">
+                <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+                <span class="sm:hidden">QR Portal</span>
+              </button>
+            </div>
+            <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+          </div>
+
+          <!-- Multi-Token Cards Grid (Ditempel Manual oleh Admin) -->
+          <div id="public-tokens-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-1">
+            <!-- Di-render dinamis oleh app.js -->
+          </div>
+        </section>
+
+        <!-- SECTION 2: KOMUNITAS BELAJAR (WHATSAPP & TELEGRAM) -->
+        <section id="komunitas" class="flex flex-col space-y-5 scroll-mt-24">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center shadow-sm shrink-0">2</span>
+            <div>
+              <span id="comm-sec-subtitle" class="text-[11px] text-primary tracking-wider uppercase font-bold">Langkah 02</span>
+              <h2 id="comm-sec-title" class="text-xl sm:text-2xl font-bold text-on-surface">Bergabung ke Wadah Komunitas Resmi</h2>
+            </div>
+          </div>
+          <p id="comm-sec-body" class="text-sm sm:text-base text-on-surface-variant -mt-2 max-w-3xl"></p>
+
+          <div id="public-community-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Kartu WA & Telegram di-render dinamis -->
+          </div>
+        </section>
+
+        <!-- SECTION 3: EKOSISTEM MEDIA SOSIAL MENTOR -->
+        <section id="medsos" class="flex flex-col space-y-5 scroll-mt-24">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center shadow-sm shrink-0">3</span>
+            <div>
+              <span id="soc-sec-subtitle" class="text-[11px] text-primary tracking-wider uppercase font-bold">Langkah 03</span>
+              <h2 id="soc-sec-title" class="text-xl sm:text-2xl font-bold text-on-surface">Terhubung di Media Sosial Mentor</h2>
+            </div>
+          </div>
+          <p id="soc-sec-body" class="text-sm sm:text-base text-on-surface-variant -mt-2 max-w-3xl"></p>
+
+          <div id="public-social-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Kartu Instagram, YouTube, TikTok di-render dinamis -->
+          </div>
+        </section>
+
+        <!-- SECTION 4: RINCIAN HAK & FASILITAS SESUAI PAKET -->
+        <section id="hak-paket" class="flex flex-col space-y-5 scroll-mt-24">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center shadow-sm shrink-0">4</span>
+            <div>
+              <span id="ben-sec-subtitle" class="text-[11px] text-primary tracking-wider uppercase font-bold">Langkah 04</span>
+              <h2 id="ben-sec-title" class="text-xl sm:text-2xl font-bold text-on-surface">Rincian Hak &amp; Fasilitas Sesuai Paket</h2>
+            </div>
+          </div>
+
+          <div class="nimbus-card rounded-3xl p-6 sm:p-9">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-6 border-b border-sky-100">
+              <div>
+                <span class="px-3.5 py-1 bg-emerald-50 text-tertiary rounded-full text-xs font-bold inline-flex items-center gap-1.5 border border-emerald-200/70">
+                  <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                  <span id="ben-status-pill">Terkonfirmasi Pembayaran Lynk.id</span>
+                </span>
+                <h3 id="ben-package-title" class="text-2xl sm:text-3xl font-extrabold text-on-surface mt-2.5">Paket Membership: Lifetime All-Access VIP</h3>
+                <p id="ben-sec-body" class="text-sm sm:text-base text-on-surface-variant mt-1">
+                  Berikut rincian fasilitas belajar dan hak penggunaan resmi pada akun Anda.
+                </p>
+              </div>
+              <div class="bg-surface-container-low px-5 py-3 rounded-2xl flex items-center gap-3 border border-sky-100 shrink-0">
+                <span class="material-symbols-outlined text-primary text-[30px]">verified_user</span>
+                <div>
+                  <p class="text-[11px] text-outline font-medium">Status Lisensi</p>
+                  <p id="ben-license-badge" class="text-sm font-bold text-on-surface">Single Seat Licensed</p>
+                </div>
+              </div>
+            </div>
+
+            <div id="public-benefits-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
+              <!-- Daftar poin fasilitas di-render dinamis -->
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: PENGUMUMAN DISCLAIMER & ANTI-PEMBAJAKAN -->
+        <section id="disclaimer" class="flex flex-col space-y-5 scroll-mt-24">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center shadow-sm shrink-0">5</span>
+            <div>
+              <span id="disc-sec-subtitle" class="text-[11px] text-primary tracking-wider uppercase font-bold">Langkah 05</span>
+              <h2 id="disc-sec-title" class="text-xl sm:text-2xl font-bold text-on-surface">Ketentuan Lisensi &amp; Anti-Pembajakan</h2>
+            </div>
+          </div>
+
+          <div class="bg-red-50/85 border border-red-200 p-6 sm:p-9 rounded-3xl shadow-sm flex flex-col md:flex-row items-start gap-5">
+            <div class="w-12 h-12 rounded-2xl bg-error text-white flex items-center justify-center shrink-0 shadow-md">
+              <span class="material-symbols-outlined text-[26px]">gavel</span>
+            </div>
+            <div class="space-y-3 flex-1">
+              <div id="disc-badge-text" class="inline-flex items-center gap-2 px-3.5 py-1 bg-error text-white rounded-full text-xs font-bold uppercase tracking-wider">
+                Peringatan Hak Cipta &amp; Lisensi Resmi
+              </div>
+              <h3 id="disc-headline" class="text-xl sm:text-2xl font-extrabold text-on-error-container">
+                Larangan Keras Menyebarluaskan / Menjual Kembali Tanpa Izin
+              </h3>
+              <p id="disc-sec-body" class="text-sm sm:text-base text-on-surface leading-relaxed"></p>
+              <div id="disc-points-list" class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Poin larangan di-render dinamis -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6: UCAPAN SELAMAT BERGABUNG & MOTIVASI PENUTUP -->
+        <section id="penutup" class="flex flex-col space-y-5 scroll-mt-24">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center shadow-sm shrink-0">6</span>
+            <div>
+              <span id="close-sec-subtitle" class="text-[11px] text-primary tracking-wider uppercase font-bold">Langkah 06</span>
+              <h2 id="close-sec-title" class="text-xl sm:text-2xl font-bold text-on-surface">Selamat Bergabung &amp; Terus Semangat Meng-Upgrade Ilmu!</h2>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-gradient-to-r from-primary via-primary-container to-sky-500 p-6 sm:p-10 text-white shadow-[0_20px_48px_-12px_rgba(2,132,199,0.28)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+            <div class="space-y-3 max-w-2xl z-10 text-center md:text-left">
+              <span id="close-eyebrow" class="text-xs uppercase tracking-widest text-white/80 font-bold">Ucapan Selamat Bergabung dari Mentor</span>
+              <p id="close-sec-body" class="text-xl sm:text-2xl font-bold italic leading-snug"></p>
+              <p id="close-helper-text" class="text-sm text-white/85"></p>
+            </div>
+            <div class="z-10 shrink-0 w-full md:w-auto">
+              <button id="btn-closing-pdf" type="button" class="nimbus-btn w-full md:w-auto px-7 py-4 rounded-full bg-white text-primary hover:bg-sky-50 text-sm font-extrabold shadow-lg flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">download</span>
+                <span id="close-cta-label">Unduh Rangkuman PDF</span>
+              </button>
+            </div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Footer Publik -->
+    <footer class="w-full bg-white/70 backdrop-blur-md border-t border-sky-100 py-8 pb-24 md:pb-8 no-print">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-[20px]">redeem</span>
+          <span id="footer-brand-label" class="text-sm font-semibold text-on-surface-variant">ProductReceiver • Official Digital Product Handover Portal</span>
+        </div>
+        <p class="text-xs text-outline">Dilindungi lisensi hak cipta digital • Terintegrasi dengan ekosistem Lynk.id</p>
+      </div>
+    </footer>
+
+    <!-- Mobile Sticky Bottom Action Bar -->
+    <div id="mobile-sticky-bar" class="md:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white/90 backdrop-blur-xl border-t border-sky-100 flex items-center gap-2.5 shadow-[0_-8px_24px_rgba(14,165,233,0.12)] no-print">
+      <a id="mobile-btn-portal" href="https://lynk.id" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 px-4 rounded-full bg-primary text-white text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-sm">
+        <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+        <span>Buka Portal</span>
+      </a>
+      <button id="mobile-btn-copy-primary" type="button" class="flex-1 py-3 px-4 rounded-full bg-sky-100 text-primary text-xs font-extrabold flex items-center justify-center gap-1.5 border border-sky-200">
+        <span class="material-symbols-outlined text-[16px]">content_copy</span>
+        <span>Salin Token Utama</span>
+      </button>
+    </div>
+
+    <!-- Floating Corner Anabul Helper Widget -->
+    <aside id="anabul-corner-widget" aria-label="Asisten Anabul" class="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-30 flex flex-col items-end no-print">
+      <div id="anabul-corner-bubble" class="mb-2.5 max-w-[260px] bg-white px-4 py-3 rounded-2xl rounded-br-sm border border-sky-100 shadow-[0_16px_36px_-6px_rgba(56,189,248,0.28)] transition-all duration-300 flex items-start gap-2.5">
+        <span class="material-symbols-outlined text-sky-500 text-[20px] shrink-0 mt-0.5">pets</span>
+        <div class="flex-1">
+          <div class="flex items-center justify-between gap-2">
+            <p id="anabul-bubble-title" class="text-xs font-bold text-on-surface">Halo, Saya Anabul! 🐾</p>
+            <button id="btn-close-bubble" type="button" class="text-outline hover:text-on-surface text-xs" title="Tutup balon">✕</button>
+          </div>
+          <p id="anabul-bubble-text" class="text-[11px] leading-snug text-on-surface-variant mt-0.5">
+            Klik tombol Salin pada kartu Token, lalu masuk ke Portal Kelas ya! Meow~
+          </p>
+        </div>
+      </div>
+
+      <button id="btn-anabul-corner" type="button" class="relative group cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95" title="Klik Anabul untuk Tips!">
+        <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-primary to-secondary-container p-1 shadow-[0_12px_28px_rgba(14,165,233,0.35)] flex items-center justify-center">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-[28px]">pets</span>
+          </div>
+        </div>
+        <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-tertiary rounded-full ring-2 ring-white"></span>
+      </button>
+    </aside>
+  </div>
+
+  <!-- ========================================================================
+       ZONE 2: SUPER ADMIN CREATOR CONTROL DECK (SPA PANEL)
+       ======================================================================== -->
+  <div id="admin-view" class="hidden min-h-screen bg-surface">
+
+    <!-- Mobile Backdrop Sidebar -->
+    <div id="admin-sidebar-backdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+
+    <!-- Fixed Left Sidebar -->
+    <aside id="admin-sidebar" class="fixed left-0 top-0 h-full w-72 bg-white/95 backdrop-blur-xl border-r border-sky-100 z-50 flex flex-col pt-6 pb-5 shadow-[0_12px_32px_-8px_rgba(14,165,233,0.08)] -translate-x-full lg:translate-x-0 transition-transform duration-300">
+      <div class="px-6 mb-7 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-primary to-secondary-container text-white flex items-center justify-center shadow-sm">
+            <span class="material-symbols-outlined text-[20px]">redeem</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-lg font-extrabold text-primary leading-tight">ProductReceiver</span>
+            <span class="text-[11px] font-medium text-on-surface-variant">Creator Control Deck</span>
+          </div>
+        </div>
+        <button id="btn-close-sidebar" type="button" class="lg:hidden w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <div class="px-5 mb-2">
+        <span class="px-2 text-[11px] font-bold text-outline uppercase tracking-wider">Admin Workspace</span>
+      </div>
+
+      <nav class="flex-1 px-4 flex flex-col gap-1.5 overflow-y-auto">
+        <button type="button" data-admin-nav="analytics" class="admin-nav-btn flex items-center gap-3 px-4 py-3 rounded-2xl bg-primary text-white font-semibold text-sm shadow-sm transition-all text-left">
+          <span class="material-symbols-outlined text-[20px]">insights</span>
+          <span>Analytics &amp; Overview</span>
+        </button>
+        <button type="button" data-admin-nav="cms" class="admin-nav-btn flex items-center gap-3 px-4 py-3 rounded-2xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-semibold text-sm transition-all text-left">
+          <span class="material-symbols-outlined text-[20px]">edit_document</span>
+          <span>CMS Content Editor</span>
+        </button>
+        <button type="button" data-admin-nav="tutorials" class="admin-nav-btn flex items-center justify-between px-4 py-3 rounded-2xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-semibold text-sm transition-all text-left">
+          <span class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[20px]">smart_display</span>
+            <span>Video Tutorial YT</span>
+          </span>
+          <span id="sidebar-vid-count" class="px-2 py-0.5 rounded-full bg-primary-fixed text-primary text-[11px] font-bold">0</span>
+        </button>
+        <button type="button" data-admin-nav="tokens" class="admin-nav-btn flex items-center justify-between px-4 py-3 rounded-2xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-semibold text-sm transition-all text-left">
+          <span class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[20px]">vpn_key</span>
+            <span>Token Manual Manager</span>
+          </span>
+          <span id="sidebar-tok-count" class="px-2 py-0.5 rounded-full bg-emerald-100 text-tertiary text-[11px] font-bold">0</span>
+        </button>
+        <button type="button" data-admin-nav="system" class="admin-nav-btn flex items-center gap-3 px-4 py-3 rounded-2xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-semibold text-sm transition-all text-left">
+          <span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+          <span>Keamanan &amp; Migrasi DB</span>
+        </button>
+
+        <div class="my-3 border-t border-sky-100"></div>
+
+        <button id="btn-switch-to-public" type="button" class="flex items-center gap-3 px-4 py-3 rounded-2xl text-primary bg-sky-50/80 hover:bg-sky-100 font-semibold text-sm transition-all text-left">
+          <span class="material-symbols-outlined text-[20px]">open_in_new</span>
+          <span>Lihat Landing Page Live</span>
+        </button>
+      </nav>
+
+      <!-- Admin Profile & Logout -->
+      <div class="px-4 pt-3 border-t border-sky-100 space-y-2.5">
+        <div class="p-3 bg-surface-container-low rounded-2xl flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shrink-0" id="admin-avatar-box">SA</div>
+          <div class="min-w-0 flex-1">
+            <p id="admin-user-name" class="text-xs font-bold text-on-surface truncate">Super Admin</p>
+            <p id="admin-user-email" class="text-[11px] text-tertiary truncate">Terautentikasi</p>
+          </div>
+        </div>
+        <button id="btn-admin-logout" type="button" class="w-full py-2.5 px-4 rounded-xl bg-red-50 hover:bg-red-100 text-error text-xs font-bold flex items-center justify-center gap-2 transition">
+          <span class="material-symbols-outlined text-[17px]">logout</span>
+          <span>Akhiri Sesi Admin</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Admin Workspace -->
+    <div class="lg:pl-72 min-h-screen flex flex-col">
+      <!-- Top Sticky Header -->
+      <header class="sticky top-0 h-16 sm:h-20 bg-white/85 backdrop-blur-xl border-b border-sky-100 z-30 flex items-center justify-between px-4 sm:px-8">
+        <div class="flex items-center gap-3">
+          <button id="btn-open-sidebar" type="button" class="lg:hidden w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-on-surface">
+            <span class="material-symbols-outlined text-[22px]">menu</span>
+          </button>
+          <span class="px-3 py-1 bg-sky-100 text-primary text-xs font-bold rounded-full">Super Admin Mode</span>
+          <span id="admin-emergency-badge" class="hidden px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">Mode Darurat Aktif</span>
+          <span id="admin-latency-pill" class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 text-tertiary text-[11px] font-mono font-semibold rounded-full">⚡ -- ms</span>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <a id="admin-open-sheets-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-surface-container-low hover:bg-surface-container text-primary text-xs font-bold transition">
+            <span class="material-symbols-outlined text-[16px]">table_view</span>
+            <span>Buka Google Sheets</span>
+          </a>
+          <button id="btn-admin-sync" type="button" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-white hover:bg-primary-container text-xs font-bold shadow-sm transition">
+            <span id="admin-sync-icon" class="material-symbols-outlined text-[17px] transition-transform duration-500">sync</span>
+            <span>Sinkronkan</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Admin Content Container -->
+      <div class="p-4 sm:p-8 flex-1 space-y-8 max-w-7xl w-full mx-auto">
+
+        <!-- ==================================================================
+             ADMIN TAB 1: ANALYTICS & OVERVIEW
+             ================================================================== -->
+        <section id="admin-tab-analytics" class="admin-tab-pane space-y-7">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight">Dashboard Ringkasan &amp; Analitik</h1>
+              <p class="text-sm text-on-surface-variant mt-1">Pantau konversi salin token, tontonan video orientasi, serta rute klik komunitas pembeli Lynk.id.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" onclick="window.PRApp.switchAdminTab('tokens'); window.PRApp.openTokenModal();" class="nimbus-btn px-5 py-2.5 rounded-full bg-primary text-white text-xs font-bold shadow-sm flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[17px]">add_circle</span>
+                <span>Tempel Token Baru</span>
+              </button>
+              <button type="button" onclick="window.PRApp.switchAdminTab('tutorials'); window.PRApp.openTutorialModal();" class="nimbus-btn px-5 py-2.5 rounded-full bg-white border border-sky-200 text-primary text-xs font-bold shadow-xs flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[17px]">video_call</span>
+                <span>Tambah Video YT</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 5 High-Impact KPI Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="nimbus-card rounded-3xl p-5 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-11 h-11 rounded-2xl bg-sky-100 text-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[22px]">visibility</span>
+                </div>
+                <span id="kpi-mobile-pct" class="px-2.5 py-0.5 rounded-full bg-sky-50 text-primary text-[11px] font-bold">78% Mobile</span>
+              </div>
+              <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Total Kunjungan</span>
+              <div class="flex items-baseline gap-1.5 mt-1">
+                <span id="kpi-pageviews" class="text-3xl font-extrabold text-on-surface">0</span>
+                <span class="text-xs text-on-surface-variant">sesi</span>
+              </div>
+            </div>
+
+            <div class="nimbus-card rounded-3xl p-5 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-tertiary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[22px]">content_copy</span>
+                </div>
+                <span id="kpi-copy-rate" class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-tertiary text-[11px] font-bold">Aktif</span>
+              </div>
+              <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Token Disalin</span>
+              <div class="flex items-baseline gap-1.5 mt-1">
+                <span id="kpi-tokencopies" class="text-3xl font-extrabold text-on-surface">0</span>
+                <span class="text-xs text-on-surface-variant">kali</span>
+              </div>
+            </div>
+
+            <div class="nimbus-card rounded-3xl p-5 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-11 h-11 rounded-2xl bg-cyan-100 text-secondary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[22px]">forum</span>
+                </div>
+                <span id="kpi-comm-split" class="px-2 py-0.5 rounded-full bg-sky-50 text-secondary text-[10px] font-bold">WA: 0 | TG: 0</span>
+              </div>
+              <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Klik Komunitas</span>
+              <div class="flex items-baseline gap-1.5 mt-1">
+                <span id="kpi-community" class="text-3xl font-extrabold text-on-surface">0</span>
+                <span class="text-xs text-on-surface-variant">klik</span>
+              </div>
+            </div>
+
+            <div class="nimbus-card rounded-3xl p-5 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-11 h-11 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[22px]">share</span>
+                </div>
+                <span id="kpi-soc-split" class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 text-[10px] font-bold">3 Kanal</span>
+              </div>
+              <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Klik Medsos</span>
+              <div class="flex items-baseline gap-1.5 mt-1">
+                <span id="kpi-social" class="text-3xl font-extrabold text-on-surface">0</span>
+                <span class="text-xs text-on-surface-variant">klik</span>
+              </div>
+            </div>
+
+            <div class="nimbus-card rounded-3xl p-5 flex flex-col justify-between border-2 border-primary/20">
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-11 h-11 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[22px]">play_circle</span>
+                </div>
+                <span id="kpi-vid-active" class="px-2.5 py-0.5 rounded-full bg-red-50 text-red-600 text-[11px] font-bold">YT Embed</span>
+              </div>
+              <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Putar Video YT</span>
+              <div class="flex items-baseline gap-1.5 mt-1">
+                <span id="kpi-videos" class="text-3xl font-extrabold text-on-surface">0</span>
+                <span class="text-xs text-on-surface-variant">tayang</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart 7 Hari & Leaderboard Token Terpopuler -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-7 nimbus-card rounded-3xl p-6 flex flex-col justify-between">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                <div>
+                  <h2 class="text-lg font-bold text-on-surface">Tren Interaksi Harian (7 Hari Terakhir)</h2>
+                  <p class="text-xs text-on-surface-variant">Perbandingan kunjungan halaman terhadap frekuensi penyalinan token.</p>
+                </div>
+                <div class="flex items-center gap-4 text-xs font-semibold">
+                  <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-primary"></span>Kunjungan</span>
+                  <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-tertiary"></span>Salin Token</span>
+                </div>
+              </div>
+              <div id="admin-chart-container" class="w-full h-56 pt-2"></div>
+              <div id="admin-chart-labels" class="flex justify-between text-[11px] text-on-surface-variant pt-2 px-1"></div>
+            </div>
+
+            <div class="lg:col-span-5 nimbus-card rounded-3xl p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h2 class="text-lg font-bold text-on-surface">Token Paling Sering Disalin</h2>
+                    <p class="text-xs text-on-surface-variant">Distribusi penyalinan token buatan Admin.</p>
+                  </div>
+                  <button type="button" onclick="window.PRApp.switchAdminTab('tokens')" class="text-xs font-bold text-primary hover:underline">Kelola →</button>
+                </div>
+                <div id="admin-top-tokens-list" class="space-y-3"></div>
+              </div>
+              <div class="mt-4 pt-3 border-t border-sky-100 flex items-center justify-between text-xs">
+                <span class="font-semibold text-on-surface flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[17px] text-primary">verified</span>
+                  <span>CacheX &amp; Sheets Sync</span>
+                </span>
+                <span class="text-tertiary font-bold">100% Aktif</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Audit Log Table -->
+          <div class="nimbus-card rounded-3xl p-6 space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="text-lg font-bold text-on-surface">Log Aktivitas Interaksi Real-Time</h2>
+                  <span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span>
+                </div>
+                <p class="text-xs text-on-surface-variant">Pencatatan klik portal, salin token, putar video, dan gabung grup.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <div class="relative">
+                  <span class="material-symbols-outlined text-[17px] text-outline absolute left-3 top-2.5">search</span>
+                  <input id="log-search-input" type="text" placeholder="Cari target / perangkat..." class="pl-9 pr-4 py-2 rounded-full bg-surface-container-low text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                </div>
+                <select id="log-type-filter" class="px-3.5 py-2 rounded-full bg-surface-container-low text-xs font-semibold text-on-surface focus:outline-none">
+                  <option value="ALL">Semua Event</option>
+                  <option value="COPY_TOKEN">Salin Token</option>
+                  <option value="CLICK_PORTAL">Akses Portal</option>
+                  <option value="WATCH_TUTORIAL">Tonton Video</option>
+                  <option value="JOIN_WA">Gabung WA</option>
+                  <option value="JOIN_TG">Gabung Telegram</option>
+                  <option value="FOLLOW_SOCMED">Klik Medsos</option>
+                </select>
+                <button id="btn-export-logs-csv" type="button" class="px-3.5 py-2 rounded-full bg-sky-50 hover:bg-sky-100 text-primary text-xs font-bold flex items-center gap-1 transition">
+                  <span class="material-symbols-outlined text-[16px]">download</span>
+                  <span>Export CSV</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-surface-container-low text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">
+                    <th class="py-3 px-4 rounded-l-xl">Waktu</th>
+                    <th class="py-3 px-4">Tipe Event</th>
+                    <th class="py-3 px-4">Target / Item</th>
+                    <th class="py-3 px-4">Perangkat</th>
+                    <th class="py-3 px-4 rounded-r-xl text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-logs-tbody" class="divide-y divide-sky-50 text-xs"></tbody>
+              </table>
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-on-surface-variant pt-2">
+              <span id="admin-logs-count-info">Menampilkan 0 aktivitas</span>
+              <div class="flex items-center gap-1.5">
+                <button id="btn-logs-prev" type="button" class="px-3 py-1 rounded-full bg-surface-container-low hover:bg-surface-container font-semibold disabled:opacity-40">← Seblm</button>
+                <span id="logs-page-indicator" class="px-3 py-1 rounded-full bg-primary text-white font-bold">1</span>
+                <button id="btn-logs-next" type="button" class="px-3 py-1 rounded-full bg-surface-container-low hover:bg-surface-container font-semibold disabled:opacity-40">Lanjut →</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             ADMIN TAB 2: CMS CONTENT EDITOR (CRUD SECTION 1 S.D. 6 + HERO)
+             ================================================================== -->
+        <section id="admin-tab-cms" class="admin-tab-pane hidden space-y-6">
+          <div class="sticky top-20 z-20 bg-white/95 backdrop-blur-xl p-4 sm:p-5 rounded-3xl border border-sky-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <h1 class="text-xl sm:text-2xl font-extrabold text-on-surface">Editor Konten Landing Page (CMS)</h1>
+                <span class="px-2.5 py-0.5 rounded-full bg-sky-100 text-primary text-[11px] font-bold">Full CRUD</span>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-0.5">Ubah sapaan, link portal, grup WA/Telegram, medsos, hak paket, disclaimer, dan motivasi kapan saja.</p>
+            </div>
+            <div class="flex items-center gap-2 self-end sm:self-auto">
+              <button type="button" onclick="window.PRApp.showPublicView()" class="px-4 py-2.5 rounded-full bg-surface-container-low hover:bg-surface-container text-primary text-xs font-bold flex items-center gap-1.5 transition">
+                <span class="material-symbols-outlined text-[17px]">visibility</span>
+                <span>Pratinjau Live</span>
+              </button>
+              <button id="btn-save-all-cms" type="button" class="nimbus-btn px-6 py-2.5 rounded-full bg-primary text-white text-xs font-extrabold shadow-md flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+                <span>Simpan Semua Perubahan</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Sub-Tab Bar Seksi CMS -->
+          <div class="p-2 bg-surface-container-low rounded-2xl flex items-center gap-1.5 overflow-x-auto border border-sky-100">
+            <button type="button" data-cms-sub="sec_greeting" class="cms-sub-btn px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5 shadow-xs">
+              <span class="material-symbols-outlined text-[17px]">waving_hand</span>Sapaan &amp; Hero
+            </button>
+            <button type="button" data-cms-sub="sec_portal" class="cms-sub-btn px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[17px]">vpn_key</span>1. Portal Kelas
+            </button>
+            <button type="button" data-cms-sub="sec_community" class="cms-sub-btn px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[17px]">forum</span>2. Grup WA &amp; TG
+            </button>
+            <button type="button" data-cms-sub="sec_social" class="cms-sub-btn px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[17px]">share</span>3. Medsos (IG/YT/TT)
+            </button>
+            <button type="button" data-cms-sub="sec_benefits" class="cms-sub-btn px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[17px]">card_membership</span>4. Hak Paket
+            </button>
+            <button type="button" data-cms-sub="sec_disclaimer" class="cms-sub-btn px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[17px]">gavel</span>5. Disclaimer
+            </button>
+            <button type="button" data-cms-sub="sec_closing" class="cms-sub-btn px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[17px]">celebration</span>6. Penutup &amp; Anabul
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Form Editor Dinamis (8 Kolom) -->
+            <div id="cms-editor-form-area" class="lg:col-span-8 space-y-5">
+              <!-- Di-render dinamis sesuai sub-tab aktif oleh app.js -->
+            </div>
+
+            <!-- Kolom Kanan: Anabul Assistant & Live Mockup Preview (4 Kolom) -->
+            <div class="lg:col-span-4 space-y-5">
+              <div class="p-6 rounded-3xl bg-sky-50/90 border border-sky-100 space-y-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-2xl bg-primary text-white flex items-center justify-center shadow-sm">
+                    <span class="material-symbols-outlined text-[24px]">pets</span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-bold text-on-surface">Anabul CMS Helper</p>
+                    <p class="text-[11px] font-semibold text-primary">Sinkronisasi Instan CacheX</p>
+                  </div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl text-xs text-on-surface-variant leading-relaxed border border-sky-100">
+                  "Setiap perubahan yang Kakak simpan langsung memperbarui Google Sheets dan menyegarkan cache publik secara instan tanpa menyentuh kode!"
+                </div>
+              </div>
+
+              <!-- Mini Phone Preview -->
+              <div class="nimbus-card rounded-3xl p-5 space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-on-surface flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-primary text-[18px]">smartphone</span>
+                    <span>Ringkasan Pratinjau Mobile</span>
+                  </span>
+                  <span class="text-[10px] font-bold text-tertiary bg-emerald-50 px-2 py-0.5 rounded-full">Real-Time</span>
+                </div>
+                <div id="cms-mini-preview" class="bg-surface-container-low rounded-2xl p-4 space-y-2.5 text-xs"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             ADMIN TAB 3: VIDEO TUTORIAL YOUTUBE (MULTI-VIDEO EMBED CRUD)
+             ================================================================== -->
+        <section id="admin-tab-tutorials" class="admin-tab-pane hidden space-y-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-red-600 text-xs font-bold mb-2">
+                <span class="material-symbols-outlined text-[16px]">smart_display</span>
+                <span>Multi-Video YouTube Embeds</span>
+              </span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-on-surface">Manajemen Video Tutorial &amp; Orientasi</h1>
+              <p class="text-sm text-on-surface-variant mt-1">Tempelkan satu atau beberapa video YouTube untuk memandu member awal masuk portal &amp; menjelaskan ketentuan kelas.</p>
+            </div>
+            <button id="btn-open-add-tutorial" type="button" class="nimbus-btn px-6 py-3 rounded-full bg-primary text-white text-xs font-extrabold shadow-md flex items-center gap-2 self-start md:self-auto">
+              <span class="material-symbols-outlined text-[18px]">add_circle</span>
+              <span>Tambah Video YouTube Baru</span>
+            </button>
+          </div>
+
+          <!-- Pengaturan Header Seksi Video -->
+          <div class="nimbus-card rounded-3xl p-6 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sky-100 pb-3">
+              <div>
+                <h2 class="text-base font-bold text-on-surface">Pengaturan Header Seksi Video Panduan</h2>
+                <p class="text-xs text-on-surface-variant">Atur judul seksi, pengantar, status tampil, dan link playlist YouTube penuh.</p>
+              </div>
+              <label class="inline-flex items-center gap-2 cursor-pointer">
+                <span class="text-xs font-semibold text-on-surface-variant">Tampilkan Seksi Video</span>
+                <input id="tut-header-active" type="checkbox" checked class="sr-only peer" />
+                <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-tertiary relative after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+              </label>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Judul Utama Seksi Video</label>
+                <input id="tut-header-title" type="text" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">URL Playlist YouTube Lengkap (Opsional)</label>
+                <input id="tut-header-playlist" type="url" placeholder="https://www.youtube.com/playlist?list=..." class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-xs font-bold text-on-surface mb-1">Deskripsi Pengantar Seksi Video</label>
+                <textarea id="tut-header-body" rows="2" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30"></textarea>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <button id="btn-save-tut-header" type="button" class="px-5 py-2.5 rounded-full bg-primary text-white text-xs font-bold hover:bg-primary-container transition">
+                Simpan Header Seksi Video
+              </button>
+            </div>
+          </div>
+
+          <!-- Daftar Kartu Multi-Video YouTube -->
+          <div id="admin-tutorials-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Di-render dinamis -->
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             ADMIN TAB 4: TOKEN CATALOG & MANAGER (TEMPEL MANUAL OLEH ADMIN)
+             ================================================================== -->
+        <section id="admin-tab-tokens" class="admin-tab-pane hidden space-y-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-primary text-xs font-bold mb-2">
+                <span class="material-symbols-outlined text-[16px]">content_paste</span>
+                <span>Input Token Manual (Bukan Auto-Generate)</span>
+              </span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-on-surface">Katalog Token Akses Kelas</h1>
+              <p class="text-sm text-on-surface-variant mt-1">Tempelkan (paste) kode token buatan Anda sendiri dari platform kelas agar mudah disalin 1-klik oleh pembeli.</p>
+            </div>
+            <div class="flex items-center gap-2.5 self-start md:self-auto">
+              <button id="btn-export-tokens-csv" type="button" class="px-4 py-3 rounded-full bg-white border border-sky-200 text-primary text-xs font-bold flex items-center gap-1.5 hover:bg-sky-50 transition">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                <span>Ekspor CSV</span>
+              </button>
+              <button id="btn-open-add-token" type="button" class="nimbus-btn px-6 py-3 rounded-full bg-primary text-white text-xs font-extrabold shadow-md flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[18px]">add</span>
+                <span>Tempel Token Baru</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Summary Mosaic -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="nimbus-card rounded-3xl p-5">
+              <span class="text-xs font-bold text-on-surface-variant uppercase">Token Aktif Ditampilkan</span>
+              <p id="tok-stat-active" class="text-3xl font-extrabold text-tertiary mt-1">0</p>
+            </div>
+            <div class="nimbus-card rounded-3xl p-5">
+              <span class="text-xs font-bold text-on-surface-variant uppercase">Token Non-Aktif / Arsip</span>
+              <p id="tok-stat-inactive" class="text-3xl font-extrabold text-outline mt-1">0</p>
+            </div>
+            <div class="nimbus-card rounded-3xl p-5">
+              <span class="text-xs font-bold text-on-surface-variant uppercase">Total Frekuensi Disalin</span>
+              <p id="tok-stat-copies" class="text-3xl font-extrabold text-primary mt-1">0</p>
+            </div>
+          </div>
+
+          <!-- Search & Filter -->
+          <div class="nimbus-card rounded-3xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="relative w-full sm:w-80">
+              <span class="material-symbols-outlined absolute left-3.5 top-2.5 text-outline text-[18px]">search</span>
+              <input id="tok-search-input" type="text" placeholder="Cari kode token atau label paket..." class="w-full pl-10 pr-4 py-2 rounded-full bg-surface-container-low text-xs focus:outline-none focus:ring-2 focus:ring-primary/30" />
+            </div>
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <select id="tok-status-filter" class="px-4 py-2 rounded-full bg-surface-container-low text-xs font-semibold focus:outline-none">
+                <option value="all">Semua Status</option>
+                <option value="active">Status: Aktif</option>
+                <option value="inactive">Status: Non-Aktif</option>
+              </select>
+              <select id="tok-sort-filter" class="px-4 py-2 rounded-full bg-surface-container-low text-xs font-semibold focus:outline-none">
+                <option value="newest">Terbaru Ditempel</option>
+                <option value="copies-desc">Paling Sering Disalin</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Token Table -->
+          <div class="nimbus-card rounded-3xl overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-surface-container-low text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">
+                    <th class="py-3.5 px-5">Kode Token (Manual)</th>
+                    <th class="py-3.5 px-4">Tab &amp; Label Peruntukan</th>
+                    <th class="py-3.5 px-4">Disalin</th>
+                    <th class="py-3.5 px-4">Status Tampil</th>
+                    <th class="py-3.5 px-5 text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-tokens-tbody" class="divide-y divide-sky-50 text-xs"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             ADMIN TAB 5: KEAMANAN OAUTH, SCRIPT PROPERTIES & MIGRASI DATABASE
+             ================================================================== -->
+        <section id="admin-tab-system" class="admin-tab-pane hidden space-y-7">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-on-surface">Keamanan Script Properties &amp; Migrasi Database</h1>
+            <p class="text-sm text-on-surface-variant mt-1">Kelola kredensial Google OAuth 2.0, akses jalur darurat terenkripsi, dan sinkronisasi database antar-spreadsheet.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Panel 1: Google OAuth 2.0 & Jalur Darurat (Script Properties) -->
+            <div class="nimbus-card rounded-3xl p-6 space-y-4">
+              <div class="flex items-center gap-3 border-b border-sky-100 pb-3">
+                <div class="w-10 h-10 rounded-2xl bg-sky-100 text-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[22px]">shield_lock</span>
+                </div>
+                <div>
+                  <h2 class="text-base font-bold text-on-surface">Brankas Script Properties (Zero Literal Secrets)</h2>
+                  <p class="text-xs text-on-surface-variant">Disimpan eksklusif di server Google Apps Script.</p>
+                </div>
+              </div>
+
+              <form id="form-save-secrets" class="space-y-4">
+                <div>
+                  <label class="flex items-center justify-between text-xs font-bold text-on-surface mb-1">
+                    <span>Google OAuth 2.0 Web Client ID</span>
+                    <span id="sec-oauth-status" class="text-[11px] text-outline">Belum diatur</span>
+                  </label>
+                  <input id="sec-google-client-id" type="text" placeholder="xxxx-xxxx.apps.googleusercontent.com" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs font-mono focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+                  <p class="text-[11px] text-outline mt-1">Digunakan untuk memverifikasi tombol Sign in with Google resmi di halaman publik.</p>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-on-surface mb-1">Allowlist Email Google Super Admin (Pisahkan koma)</label>
+                  <input id="sec-admin-emails" type="text" placeholder="emailanda@gmail.com, partner@gmail.com" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs font-mono focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface mb-1">Username Jalur Darurat</label>
+                    <input id="sec-emergency-user" type="text" placeholder="darurat" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs font-mono focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface mb-1">Ganti Sandi / PIN Darurat Baru</label>
+                    <input id="sec-emergency-pass" type="password" autocomplete="new-password" placeholder="Kosongkan jika tidak diubah" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+                  </div>
+                </div>
+                <p class="text-[11px] text-outline">Sandi darurat di-hash 300x iterasi HMAC-SHA256 + Salt unik di server (tidak pernah disimpan mentah).</p>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+                  <button id="btn-rotate-session" type="button" class="px-4 py-2.5 rounded-full bg-red-50 hover:bg-red-100 text-error text-xs font-bold transition">
+                    Rotasi Session Secret
+                  </button>
+                  <button type="submit" class="nimbus-btn px-6 py-2.5 rounded-full bg-primary text-white text-xs font-extrabold shadow-sm">
+                    Simpan Konfigurasi Keamanan
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Panel 2: Migrasi & Sinkronisasi Database (Migrasi.gs) -->
+            <div class="nimbus-card rounded-3xl p-6 space-y-4">
+              <div class="flex items-center gap-3 border-b border-sky-100 pb-3">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-tertiary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[22px]">database</span>
+                </div>
+                <div>
+                  <h2 class="text-base font-bold text-on-surface">Migrasi &amp; Delta-Sync Database Spreadsheet</h2>
+                  <p class="text-xs text-on-surface-variant">Impor data dari spreadsheet versi lama secara aman (baca-saja &amp; idempoten).</p>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-xs font-bold text-on-surface mb-1">ID atau URL Google Sheets Sumber (Aplikasi Lama)</label>
+                  <input id="mig-source-input" type="text" placeholder="https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz/edit" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs font-mono focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+                </div>
+
+                <div class="flex flex-col gap-2 text-xs text-on-surface-variant pt-1">
+                  <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input id="mig-preserve-disabled" type="checkbox" checked class="rounded text-primary" />
+                    <span>Jaga item yang sengaja dinonaktifkan di aplikasi baru agar tidak tertimpa</span>
+                  </label>
+                  <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input id="mig-include-logs" type="checkbox" checked class="rounded text-primary" />
+                    <span>Sertakan sinkronisasi riwayat log analitik (`tbl_analytics`)</span>
+                  </label>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2.5 pt-2">
+                  <button id="btn-mig-dryrun" type="button" class="px-5 py-2.5 rounded-full bg-sky-100 hover:bg-sky-200 text-primary text-xs font-bold flex items-center gap-1.5 transition">
+                    <span class="material-symbols-outlined text-[17px]">search_check</span>
+                    <span>1. Pindai Simulasi (Dry-Run)</span>
+                  </button>
+                  <button id="btn-mig-execute" type="button" class="nimbus-btn px-5 py-2.5 rounded-full bg-tertiary text-white text-xs font-extrabold flex items-center gap-1.5 shadow-sm">
+                    <span class="material-symbols-outlined text-[17px]">sync_saved_locally</span>
+                    <span>2. Jalankan Sinkronisasi Upsert</span>
+                  </button>
+                </div>
+
+                <div id="mig-result-box" class="hidden mt-3 p-4 rounded-2xl bg-surface-container-low border border-sky-100 text-xs space-y-2"></div>
+              </div>
+
+              <!-- Cache Turbo Control -->
+              <div class="pt-3 border-t border-sky-100 flex items-center justify-between">
+                <div>
+                  <p class="text-xs font-bold text-on-surface">Segarkan CacheX Publik (Scale Turbo)</p>
+                  <p class="text-[11px] text-outline">Paksa perbarui versi cache publik jika Anda mengedit langsung dari Google Sheets.</p>
+                </div>
+                <button id="btn-force-bump-cache" type="button" class="px-4 py-2 rounded-full bg-surface-container hover:bg-surface-container-high text-primary text-xs font-bold shrink-0 transition">
+                  Bump Cache
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 1: ADMIN LOGIN (GOOGLE OAUTH 2.0 + HIDDEN EMERGENCY BYPASS)
+       ======================================================================== -->
+  <div id="auth-modal" class="fixed inset-0 z-50 bg-slate-900/55 backdrop-blur-md hidden items-center justify-center p-4 no-print">
+    <div class="w-full max-w-md bg-white rounded-3xl p-7 shadow-2xl border border-sky-100 relative space-y-5">
+      <button id="btn-close-auth-modal" type="button" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+
+      <!-- Header Modal: Klik 5x pada ikon Shield untuk membuka Jalur Darurat Rahasia! -->
+      <div class="text-center space-y-2">
+        <div id="secret-shield-trigger" class="w-14 h-14 rounded-2xl bg-sky-100 text-primary flex items-center justify-center mx-auto cursor-pointer select-none transition-transform active:scale-90" title="Keamanan OAuth 2.0">
+          <span class="material-symbols-outlined text-[30px]">verified_user</span>
+        </div>
+        <h3 class="text-xl font-extrabold text-on-surface">Login Super Admin</h3>
+        <p class="text-xs text-on-surface-variant">Masuk dengan akun Google terdaftar untuk mengelola konten &amp; token ProductReceiver.</p>
+      </div>
+
+      <!-- Peringatan jika GAS_URL belum diatur di config.js -->
+      <div id="auth-unconfigured-notice" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-2">
+        <p class="font-bold flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[17px]">info</span>
+          <span>Backend GAS_URL Belum Terhubung</span>
+        </p>
+        <p class="leading-relaxed">Isi URL Web App Google Apps Script Anda di file <code class="font-mono bg-white px-1.5 py-0.5 rounded">js/config.js</code> untuk mengaktifkan penyimpanan permanen ke Google Sheets.</p>
+        <button id="btn-enter-demo-admin" type="button" class="w-full py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold transition">
+          Buka Pratinjau UI Dashboard (Mode Lokal)
+        </button>
+      </div>
+
+      <!-- Area Google Sign-In Resmi (OAuth 2.0) -->
+      <div id="oauth-signin-section" class="space-y-3">
+        <div id="google-gsi-button-container" class="flex justify-center min-h-[44px]"></div>
+        <p id="oauth-hint-text" class="text-[11px] text-center text-outline">
+          Hanya email Google dalam daftar Allowlist Super Admin yang diizinkan masuk.
+        </p>
+      </div>
+
+      <!-- FORM JALUR DARURAT TERSEMBUNYI (Terbuka via 5x klik ikon Shield / Alt+Shift+E / #darurat) -->
+      <form id="emergency-login-form" class="hidden pt-4 border-t border-sky-100 space-y-3">
+        <div class="flex items-center gap-2 text-amber-700 bg-amber-50 px-3.5 py-2 rounded-xl text-xs font-bold">
+          <span class="material-symbols-outlined text-[18px]">key</span>
+          <span>Jalur Masuk Darurat (Emergency Bypass)</span>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-on-surface mb-1">Username Darurat</label>
+          <input id="em-username-input" type="text" value="darurat" required class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs font-mono focus:outline-none focus:ring-2 focus:ring-primary/30" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-on-surface mb-1">Sandi / PIN Rahasia Darurat</label>
+          <input id="em-password-input" type="password" placeholder="Masukkan sandi dari log setup GAS..." required class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:ring-2 focus:ring-primary/30" />
+        </div>
+        <button id="btn-submit-emergency" type="submit" class="nimbus-btn w-full py-3 rounded-xl bg-on-surface text-white text-xs font-extrabold">
+          Validasi &amp; Masuk via Jalur Darurat
+        </button>
+      </form>
+
+      <div id="auth-error-box" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-error text-xs font-semibold text-center"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: TEMPEL / EDIT TOKEN MANUAL (BUATAN ADMIN SENDIRI)
+       ======================================================================== -->
+  <div id="token-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4 no-print">
+    <div class="w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-sky-100 overflow-hidden">
+      <div class="bg-surface-container-low px-6 py-4 flex items-center justify-between border-b border-sky-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">content_paste</span>
+          </div>
+          <div>
+            <h3 id="token-modal-title" class="text-base font-bold text-on-surface">Tempel Token Akses Baru</h3>
+            <p class="text-[11px] text-on-surface-variant">Tempelkan kode token yang sudah Anda buat dari platform kelas Anda</p>
+          </div>
+        </div>
+        <button type="button" onclick="window.PRApp.closeTokenModal()" class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-outline hover:text-on-surface">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <form id="form-token-manual" class="p-6 space-y-4">
+        <input id="tok-form-id" type="hidden" />
+        <div>
+          <label class="flex items-center justify-between text-xs font-bold text-on-surface mb-1">
+            <span>Kode Token (Tempel / Paste di sini) *</span>
+            <span class="text-[11px] text-primary font-semibold">Sesuai Token Asli Anda</span>
+          </label>
+          <input id="tok-form-code" type="text" required placeholder="Contoh: KELASPRO-2026-VIP" class="w-full px-4 py-3 rounded-xl bg-surface-container-low font-mono font-bold text-primary text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/40" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Label Tab Folder Atas</label>
+            <input id="tok-form-tab" type="text" placeholder="Contoh: Token Utama / Bonus" class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Nama Paket / Peruntukan *</label>
+            <input id="tok-form-label" type="text" required placeholder="Contoh: Akses Modul LMS" class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Deskripsi Instruksi Singkat</label>
+          <input id="tok-form-desc" type="text" placeholder="Contoh: Gunakan kode ini saat login pertama kali di portal kelas." class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Keterangan Batch / Masa Aktif</label>
+            <input id="tok-form-batch" type="text" placeholder="Contoh: Batch Lynk.id #14" class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Info Kuota (Opsional)</label>
+            <input id="tok-form-quota" type="number" min="0" placeholder="Kosongkan = Unlimited" class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-surface-container-low flex items-center justify-between">
+          <div>
+            <p class="text-xs font-bold text-on-surface">Tampilkan di Landing Page</p>
+            <p class="text-[11px] text-on-surface-variant">Pembeli dapat langsung menyalin token ini</p>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input id="tok-form-active" type="checkbox" checked class="sr-only peer" />
+            <div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:bg-tertiary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+          </label>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button type="button" onclick="window.PRApp.closeTokenModal()" class="px-5 py-2.5 rounded-full bg-surface-container-low text-xs font-bold text-on-surface">Batal</button>
+          <button type="submit" class="nimbus-btn px-6 py-2.5 rounded-full bg-primary text-white text-xs font-extrabold shadow-md">Simpan Token</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 3: TAMBAH / EDIT VIDEO TUTORIAL YOUTUBE (MULTI-EMBED)
+       ======================================================================== -->
+  <div id="tutorial-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4 no-print">
+    <div class="w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-sky-100 overflow-hidden max-h-[92vh] flex flex-col">
+      <div class="bg-surface-container-low px-6 py-4 flex items-center justify-between border-b border-sky-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">smart_display</span>
+          </div>
+          <div>
+            <h3 id="tut-modal-title" class="text-base font-bold text-on-surface">Tambah Video Panduan YouTube</h3>
+            <p class="text-[11px] text-on-surface-variant">Tempelkan link video YouTube untuk diputar langsung di halaman serah terima</p>
+          </div>
+        </div>
+        <button type="button" onclick="window.PRApp.closeTutorialModal()" class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-outline hover:text-on-surface">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <form id="form-tutorial-video" class="p-6 space-y-4 overflow-y-auto">
+        <input id="vid-form-id" type="hidden" />
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Link URL atau ID Video YouTube *</label>
+          <input id="vid-form-url" type="text" required placeholder="https://www.youtube.com/watch?v=... atau https://youtu.be/..." class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs font-mono focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+        </div>
+
+        <!-- Live Thumbnail Preview -->
+        <div id="vid-thumb-preview-box" class="hidden p-3 rounded-2xl bg-sky-50/70 border border-sky-100 flex items-center gap-3">
+          <img id="vid-thumb-img" src="" alt="Preview Thumbnail" class="w-28 h-16 rounded-xl object-cover bg-slate-900 shrink-0" />
+          <div class="text-xs">
+            <p class="font-bold text-primary">Video YouTube Terdeteksi ✓</p>
+            <p id="vid-detected-id" class="font-mono text-[11px] text-on-surface-variant"></p>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Judul Panduan Video *</label>
+          <input id="vid-form-title" type="text" required placeholder="Contoh: 1. Cara Login Portal & Aktivasi Token Kelas" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Deskripsi Singkat Poin Video</label>
+          <textarea id="vid-form-desc" rows="2" placeholder="Penjelasan singkat apa yang dipelajari member di video ini..." class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30"></textarea>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Durasi</label>
+            <input id="vid-form-duration" type="text" placeholder="06:30" class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs font-mono focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Badge Label</label>
+            <input id="vid-form-badge" type="text" placeholder="Wajib Ditonton" class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Urutan Tampil</label>
+            <input id="vid-form-order" type="number" min="1" value="1" class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low text-xs font-mono focus:outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Timecodes Lompat Menit (Opsional — 1 baris per menit)</label>
+          <textarea id="vid-form-timecodes" rows="3" placeholder="00:30 | Cara Salin Token&#10;02:15 | Login ke Portal Kelas&#10;04:40 | Ketentuan Lisensi" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs font-mono focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30"></textarea>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-surface-container-low flex items-center justify-between">
+          <span class="text-xs font-bold text-on-surface">Tampilkan Video Ini di Playlist Publik</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input id="vid-form-active" type="checkbox" checked class="sr-only peer" />
+            <div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:bg-tertiary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+          </label>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button type="button" onclick="window.PRApp.closeTutorialModal()" class="px-5 py-2.5 rounded-full bg-surface-container-low text-xs font-bold text-on-surface">Batal</button>
+          <button type="submit" class="nimbus-btn px-6 py-2.5 rounded-full bg-primary text-white text-xs font-extrabold shadow-md">Simpan Video Panduan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 4: QR CODE AKSES CEPAT PORTAL
+       ======================================================================== -->
+  <div id="qr-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4 no-print">
+    <div class="w-full max-w-xs bg-white rounded-3xl p-6 text-center shadow-2xl border border-sky-100 space-y-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-primary uppercase tracking-wider">Scan Buka di HP / Tablet</span>
+        <button type="button" onclick="document.getElementById('qr-modal').classList.add('hidden');document.getElementById('qr-modal').classList.remove('flex');" class="w-7 h-7 rounded-full bg-surface-container-low flex items-center justify-center text-outline">✕</button>
+      </div>
+      <div class="p-4 bg-sky-50 rounded-2xl inline-block mx-auto border border-sky-100">
+        <img id="portal-qr-img" src="" alt="QR Code Portal Kelas" class="w-44 h-44 mx-auto rounded-lg" />
+      </div>
+      <p id="portal-qr-url" class="text-[11px] font-mono text-on-surface-variant break-all"></p>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       GLOBAL TOAST NOTIFICATION
+       ======================================================================== -->
+  <div id="global-toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[9999] transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2.5 px-5 py-3.5 bg-white text-on-surface rounded-full border border-sky-200 shadow-[0_20px_48px_-12px_rgba(2,132,199,0.38)] no-print">
+    <span id="global-toast-icon" class="material-symbols-outlined text-tertiary text-[22px]">check_circle</span>
+    <span id="global-toast-msg" class="text-xs sm:text-sm font-bold text-on-surface">Berhasil!</span>
+  </div>
+
+  <!-- Konfigurasi Endpoint Tunggal & Aplikasi Utama -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
