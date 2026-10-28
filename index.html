@@ -168,6 +168,74 @@
   </div>
 
   <!-- ========================================================================
+       ZONE 0: GERBANG PROTEKSI ORIGIN & ISOLASI URL ANTAR-KELAS
+       ======================================================================== -->
+  <div id="origin-gate-view" class="hidden min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden no-print">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[480px] bg-gradient-to-b from-sky-300/30 via-sky-100/40 to-transparent blur-3xl -z-10 pointer-events-none rounded-full"></div>
+    <div class="w-full max-w-lg nimbus-card rounded-3xl p-7 sm:p-9 text-center space-y-5 border border-sky-100 shadow-[0_24px_56px_-12px_rgba(2,132,199,0.22)]">
+      <!-- Klik 5x pada perisai ini juga dapat membuka Jalur Darurat Admin -->
+      <div id="gate-shield-trigger" class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-primary to-secondary-container text-white flex items-center justify-center mx-auto shadow-lg cursor-pointer select-none transition-transform active:scale-90" title="Proteksi Akses ProductReceiver">
+        <span id="gate-icon" class="material-symbols-outlined text-[32px]">admin_panel_settings</span>
+      </div>
+
+      <div class="space-y-2">
+        <span id="gate-badge-text" class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-100 text-primary text-xs font-extrabold uppercase tracking-wider">
+          Proteksi Origin • Khusus Super Admin
+        </span>
+        <h1 id="gate-title" class="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight">
+          Gerbang Utama ProductReceiver
+        </h1>
+        <p id="gate-desc" class="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+          Halaman utama (origin) hanya dapat diakses oleh email Super Admin yang terdaftar di Google OAuth 2.0. Jika Anda adalah pembeli kelas, silakan buka <strong>Link URL Khusus Kelas</strong> yang tertera pada bukti pembelian Anda.
+        </p>
+      </div>
+
+      <!-- Mode A: Login Google OAuth 2.0 Super Admin di Origin (/) -->
+      <div id="gate-admin-login-box" class="space-y-3 pt-1">
+        <button id="btn-gate-open-auth" type="button" class="nimbus-btn w-full py-3.5 px-6 rounded-full bg-primary text-white text-xs sm:text-sm font-extrabold shadow-md flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[19px]">verified_user</span>
+          <span>Login Super Admin (Google OAuth 2.0)</span>
+        </button>
+
+        <!-- Kotak Pratinjau Cepat jika GAS_URL belum diisi (Mode Lokal) -->
+        <div id="gate-local-preview-box" class="hidden p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-left space-y-2.5">
+          <p class="text-xs font-bold text-amber-900 flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">science</span>
+            <span>Mode Pratinjau Lokal (GAS_URL Belum Diisi)</span>
+          </p>
+          <p class="text-[11px] text-amber-800 leading-relaxed">
+            Saat dideploy ke Vercel + GAS, halaman origin <code>/</code> dikunci ketat untuk Super Admin, sementara pembeli membuka URL per kelas seperti <code>/kelasA</code> atau <code>/kelasB</code>. Uji simulasi sekarang:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+            <button type="button" data-demo-slug="kelasA" class="btn-demo-open-class py-2 px-3 rounded-xl bg-white hover:bg-sky-50 border border-amber-200 text-primary text-xs font-bold flex items-center justify-center gap-1 transition">
+              <span class="material-symbols-outlined text-[15px]">open_in_new</span>
+              <span>Buka /kelasA</span>
+            </button>
+            <button type="button" data-demo-slug="kelasB" class="btn-demo-open-class py-2 px-3 rounded-xl bg-white hover:bg-sky-50 border border-amber-200 text-primary text-xs font-bold flex items-center justify-center gap-1 transition">
+              <span class="material-symbols-outlined text-[15px]">open_in_new</span>
+              <span>Buka /kelasB</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode B: Proteksi Blokir Akses Lintas Kelas untuk Customer -->
+      <div id="gate-blocked-class-box" class="hidden space-y-3 pt-1">
+        <div class="p-4 rounded-2xl bg-red-50 border border-red-200 text-xs text-red-900 leading-relaxed">
+          Demi keamanan lisensi token &amp; grup eksklusif, setiap pembeli hanya diizinkan mengakses <strong>1 alamat URL Landing Page sesuai Paket Kelas</strong> yang dibeli.
+        </div>
+        <button id="btn-return-my-class" type="button" class="hidden nimbus-btn w-full py-3.5 px-6 rounded-full bg-primary text-white text-xs sm:text-sm font-extrabold shadow-md items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+          <span id="btn-return-my-class-label">Kembali ke Halaman Kelas Saya</span>
+        </button>
+        <button id="btn-gate-admin-override" type="button" class="text-[11px] font-semibold text-outline hover:text-primary underline transition">
+          Saya Pemilik / Super Admin (Login OAuth 2.0)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
        ZONE 1: PUBLIC CUSTOMER ONBOARDING PORTAL (OPEN ACCESS VIA LYNK.ID)
        ======================================================================== -->
   <div id="public-view" class="min-h-screen flex flex-col relative">
@@ -195,12 +263,14 @@
           <a href="#medsos" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full text-on-surface-variant hover:text-primary transition-all">Medsos</a>
           <a href="#hak-paket" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full text-on-surface-variant hover:text-primary transition-all">Hak Paket</a>
           <a href="#disclaimer" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full text-on-surface-variant hover:text-primary transition-all">Disclaimer</a>
+          <a href="#contact-admin-section" class="nav-pill px-3.5 py-1.5 text-xs font-semibold rounded-full text-on-surface-variant hover:text-primary transition-all">Hubungi Admin</a>
         </nav>
 
         <!-- Right Controls: Toggle Anabul Escort & Discreet Admin Lock -->
         <div class="flex items-center gap-2">
-          <button id="btn-toggle-anabul" type="button" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-sky-50 hover:bg-sky-100 text-primary text-xs font-semibold transition-all border border-sky-200/70" title="Aktifkan/Matikan Kucing Anabul Pengikut Kursor">
-            <span class="material-symbols-outlined text-[16px]">pets</span>
+          <button id="btn-toggle-anabul" type="button" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-sky-50 hover:bg-sky-100 text-primary text-xs font-semibold transition-all border border-sky-200/70" title="Aktifkan/Matikan Maskot Pengikut Kursor">
+            <img id="anabul-toggle-logo-img" src="" alt="" class="hidden w-4 h-4 rounded-full object-cover" />
+            <span id="anabul-toggle-default-icon" class="material-symbols-outlined text-[16px]">pets</span>
             <span id="anabul-toggle-label">Anabul Aktif</span>
           </button>
           <button id="btn-open-admin-auth" type="button" class="w-10 h-10 rounded-full bg-surface-container hover:bg-primary hover:text-white flex items-center justify-center text-on-surface-variant transition-all shadow-xs" title="Login Super Admin">
@@ -447,30 +517,50 @@
           </div>
         </section>
 
-        <!-- SECTION 5: PENGUMUMAN DISCLAIMER & ANTI-PEMBAJAKAN -->
+        <!-- SECTION 5: PENGUMUMAN DISCLAIMER & ANTI-PEMBAJAKAN (GLOWING INTERAKTIF) -->
         <section id="disclaimer" class="flex flex-col space-y-5 scroll-mt-24">
           <div class="flex items-center gap-3">
-            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center shadow-sm shrink-0">5</span>
+            <span class="w-9 h-9 rounded-full bg-error text-white font-bold flex items-center justify-center shadow-sm shrink-0">5</span>
             <div>
-              <span id="disc-sec-subtitle" class="text-[11px] text-primary tracking-wider uppercase font-bold">Langkah 05</span>
+              <span id="disc-sec-subtitle" class="text-[11px] text-error tracking-wider uppercase font-bold">Langkah 05 • Wajib Dipatuhi</span>
               <h2 id="disc-sec-title" class="text-xl sm:text-2xl font-bold text-on-surface">Ketentuan Lisensi &amp; Anti-Pembajakan</h2>
             </div>
           </div>
 
-          <div class="bg-red-50/85 border border-red-200 p-6 sm:p-9 rounded-3xl shadow-sm flex flex-col md:flex-row items-start gap-5">
-            <div class="w-12 h-12 rounded-2xl bg-error text-white flex items-center justify-center shrink-0 shadow-md">
-              <span class="material-symbols-outlined text-[26px]">gavel</span>
+          <div id="disclaimer-card" class="disclaimer-glow-card p-6 sm:p-9 rounded-3xl flex flex-col md:flex-row items-start gap-5" data-interactive="true">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-amber-500 text-white flex items-center justify-center shrink-0 disclaimer-siren-icon">
+              <span class="material-symbols-outlined text-[28px]">gavel</span>
             </div>
-            <div class="space-y-3 flex-1">
-              <div id="disc-badge-text" class="inline-flex items-center gap-2 px-3.5 py-1 bg-error text-white rounded-full text-xs font-bold uppercase tracking-wider">
-                Peringatan Hak Cipta &amp; Lisensi Resmi
+            <div class="space-y-3.5 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-error text-white rounded-full text-xs font-extrabold uppercase tracking-wider shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-amber-300 animate-ping"></span>
+                  <span id="disc-badge-text">Peringatan Hak Cipta &amp; Lisensi Resmi</span>
+                </div>
+                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-100/90 text-amber-900 border border-amber-300 text-[11px] font-extrabold">
+                  <span class="material-symbols-outlined text-[14px]">bolt</span>
+                  <span>Proteksi Lisensi Aktif</span>
+                </span>
               </div>
+
               <h3 id="disc-headline" class="text-xl sm:text-2xl font-extrabold text-on-error-container">
                 Larangan Keras Menyebarluaskan / Menjual Kembali Tanpa Izin
               </h3>
               <p id="disc-sec-body" class="text-sm sm:text-base text-on-surface leading-relaxed"></p>
+
               <div id="disc-points-list" class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <!-- Poin larangan di-render dinamis -->
+                <!-- Poin larangan interaktif di-render dinamis (klik untuk highlight) -->
+              </div>
+
+              <div class="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-red-200/70">
+                <p class="text-[11px] sm:text-xs font-semibold text-red-800/90 flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[16px]">touch_app</span>
+                  <span>Arahkan kursor atau klik poin ketentuan di atas untuk sorotan interaktif.</span>
+                </p>
+                <button id="btn-ack-disclaimer" type="button" class="nimbus-btn px-5 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white text-xs font-extrabold shadow-md flex items-center justify-center gap-1.5 shrink-0 transition">
+                  <span id="ack-disclaimer-icon" class="material-symbols-outlined text-[16px]">verified_user</span>
+                  <span id="ack-disclaimer-label">Saya Memahami &amp; Patuh Lisensi</span>
+                </button>
               </div>
             </div>
           </div>
@@ -502,6 +592,35 @@
           </div>
         </section>
 
+        <!-- SECTION KONTAK BANTUAN ADMIN (WHATSAPP & EMAIL) -->
+        <section id="contact-admin-section" class="flex flex-col space-y-5 scroll-mt-24 no-print">
+          <div class="nimbus-card rounded-3xl p-6 sm:p-9 border-2 border-sky-200/80 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div class="flex items-start gap-4 max-w-2xl">
+              <div class="w-13 h-13 p-3.5 rounded-2xl bg-sky-100 text-primary flex items-center justify-center shrink-0 shadow-xs">
+                <span class="material-symbols-outlined text-[28px]">support_agent</span>
+              </div>
+              <div class="space-y-1.5">
+                <span id="contact-sec-subtitle" class="text-[11px] text-primary tracking-wider uppercase font-extrabold">Pusat Bantuan Member Resmi</span>
+                <h2 id="contact-sec-title" class="text-xl sm:text-2xl font-extrabold text-on-surface">Butuh Bantuan Kendala Akses? Hubungi Admin</h2>
+                <p id="contact-sec-body" class="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                  Jika mengalami kendala saat menyalin token, gagal masuk ke portal kelas, atau link grup tidak terbuka, tim Admin kami siap membantu Anda secara langsung melalui WhatsApp atau Email.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0">
+              <a id="btn-contact-admin-wa" href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="nimbus-btn px-6 py-4 rounded-full bg-tertiary hover:bg-emerald-700 text-white text-xs sm:text-sm font-extrabold shadow-md flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[19px]">chat</span>
+                <span id="contact-wa-label">Hubungi via WhatsApp</span>
+              </a>
+              <a id="btn-contact-admin-email" href="mailto:support@productreceiver.com" class="nimbus-btn px-6 py-4 rounded-full bg-primary hover:bg-primary-container text-white text-xs sm:text-sm font-extrabold shadow-md flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[19px]">mail</span>
+                <span id="contact-email-label">Kirim Email ke Admin</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
       </div>
     </main>
 
@@ -528,10 +647,11 @@
       </button>
     </div>
 
-    <!-- Floating Corner Anabul Helper Widget -->
-    <aside id="anabul-corner-widget" aria-label="Asisten Anabul" class="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-30 flex flex-col items-end no-print">
+    <!-- Floating Corner Mascot / Custom Logo Helper Widget -->
+    <aside id="anabul-corner-widget" aria-label="Asisten Maskot" class="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-30 flex flex-col items-end no-print">
       <div id="anabul-corner-bubble" class="mb-2.5 max-w-[260px] bg-white px-4 py-3 rounded-2xl rounded-br-sm border border-sky-100 shadow-[0_16px_36px_-6px_rgba(56,189,248,0.28)] transition-all duration-300 flex items-start gap-2.5">
-        <span class="material-symbols-outlined text-sky-500 text-[20px] shrink-0 mt-0.5">pets</span>
+        <img id="anabul-bubble-logo-img" src="" alt="Logo Maskot" class="hidden w-6 h-6 rounded-full object-cover shrink-0 mt-0.5 ring-1 ring-sky-200" />
+        <span id="anabul-bubble-default-icon" class="material-symbols-outlined text-sky-500 text-[20px] shrink-0 mt-0.5">pets</span>
         <div class="flex-1">
           <div class="flex items-center justify-between gap-2">
             <p id="anabul-bubble-title" class="text-xs font-bold text-on-surface">Halo, Saya Anabul! 🐾</p>
@@ -544,9 +664,10 @@
       </div>
 
       <button id="btn-anabul-corner" type="button" class="relative group cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95" title="Klik Anabul untuk Tips!">
-        <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-primary to-secondary-container p-1 shadow-[0_12px_28px_rgba(14,165,233,0.35)] flex items-center justify-center">
-          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-primary">
-            <span class="material-symbols-outlined text-[28px]">pets</span>
+        <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-primary to-secondary-container p-1 shadow-[0_12px_28px_rgba(14,165,233,0.35)] flex items-center justify-center overflow-hidden">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-primary overflow-hidden">
+            <img id="anabul-corner-logo-img" src="" alt="Logo Pojok Kanan" class="hidden w-full h-full object-cover rounded-full" />
+            <span id="anabul-corner-default-icon" class="material-symbols-outlined text-[28px]">pets</span>
           </div>
         </div>
         <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-tertiary rounded-full ring-2 ring-white"></span>
@@ -588,6 +709,13 @@
           <span class="material-symbols-outlined text-[20px]">insights</span>
           <span>Analytics &amp; Overview</span>
         </button>
+        <button type="button" data-admin-nav="classes" class="admin-nav-btn flex items-center justify-between px-4 py-3 rounded-2xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-semibold text-sm transition-all text-left">
+          <span class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[20px]">workspaces</span>
+            <span>Paket Kelas &amp; URL</span>
+          </span>
+          <span id="sidebar-cls-count" class="px-2 py-0.5 rounded-full bg-sky-100 text-primary text-[11px] font-bold">1</span>
+        </button>
         <button type="button" data-admin-nav="cms" class="admin-nav-btn flex items-center gap-3 px-4 py-3 rounded-2xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-semibold text-sm transition-all text-left">
           <span class="material-symbols-outlined text-[20px]">edit_document</span>
           <span>CMS Content Editor</span>
@@ -615,14 +743,14 @@
 
         <button id="btn-switch-to-public" type="button" class="flex items-center gap-3 px-4 py-3 rounded-2xl text-primary bg-sky-50/80 hover:bg-sky-100 font-semibold text-sm transition-all text-left">
           <span class="material-symbols-outlined text-[20px]">open_in_new</span>
-          <span>Lihat Landing Page Live</span>
+          <span>Lihat Landing Page Kelas</span>
         </button>
       </nav>
 
       <!-- Admin Profile & Logout -->
       <div class="px-4 pt-3 border-t border-sky-100 space-y-2.5">
         <div class="p-3 bg-surface-container-low rounded-2xl flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shrink-0" id="admin-avatar-box">SA</div>
+          <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden" id="admin-avatar-box">SA</div>
           <div class="min-w-0 flex-1">
             <p id="admin-user-name" class="text-xs font-bold text-on-surface truncate">Super Admin</p>
             <p id="admin-user-email" class="text-[11px] text-tertiary truncate">Terautentikasi</p>
@@ -637,21 +765,37 @@
 
     <!-- Main Admin Workspace -->
     <div class="lg:pl-72 min-h-screen flex flex-col">
-      <!-- Top Sticky Header -->
-      <header class="sticky top-0 h-16 sm:h-20 bg-white/85 backdrop-blur-xl border-b border-sky-100 z-30 flex items-center justify-between px-4 sm:px-8">
-        <div class="flex items-center gap-3">
+      <!-- Top Sticky Header dengan Pemilih Kelas Aktif -->
+      <header class="sticky top-0 min-h-[68px] py-2.5 bg-white/90 backdrop-blur-xl border-b border-sky-100 z-30 flex flex-wrap items-center justify-between gap-2.5 px-4 sm:px-8">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
           <button id="btn-open-sidebar" type="button" class="lg:hidden w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-on-surface">
             <span class="material-symbols-outlined text-[22px]">menu</span>
           </button>
-          <span class="px-3 py-1 bg-sky-100 text-primary text-xs font-bold rounded-full">Super Admin Mode</span>
+
+          <!-- Pemilih Paket Kelas Aktif (Multi-Landing Page Switcher) -->
+          <div class="flex items-center gap-1.5 bg-sky-50 border border-sky-200/80 rounded-full pl-3 pr-1.5 py-1">
+            <span class="material-symbols-outlined text-primary text-[16px]">workspaces</span>
+            <span class="hidden sm:inline text-[11px] font-bold text-on-surface-variant">Kelas Aktif:</span>
+            <select id="admin-active-class-select" class="bg-white text-primary text-xs font-extrabold rounded-full px-3 py-1 border border-sky-100 focus:outline-none cursor-pointer max-w-[190px] sm:max-w-[240px]">
+              <option value="CLS-UTAMA">Kelas A (/kelasA)</option>
+            </select>
+            <button id="btn-copy-active-class-url" type="button" class="px-2.5 py-1 rounded-full bg-primary text-white hover:bg-primary-container text-[11px] font-bold flex items-center gap-1 transition" title="Salin Link URL Landing Page Kelas Ini untuk ditempel di Lynk.id">
+              <span class="material-symbols-outlined text-[14px]">link</span>
+              <span class="hidden md:inline">Salin URL</span>
+            </button>
+            <button id="btn-open-add-class-top" type="button" class="w-7 h-7 rounded-full bg-white hover:bg-sky-100 text-primary border border-sky-200 flex items-center justify-center transition" title="Buat URL Landing Page Kelas Baru (+)">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+            </button>
+          </div>
+
           <span id="admin-emergency-badge" class="hidden px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">Mode Darurat Aktif</span>
-          <span id="admin-latency-pill" class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 text-tertiary text-[11px] font-mono font-semibold rounded-full">⚡ -- ms</span>
+          <span id="admin-latency-pill" class="hidden xl:inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 text-tertiary text-[11px] font-mono font-semibold rounded-full">⚡ -- ms</span>
         </div>
 
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-2">
           <a id="admin-open-sheets-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-surface-container-low hover:bg-surface-container text-primary text-xs font-bold transition">
             <span class="material-symbols-outlined text-[16px]">table_view</span>
-            <span>Buka Google Sheets</span>
+            <span>Buka Sheets</span>
           </a>
           <button id="btn-admin-sync" type="button" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-white hover:bg-primary-container text-xs font-bold shadow-sm transition">
             <span id="admin-sync-icon" class="material-symbols-outlined text-[17px] transition-transform duration-500">sync</span>
@@ -818,6 +962,9 @@
                   <option value="JOIN_WA">Gabung WA</option>
                   <option value="JOIN_TG">Gabung Telegram</option>
                   <option value="FOLLOW_SOCMED">Klik Medsos</option>
+                  <option value="CONTACT_WA">Klik WA Admin</option>
+                  <option value="CONTACT_EMAIL">Klik Email Admin</option>
+                  <option value="ACK_DISCLAIMER">Konfirmasi Lisensi</option>
                 </select>
                 <button id="btn-export-logs-csv" type="button" class="px-3.5 py-2 rounded-full bg-sky-50 hover:bg-sky-100 text-primary text-xs font-bold flex items-center gap-1 transition">
                   <span class="material-symbols-outlined text-[16px]">download</span>
@@ -897,7 +1044,10 @@
               <span class="material-symbols-outlined text-[17px]">gavel</span>5. Disclaimer
             </button>
             <button type="button" data-cms-sub="sec_closing" class="cms-sub-btn px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-[17px]">celebration</span>6. Penutup &amp; Anabul
+              <span class="material-symbols-outlined text-[17px]">celebration</span>6. Penutup &amp; Maskot
+            </button>
+            <button type="button" data-cms-sub="sec_contact" class="cms-sub-btn px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[17px]">support_agent</span>7. Kontak Admin (WA &amp; Email)
             </button>
           </div>
 
@@ -1195,6 +1345,46 @@
           </div>
         </section>
 
+        <!-- ==================================================================
+             ADMIN TAB 6: MANAJEMEN MULTI-KELAS & ISOLASI URL LANDING PAGE
+             ================================================================== -->
+        <section id="admin-tab-classes" class="admin-tab-pane hidden space-y-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-primary text-xs font-bold mb-2">
+                <span class="material-symbols-outlined text-[16px]">workspaces</span>
+                <span>Multi-Class URL Isolation • 1 Kelas = 1 Link Eksklusif</span>
+              </span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-on-surface">Paket Kelas &amp; URL Landing Page Terpisah</h1>
+              <p class="text-sm text-on-surface-variant mt-1">
+                Setiap kelas memiliki URL berbeda (contoh: <code>/kelasA</code>, <code>/kelasB</code>) dengan isi Token, Grup WA/TG, Video YT, dan Konten CMS yang terisolasi penuh. Pembeli Kelas A terblokir otomatis dari URL Kelas B maupun halaman utama origin <code>/</code>.
+              </p>
+            </div>
+            <button id="btn-open-add-class" type="button" class="nimbus-btn px-6 py-3 rounded-full bg-primary text-white text-xs font-extrabold shadow-md flex items-center gap-2 self-start md:self-auto shrink-0">
+              <span class="material-symbols-outlined text-[18px]">add_circle</span>
+              <span>Buat Kelas &amp; URL Baru</span>
+            </button>
+          </div>
+
+          <!-- Info Proteksi Origin & Single-Class Lock -->
+          <div class="p-5 rounded-3xl bg-sky-50/90 border border-sky-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-2xl bg-primary text-white flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[20px]">verified_user</span>
+              </div>
+              <div class="text-xs leading-relaxed text-on-surface-variant">
+                <p class="font-extrabold text-on-surface text-sm">Cara Kerja Proteksi Multi-URL Otomatis:</p>
+                <p>1) Alamat utama <strong>Origin (<code>/</code>)</strong> dikunci khusus login Google OAuth 2.0 Super Admin. 2) Saat pembeli membuka link kelasnya (mis. <code>/kelasA</code>), mereka langsung masuk tanpa login &amp; browser dikunci khusus ke kelas tersebut. 3) Anda juga dapat mengaktifkan <strong>Kunci Rahasia URL (<code>?k=...</code>)</strong> per kelas agar URL mustahil ditebak walau lewat mode penyamaran (Incognito).</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Daftar Kartu Paket Kelas -->
+          <div id="admin-classes-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Di-render dinamis oleh app.js -->
+          </div>
+        </section>
+
       </div>
     </div>
   </div>
@@ -1413,6 +1603,92 @@
         <div class="flex items-center justify-end gap-2 pt-2">
           <button type="button" onclick="window.PRApp.closeTutorialModal()" class="px-5 py-2.5 rounded-full bg-surface-container-low text-xs font-bold text-on-surface">Batal</button>
           <button type="submit" class="nimbus-btn px-6 py-2.5 rounded-full bg-primary text-white text-xs font-extrabold shadow-md">Simpan Video Panduan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 5: BUAT / EDIT PAKET KELAS & URL UNIK (/kelasA, /kelasB, dst.)
+       ======================================================================== -->
+  <div id="class-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4 no-print">
+    <div class="w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-sky-100 overflow-hidden max-h-[92vh] flex flex-col">
+      <div class="bg-surface-container-low px-6 py-4 flex items-center justify-between border-b border-sky-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-sky-100 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">workspaces</span>
+          </div>
+          <div>
+            <h3 id="cls-modal-title" class="text-base font-bold text-on-surface">Buat Paket Kelas &amp; URL Baru</h3>
+            <p class="text-[11px] text-on-surface-variant">Setiap kelas memiliki URL Landing Page, Token, &amp; Grup yang terpisah</p>
+          </div>
+        </div>
+        <button type="button" onclick="window.PRApp.closeClassModal()" class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-outline hover:text-on-surface">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <form id="form-class-item" class="p-6 space-y-4 overflow-y-auto">
+        <input id="cls-form-id" type="hidden" />
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Nama Paket Kelas *</label>
+          <input id="cls-form-name" type="text" required placeholder="Contoh: Kelas B — Bootcamp TikTok Affiliate" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs sm:text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+        </div>
+
+        <div>
+          <label class="flex items-center justify-between text-xs font-bold text-on-surface mb-1">
+            <span>Alamat Slug URL Kelas * (Tanpa spasi)</span>
+            <span class="text-[11px] text-primary font-mono" id="cls-slug-preview">/kelasB</span>
+          </label>
+          <div class="flex items-center rounded-xl bg-surface-container-low border border-sky-100 overflow-hidden focus-within:bg-white focus-within:ring-2 focus-within:ring-primary/30">
+            <span class="px-3 py-2.5 text-xs font-mono text-outline bg-sky-50/70 border-r border-sky-100 select-none">/</span>
+            <input id="cls-form-slug" type="text" required placeholder="kelasB" class="w-full px-3 py-2.5 bg-transparent font-mono font-bold text-primary text-xs sm:text-sm focus:outline-none" />
+          </div>
+          <p class="text-[11px] text-outline mt-1">Contoh hasil: <code>https://panduanawal.vercel.app/kelasB</code></p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Catatan / Deskripsi Singkat Kelas</label>
+          <input id="cls-form-desc" type="text" placeholder="Contoh: Halaman panduan khusus pembeli paket Kelas B di Lynk.id" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/30" />
+        </div>
+
+        <div id="cls-clone-wrap">
+          <label class="block text-xs font-bold text-on-surface mb-1">Salin Template Desain Awal Dari Kelas</label>
+          <select id="cls-form-clone" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-xs font-semibold focus:outline-none">
+            <option value="CLS-UTAMA">Kelas Utama (Template Standar)</option>
+          </select>
+          <p class="text-[11px] text-outline mt-1">Token &amp; Video kelas baru tetap kosong/terpisah agar aman, sementara teks dasar disalin agar cepat Anda sesuaikan.</p>
+        </div>
+
+        <!-- Opsi Kunci Rahasia URL Anti-Tebak -->
+        <div class="p-4 rounded-2xl bg-sky-50/80 border border-sky-200/70 space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-extrabold text-on-surface">Kunci Rahasia URL Anti-Tebak (Opsional)</p>
+              <p class="text-[11px] text-on-surface-variant">Jika aktif, pembeli wajib memakai link utuh beserta kode kunci (mencegah orang menebak <code>/kelasB</code> di browser lain).</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+              <input id="cls-form-reqkey" type="checkbox" class="sr-only peer" />
+              <div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:bg-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+            </label>
+          </div>
+          <div id="cls-key-input-wrap" class="hidden">
+            <label class="block text-[11px] font-bold text-on-surface mb-1">Kode Kunci Rahasia URL (<code>?k=...</code>)</label>
+            <input id="cls-form-key" type="text" placeholder="Otomatis dibuat jika dikosongkan" class="w-full px-3.5 py-2 rounded-xl bg-white border border-sky-200 font-mono text-xs text-primary font-bold focus:outline-none" />
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-surface-container-low flex items-center justify-between">
+          <span class="text-xs font-bold text-on-surface">Aktifkan Halaman Landing Page Kelas Ini</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input id="cls-form-active" type="checkbox" checked class="sr-only peer" />
+            <div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:bg-tertiary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+          </label>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button type="button" onclick="window.PRApp.closeClassModal()" class="px-5 py-2.5 rounded-full bg-surface-container-low text-xs font-bold text-on-surface">Batal</button>
+          <button type="submit" class="nimbus-btn px-6 py-2.5 rounded-full bg-primary text-white text-xs font-extrabold shadow-md">Simpan Paket Kelas</button>
         </div>
       </form>
     </div>

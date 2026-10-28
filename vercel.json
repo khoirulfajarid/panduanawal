@@ -1,0 +1,9 @@
+{
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/((?!css/|js/|assets/|favicon\\.ico|\\.nojekyll).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

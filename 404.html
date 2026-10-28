@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Memuat Halaman Kelas...</title>
+  <script>
+    // SPA Clean-URL Router Fallback untuk GitHub Pages (/kelasA, /kelasB, dst.)
+    (function () {
+      try {
+        sessionStorage.setItem('pr_spa_path', window.location.pathname + window.location.search + window.location.hash);
+      } catch (e) {}
+      var segs = window.location.pathname.replace(/\/+$/, '').split('/');
+      segs.pop();
+      var base = segs.join('/') + '/';
+      window.location.replace(base);
+    })();
+  </script>
+</head>
+<body></body>
+</html>

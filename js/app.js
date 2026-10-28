@@ -9,23 +9,37 @@
 (function () {
   'use strict';
 
+  const DEFAULT_CLASS_ID = 'CLS-UTAMA';
+
   const STORAGE_KEYS = {
-    PUB_CACHE: 'pr_pub_cache_v1',
+    PUB_CACHE: 'pr_pub_cache_v2_',
     SESSION_TOKEN: 'pr_admin_hmac_token',
     SESSION_USER: 'pr_admin_user_info',
     ANABUL_ACTIVE: 'pr_anabul_escort_on',
-    VIEWED_SESSION: 'pr_tracked_pageview'
+    VIEWED_SESSION: 'pr_tracked_pageview_',
+    LOCKED_SLUG: 'pr_customer_locked_slug',
+    AUTH_KEYS: 'pr_customer_auth_keys',
+    DISC_ACK: 'pr_disclaimer_ack_v1',
+    DEMO_MULTI_DB: 'pr_local_demo_multiclass_v1'
   };
 
   // Data default bawaan (digunakan saat pratinjau lokal sebelum GAS_URL diisi)
-  function getDefaultBootData() {
+  function getDefaultBootData(customClassName, customSlug, customClassId) {
     const now = new Date().toISOString();
+    const clsName = customClassName || 'Kelas A (Paket Utama)';
+    const clsSlug = customSlug || 'kelasA';
+    const clsId = customClassId || DEFAULT_CLASS_ID;
     return {
+      classInfo: {
+        class_id: clsId,
+        class_slug: clsSlug,
+        class_name: clsName
+      },
       sections: {
         sec_greeting: {
           section_id: 'sec_greeting',
           section_title: 'Terima Kasih Atas Pembelian Anda!',
-          section_subtitle: 'Selamat Datang di Kelas Eksklusif',
+          section_subtitle: 'Selamat Datang di ' + clsName,
           content_body: 'Aset digital Anda telah siap. Ikuti panduan terstruktur di bawah ini untuk menonton video orientasi, menyalin token akses kelas, bergabung ke grup diskusi, dan mengklaim seluruh fasilitas Anda.',
           cta_label: 'Mulai Panduan Sekarang',
           cta_url: '#video-panduan',
@@ -34,10 +48,12 @@
           metadata: {
             brand_name: 'ProductReceiver',
             verified_pill: 'Terverifikasi Lynk.id',
-            hero_badge: 'Portal Serah Terima Resmi Lynk.id',
+            hero_badge: 'Portal Serah Terima Resmi • ' + clsName,
             rating_text: '500+ Alumni Puas',
             extra_count: '+480',
             anabul_enabled: true,
+            mascot_name: 'Anabul',
+            mascot_logo_url: '',
             anabul_greeting: 'Halo, Saya Anabul! 🐾',
             anabul_subtext: 'Aku menemani kursor kamu! Klik tombol Salin pada kartu Token lalu buka Portal Kelas ya!'
           }
@@ -67,7 +83,7 @@
           updated_at: now,
           metadata: {
             banner_badge: 'Direct Link Learning Management System',
-            banner_title: 'Akses Portal Belajar Utama',
+            banner_title: 'Akses Portal Belajar — ' + clsName,
             show_qr: true
           }
         },
@@ -75,7 +91,7 @@
           section_id: 'sec_community',
           section_title: 'Bergabung ke Wadah Komunitas Resmi',
           section_subtitle: 'Langkah 02',
-          content_body: 'Pilih grup diskusi WhatsApp dan saluran informasi Telegram resmi agar Anda tidak tertinggal info jadwal live mentoring dan update materi terbaru.',
+          content_body: 'Pilih grup diskusi WhatsApp dan saluran informasi Telegram resmi sesuai paket kelas Anda agar tidak tertinggal info jadwal live mentoring.',
           cta_label: 'Gabung Komunitas',
           cta_url: '',
           is_active: true,
@@ -84,7 +100,7 @@
             wa: {
               enabled: true,
               tab_label: 'Grup Diskusi & Networking',
-              title: 'WhatsApp Community VIP',
+              title: 'WhatsApp Group — ' + clsName,
               description: 'Ruang silaturahmi & sharing pengalaman sesama member se-Indonesia. Tempat berdiskusi santai, tanya jawab kendala teknis harian, dan kolaborasi project.',
               bullets: [
                 'Diskusi dua arah langsung bersama mentor & tim asisten',
@@ -96,7 +112,7 @@
             tg: {
               enabled: true,
               tab_label: 'Channel Broadcast Modul',
-              title: 'Telegram Broadcast Channel',
+              title: 'Telegram Channel — ' + clsName,
               description: 'Saluran resmi notifikasi satu arah agar Anda tidak pernah ketinggalan update modul baru, jadwal sesi Zoom mentoring, dan file resource penting.',
               bullets: [
                 'Arsip tautan rekaman sesi live webinar & materi suplemen',
@@ -124,7 +140,9 @@
                 handle: '@mentor_official',
                 pitch: 'Update tips kilat harian, Q&A interaktif lewat Story, behind the scenes pembuatan produk digital, dan info giveaway eksklusif!',
                 cta_label: 'Follow Instagram',
-                url: 'https://instagram.com/'
+                url: 'https://instagram.com/',
+                wallpaper_url: '',
+                avatar_url: ''
               },
               {
                 platform: 'youtube',
@@ -132,7 +150,9 @@
                 handle: 'Mentor Academy ID',
                 pitch: 'Video tutorial mendalam gratis berdurasi penuh, rekaman podcast bersama praktisi industri, dan bedah studi kasus nyata setiap minggu!',
                 cta_label: 'Subscribe YouTube',
-                url: 'https://youtube.com/'
+                url: 'https://youtube.com/',
+                wallpaper_url: '',
+                avatar_url: ''
               },
               {
                 platform: 'tiktok',
@@ -140,7 +160,9 @@
                 handle: '@mentor.creativelab',
                 pitch: 'Insight daging 60 detik yang padat dan langsung bisa dipraktekkan, rekomendasi AI & tools produktivitas terbaru, serta tren digital terkini!',
                 cta_label: 'Ikuti di TikTok',
-                url: 'https://tiktok.com/'
+                url: 'https://tiktok.com/',
+                wallpaper_url: '',
+                avatar_url: ''
               }
             ]
           }
@@ -156,7 +178,7 @@
           updated_at: now,
           metadata: {
             status_pill: 'Terkonfirmasi Pembayaran Lynk.id',
-            package_title: 'Paket Membership: Lifetime All-Access VIP',
+            package_title: 'Paket Membership: ' + clsName,
             license_badge: 'Single Seat Licensed',
             items: [
               {
@@ -189,7 +211,7 @@
         sec_disclaimer: {
           section_id: 'sec_disclaimer',
           section_title: 'Ketentuan Lisensi & Anti-Pembajakan',
-          section_subtitle: 'Langkah 05',
+          section_subtitle: 'Langkah 05 • Wajib Dipatuhi',
           content_body: 'Seluruh video materi, modul panduan, dokumen template, serta kode token akses di halaman ini dilindungi oleh Undang-Undang Hak Cipta No. 28 Tahun 2014 Republik Indonesia. Dilarang keras menyebarluaskan, membagikan akses secara gratis, mengunggah ulang ke drive publik, atau memperjualbelikan kembali (resell) tanpa izin tertulis resmi.',
           cta_label: '',
           cta_url: '',
@@ -217,13 +239,34 @@
             eyebrow: 'Ucapan Selamat Bergabung dari Mentor',
             helper_text: 'Simpan halaman ini di bookmark browser Anda atau cetak rangkuman panduan PDF agar mudah diakses kapan saja.'
           }
+        },
+        sec_contact: {
+          section_id: 'sec_contact',
+          section_title: 'Butuh Bantuan Kendala Akses? Hubungi Admin Resmi',
+          section_subtitle: 'Pusat Bantuan Member Resmi',
+          content_body: 'Jika mengalami kendala saat menyalin token, gagal masuk ke portal kelas, atau link grup tidak terbuka, tim Admin kami siap membantu Anda secara langsung melalui WhatsApp atau Email.',
+          cta_label: 'Hubungi via WhatsApp',
+          cta_url: '6281234567890',
+          is_active: true,
+          updated_at: now,
+          metadata: {
+            wa_enabled: true,
+            wa_number: '6281234567890',
+            wa_label: 'Hubungi via WhatsApp',
+            wa_message: 'Halo Admin, saya pembeli ' + clsName + ' di Lynk.id dan butuh bantuan terkait akses halaman panduan.',
+            email_enabled: true,
+            email_address: 'support@productreceiver.com',
+            email_label: 'Kirim Email ke Admin',
+            email_subject: 'Bantuan Akses Member — ' + clsName
+          }
         }
       },
       tokens: [
         {
           token_id: 'TOK-UTAMA01',
-          token_code: 'KELASPRO-2026-VIP',
-          token_label: 'Akses Modul Utama Kelas',
+          class_id: clsId,
+          token_code: clsSlug.toUpperCase() + '-2026-VIP',
+          token_label: 'Akses Modul Utama — ' + clsName,
           tab_badge: 'Token Utama',
           description: 'Salin dan tempelkan kode ini saat masuk ke Portal Kelas untuk membuka seluruh modul video.',
           batch_info: 'Batch Resmi Lynk.id',
@@ -234,7 +277,8 @@
         },
         {
           token_id: 'TOK-BONUS02',
-          token_code: 'BONUS-TEMPLATE-KIT',
+          class_id: clsId,
+          token_code: clsSlug.toUpperCase() + '-BONUS-KIT',
           token_label: 'Akses Kit Template & Resource',
           tab_badge: 'Token Bonus',
           description: 'Gunakan kode akses ini untuk membuka folder bonus template kerja pendukung.',
@@ -248,6 +292,7 @@
       tutorials: [
         {
           video_id: 'VID-GUIDE01',
+          class_id: clsId,
           youtube_url: 'https://www.youtube.com/watch?v=M7lc1UVf-VE',
           youtube_id: 'M7lc1UVf-VE',
           title: '1. Panduan Masuk Portal, Cara Salin Token & Aktivasi Kelas',
@@ -266,6 +311,7 @@
         },
         {
           video_id: 'VID-GUIDE02',
+          class_id: clsId,
           youtube_url: 'https://www.youtube.com/watch?v=ysz5S6PUM-U',
           youtube_id: 'ysz5S6PUM-U',
           title: '2. Panduan Gabung Grup Diskusi & Etika Komunitas',
@@ -283,6 +329,7 @@
         },
         {
           video_id: 'VID-GUIDE03',
+          class_id: clsId,
           youtube_url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
           youtube_id: 'aqz-KE-bpKQ',
           title: '3. Penjelasan Hak Paket, Lisensi & Ketentuan Anti-Pembajakan',
@@ -310,6 +357,10 @@
   // State Aplikasi Terpusat
   const state = {
     pub: getDefaultBootData(),
+    currentSlug: '',
+    currentKey: '',
+    gateMode: '',
+    activeClassId: DEFAULT_CLASS_ID,
     activeVideoIdx: 0,
     activeVideoStartSec: 0,
     activeVideoAutoplay: false,
@@ -318,6 +369,8 @@
     adminUser: null,
     isDemoAdmin: false,
     adminData: {
+      classes: [],
+      sectionsByClass: {},
       sections: {},
       tokens: [],
       tutorials: [],
@@ -428,6 +481,308 @@
   }
 
   // ==========================================================================
+  // 1B. ROUTING MULTI-KELAS, PROTEKSI ORIGIN & UPLOAD MEDIA KUSTOM
+  // ==========================================================================
+  function normalizeSlug(raw) {
+    return String(raw || '').trim().replace(/^\/+|\/+$/g, '').replace(/[^A-Za-z0-9_-]/g, '');
+  }
+
+  function isSuperAdminLoggedIn() {
+    return !!(state.sessionToken || state.isDemoAdmin);
+  }
+
+  function restoreSpaRedirectPath() {
+    try {
+      const saved = sessionStorage.getItem('pr_spa_path');
+      if (saved) {
+        sessionStorage.removeItem('pr_spa_path');
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', saved);
+        }
+      }
+    } catch (e) { /* abaikan */ }
+  }
+
+  function resolveRouteContext() {
+    const qs = new URLSearchParams(window.location.search || '');
+    const qSlug = normalizeSlug(qs.get('kelas') || qs.get('slug') || '');
+    const qKey = String(qs.get('k') || qs.get('key') || '').trim();
+
+    if (qSlug) {
+      return { slug: qSlug, key: qKey };
+    }
+    if (window.location.protocol === 'file:') {
+      return { slug: '', key: qKey };
+    }
+
+    const parts = String(window.location.pathname || '')
+      .split('/')
+      .filter(function (seg) { return seg && seg.toLowerCase() !== 'index.html'; });
+
+    let slug = '';
+    const host = String(window.location.hostname || '').toLowerCase();
+    if (host.slice(-10) === '.github.io') {
+      // Pada GitHub Pages project site: /nama-repo/kelasA -> parts[1] adalah slug
+      slug = parts.length >= 2 ? normalizeSlug(parts[1]) : '';
+    } else {
+      // Pada Vercel / Custom Domain: https://panduanawal.vercel.app/kelasA -> parts[0] adalah slug
+      slug = parts.length >= 1 ? normalizeSlug(parts[0]) : '';
+    }
+    return { slug: slug, key: qKey };
+  }
+
+  function buildClassPublicUrl(cls) {
+    if (!cls) return window.location.origin || '';
+    const slug = normalizeSlug(cls.class_slug || 'kelasA');
+    const needKey = !!(cls.require_key && cls.access_key);
+
+    if (window.location.protocol === 'file:') {
+      const baseFile = window.location.href.split('?')[0].split('#')[0];
+      return baseFile + '?kelas=' + encodeURIComponent(slug) + (needKey ? '&k=' + encodeURIComponent(cls.access_key) : '');
+    }
+
+    const host = String(window.location.hostname || '').toLowerCase();
+    let baseOrigin = window.location.origin;
+    if (host.slice(-10) === '.github.io') {
+      const segs = String(window.location.pathname || '').split('/').filter(Boolean);
+      if (segs.length > 0 && segs[0].toLowerCase() !== 'index.html') {
+        baseOrigin += '/' + segs[0];
+      }
+    }
+    return baseOrigin + '/' + encodeURIComponent(slug) + (needKey ? '?k=' + encodeURIComponent(cls.access_key) : '');
+  }
+
+  function showOriginGate(mode, customMessage) {
+    state.gateMode = mode;
+    const gate = $('origin-gate-view');
+    const pub = $('public-view');
+    const adm = $('admin-view');
+    if (pub) pub.classList.add('hidden');
+    if (adm) adm.classList.add('hidden');
+    if (!gate) return;
+    gate.classList.remove('hidden');
+
+    const iconEl = $('gate-icon');
+    const badgeEl = $('gate-badge-text');
+    const titleEl = $('gate-title');
+    const descEl = $('gate-desc');
+    const loginBox = $('gate-admin-login-box');
+    const blockedBox = $('gate-blocked-class-box');
+    const localBox = $('gate-local-preview-box');
+    const retBtn = $('btn-return-my-class');
+    const retLbl = $('btn-return-my-class-label');
+
+    if (mode === 'ORIGIN') {
+      if (iconEl) iconEl.textContent = 'admin_panel_settings';
+      if (badgeEl) {
+        badgeEl.textContent = 'Proteksi Origin • Khusus Super Admin';
+        badgeEl.className = 'inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-100 text-primary text-xs font-extrabold uppercase tracking-wider';
+      }
+      if (titleEl) titleEl.textContent = 'Gerbang Utama ProductReceiver';
+      if (descEl) {
+        descEl.innerHTML = 'Halaman utama (origin) dikunci dan wajib login menggunakan email <strong>Google OAuth 2.0 Super Admin</strong> yang terdaftar. Pembeli kelas silakan langsung membuka <strong>Link URL Khusus Kelas</strong> dari bukti pembelian Anda.';
+      }
+      if (loginBox) loginBox.classList.remove('hidden');
+      if (blockedBox) blockedBox.classList.add('hidden');
+      if (localBox) localBox.classList.toggle('hidden', isGasConfigured());
+    } else {
+      if (iconEl) iconEl.textContent = 'block';
+      if (badgeEl) {
+        badgeEl.textContent = 'Akses Halaman Kelas Dibatasi';
+        badgeEl.className = 'inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-red-100 text-error text-xs font-extrabold uppercase tracking-wider';
+      }
+      if (titleEl) titleEl.textContent = 'URL Kelas Ini Tidak Dapat Diakses';
+      if (descEl) {
+        descEl.textContent = customMessage || 'Anda hanya dapat mengakses halaman panduan sesuai Link URL Paket Kelas resmi pembelian Anda.';
+      }
+      if (loginBox) loginBox.classList.add('hidden');
+      if (blockedBox) blockedBox.classList.remove('hidden');
+
+      const lockedSlug = localStorage.getItem(STORAGE_KEYS.LOCKED_SLUG) || '';
+      if (retBtn) {
+        if (lockedSlug && lockedSlug.toLowerCase() !== String(state.currentSlug || '').toLowerCase()) {
+          retBtn.classList.remove('hidden');
+          retBtn.classList.add('flex');
+          if (retLbl) retLbl.textContent = 'Kembali ke Halaman Kelas Saya (/' + lockedSlug + ')';
+        } else {
+          retBtn.classList.add('hidden');
+          retBtn.classList.remove('flex');
+        }
+      }
+    }
+  }
+
+  function hideOriginGate() {
+    state.gateMode = '';
+    const gate = $('origin-gate-view');
+    if (gate) gate.classList.add('hidden');
+  }
+
+  function buildWhatsAppUrl(rawNumber, message) {
+    let digits = String(rawNumber || '').replace(/[^0-9]/g, '');
+    if (digits.indexOf('0') === 0) {
+      digits = '62' + digits.slice(1);
+    }
+    if (!digits) digits = '6281234567890';
+    const base = 'https://wa.me/' + digits;
+    return message ? (base + '?text=' + encodeURIComponent(message)) : base;
+  }
+
+  function getSocialPlatformSvg(platform) {
+    const p = String(platform || '').toLowerCase();
+    if (p === 'youtube') {
+      return '<svg viewBox="0 0 24 24" class="w-7 h-7" aria-hidden="true">' +
+        '<path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>' +
+        '<polygon fill="#FFFFFF" points="9.545,15.568 15.818,12 9.545,8.432"/>' +
+      '</svg>';
+    }
+    if (p === 'tiktok') {
+      return '<svg viewBox="0 0 24 24" class="w-7 h-7" aria-hidden="true">' +
+        '<rect width="24" height="24" rx="6" fill="#0F172A"/>' +
+        '<path fill="#25F4EE" d="M16.6 8.2c-1.1-.4-1.9-1.4-2.1-2.6h-2.5v9.2c0 1.2-1 2.2-2.2 2.2-.7 0-1.3-.3-1.7-.8-.4-.4-.5-1-.5-1.5 0-1.2 1-2.2 2.2-2.2.2 0 .5 0 .7.1V9.9c-.3 0-.6-.1-.9-.1-2.5 0-4.6 2.1-4.6 4.6 0 1.2.5 2.4 1.3 3.2.8.9 2 1.4 3.3 1.4 2.5 0 4.6-2.1 4.6-4.6v-4c.9.6 2 1 3.2 1V8.6c-.3 0-.6-.2-.8-.4z"/>' +
+        '<path fill="#FE2C55" d="M17.4 8.7c-1.2 0-2.3-.4-3.2-1v4c0 2.5-2.1 4.6-4.6 4.6-.9 0-1.8-.3-2.5-.8.8.8 1.9 1.3 3.1 1.3 2.5 0 4.6-2.1 4.6-4.6v-4c.9.6 2 1 3.2 1V8.7h-.6z"/>' +
+      '</svg>';
+    }
+    // Default: Instagram Official Gradient Logo
+    return '<svg viewBox="0 0 24 24" class="w-7 h-7" aria-hidden="true">' +
+      '<defs><linearGradient id="igBrandGrad" x1="0%" y1="100%" x2="100%" y2="0%">' +
+        '<stop offset="0%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/>' +
+      '</linearGradient></defs>' +
+      '<rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="url(#igBrandGrad)"/>' +
+      '<rect x="5" y="5" width="14" height="14" rx="4.2" fill="none" stroke="#FFFFFF" stroke-width="1.8"/>' +
+      '<circle cx="12" cy="12" r="3.3" fill="none" stroke="#FFFFFF" stroke-width="1.8"/>' +
+      '<circle cx="16.3" cy="7.7" r="1.1" fill="#FFFFFF"/>' +
+    '</svg>';
+  }
+
+  /**
+   * Kompresi gambar di browser (HTML5 Canvas) & unggah ke Google Drive CDN (atau DataURL saat Mode Lokal)
+   */
+  function compressImageToDataUrl(file, maxW, maxH, preferPng) {
+    return new Promise(function (resolve, reject) {
+      if (!file || !file.type || file.type.indexOf('image/') !== 0) {
+        reject(new Error('Pilih file gambar yang valid (PNG, JPG, WebP, atau GIF).'));
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        reject(new Error('Ukuran file gambar terlalu besar (maksimal 8 MB).'));
+        return;
+      }
+      const reader = new FileReader();
+      reader.onerror = function () { reject(new Error('Gagal membaca file gambar.')); };
+      reader.onload = function (ev) {
+        const rawUrl = String(ev.target.result || '');
+        if (file.type === 'image/svg+xml' || file.type === 'image/gif') {
+          resolve({ dataUrl: rawUrl, mimeType: file.type });
+          return;
+        }
+        const img = new Image();
+        img.onerror = function () { reject(new Error('Format gambar tidak dapat diproses.')); };
+        img.onload = function () {
+          let w = img.width || 400;
+          let h = img.height || 400;
+          const ratio = Math.min(1, (maxW || 900) / w, (maxH || 900) / h);
+          w = Math.max(1, Math.round(w * ratio));
+          h = Math.max(1, Math.round(h * ratio));
+
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+
+          const outMime = (preferPng || file.type === 'image/png' || file.type === 'image/webp') ? 'image/png' : 'image/jpeg';
+          const outUrl = outMime === 'image/jpeg' ? canvas.toDataURL('image/jpeg', 0.84) : canvas.toDataURL('image/png');
+          resolve({ dataUrl: outUrl, mimeType: outMime });
+        };
+        img.src = rawUrl;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function uploadCustomImageFile(file, category, opts) {
+    opts = opts || {};
+    const compressed = await compressImageToDataUrl(file, opts.maxW || 900, opts.maxH || 900, !!opts.preferPng);
+    if (isGasConfigured() && !state.isDemoAdmin) {
+      const res = await api('admin.uploadMedia', {
+        base64: compressed.dataUrl,
+        mimeType: compressed.mimeType,
+        category: category || 'custom'
+      });
+      return res.data && res.data.url ? res.data.url : compressed.dataUrl;
+    }
+    return compressed.dataUrl;
+  }
+
+  // Simulasi Multi-Kelas Lokal (ketika GAS_URL belum diisi)
+  function initOrLoadLocalDemoStore() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEYS.DEMO_MULTI_DB);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && Array.isArray(parsed.classes) && parsed.classes.length) {
+          return parsed;
+        }
+      }
+    } catch (e) { /* abaikan */ }
+
+    const now = new Date().toISOString();
+    const bootA = getDefaultBootData('Kelas A (Paket Utama)', 'kelasA', DEFAULT_CLASS_ID);
+    const bootB = getDefaultBootData('Kelas B (Bootcamp VIP)', 'kelasB', 'CLS-KELASB');
+    const store = {
+      classes: [
+        {
+          class_id: DEFAULT_CLASS_ID,
+          class_slug: 'kelasA',
+          class_name: 'Kelas A (Paket Utama)',
+          access_key: 'KLS-A123',
+          require_key: false,
+          description: 'Landing page khusus pembeli Paket Kelas A',
+          is_active: true,
+          created_at: now,
+          updated_at: now
+        },
+        {
+          class_id: 'CLS-KELASB',
+          class_slug: 'kelasB',
+          class_name: 'Kelas B (Bootcamp VIP)',
+          access_key: 'KLS-B999',
+          require_key: false,
+          description: 'Landing page khusus pembeli Paket Kelas B (Token & Grup Berbeda)',
+          is_active: true,
+          created_at: now,
+          updated_at: now
+        }
+      ],
+      sectionsByClass: {
+        'CLS-UTAMA': bootA.sections,
+        'CLS-KELASB': bootB.sections
+      },
+      tokens: bootA.tokens.concat(bootB.tokens.map(function (t, i) {
+        return Object.assign({}, t, { token_id: 'TOK-B0' + (i + 1), class_id: 'CLS-KELASB' });
+      })),
+      tutorials: bootA.tutorials.concat(bootB.tutorials.slice(0, 2).map(function (v, i) {
+        return Object.assign({}, v, { video_id: 'VID-B0' + (i + 1), class_id: 'CLS-KELASB' });
+      }))
+    };
+    try { localStorage.setItem(STORAGE_KEYS.DEMO_MULTI_DB, JSON.stringify(store)); } catch (e) { /* abaikan */ }
+    return store;
+  }
+
+  function persistLocalDemoStore() {
+    if (!state.isDemoAdmin) return;
+    try {
+      localStorage.setItem(STORAGE_KEYS.DEMO_MULTI_DB, JSON.stringify({
+        classes: state.adminData.classes,
+        sectionsByClass: state.adminData.sectionsByClass,
+        tokens: state.adminData.tokens,
+        tutorials: state.adminData.tutorials
+      }));
+    } catch (e) { /* abaikan kuota localStorage */ }
+  }
+
+  // ==========================================================================
   // 2. LAYER KOMUNIKASI REST API (GAS-PRO-API + SCALE TURBO DEDUPLICATION)
   // ==========================================================================
   const _inflight = {};
@@ -440,6 +795,13 @@
     let res;
     if (useGet) {
       const qs = new URLSearchParams({ action: action });
+      if (data && typeof data === 'object') {
+        Object.keys(data).forEach(function (k) {
+          if (data[k] !== undefined && data[k] !== null && data[k] !== '') {
+            qs.set(k, String(data[k]));
+          }
+        });
+      }
       res = await fetch(GAS_URL + '?' + qs.toString(), { method: 'GET' });
     } else {
       // WAJIB text/plain;charset=utf-8 agar bebas masalah CORS Preflight pada GAS!
@@ -484,10 +846,12 @@
   function trackEvent(eventType, target, extra) {
     extra = extra || {};
     if (!isGasConfigured()) return;
+    const activeCid = (state.pub && state.pub.classInfo && state.pub.classInfo.class_id) || state.activeClassId || DEFAULT_CLASS_ID;
     const payload = {
       event_type: eventType,
       event_target: target || '-',
       device_info: detectDeviceLabel(),
+      class_id: activeCid,
       token_id: extra.token_id || '',
       video_id: extra.video_id || ''
     };
@@ -499,9 +863,21 @@
   }
 
   // ==========================================================================
-  // 3. CUSTOM MAGNETIC CURSOR & KUCING IMUT ANABUL PENGIKUT KURSOR
+  // 3. CUSTOM MAGNETIC CURSOR & MASKOT / LOGO POJOK KANAN KUSTOM
   // ==========================================================================
   let anabulExcitedTimer = null;
+
+  function getMascotConfig() {
+    const secGreet = (state.pub && state.pub.sections && state.pub.sections.sec_greeting) || {};
+    const mg = secGreet.metadata || {};
+    return {
+      enabled: mg.anabul_enabled !== false,
+      name: String(mg.mascot_name || 'Anabul').trim() || 'Anabul',
+      logoUrl: String(mg.mascot_logo_url || '').trim(),
+      greeting: mg.anabul_greeting || '',
+      subtext: mg.anabul_subtext || ''
+    };
+  }
 
   function celebrateAnabul(bubbleMsg) {
     const escort = $('anabul-cursor-escort');
@@ -523,12 +899,57 @@
   function applyAnabulVisibility() {
     const escort = $('anabul-cursor-escort');
     const lbl = $('anabul-toggle-label');
-    const secGreet = (state.pub.sections && state.pub.sections.sec_greeting) || {};
-    const adminAllows = !(secGreet.metadata && secGreet.metadata.anabul_enabled === false);
-    const show = state.anabulOn && adminAllows;
+    const cfg = getMascotConfig();
+    const show = state.anabulOn && cfg.enabled;
 
     if (escort) escort.style.opacity = show ? '1' : '0';
-    if (lbl) lbl.textContent = state.anabulOn ? 'Anabul Aktif' : 'Anabul Tidur';
+    if (lbl) lbl.textContent = cfg.name + (state.anabulOn ? ' Aktif' : ' Tidur');
+
+    const cornerBtn = $('btn-anabul-corner');
+    if (cornerBtn) cornerBtn.title = 'Klik ' + cfg.name + ' untuk Tips!';
+    const toggleBtn = $('btn-toggle-anabul');
+    if (toggleBtn) toggleBtn.title = 'Aktifkan/Matikan ' + cfg.name + ' Pengikut Kursor';
+
+    // Terapkan Logo Kustom di Pojok Kanan Bawah, Balon, & Tombol Toggle Navbar
+    const hasLogo = !!cfg.logoUrl;
+    const cornerImg = $('anabul-corner-logo-img');
+    const cornerDef = $('anabul-corner-default-icon');
+    if (cornerImg && cornerDef) {
+      if (hasLogo) {
+        cornerImg.src = cfg.logoUrl;
+        cornerImg.classList.remove('hidden');
+        cornerDef.classList.add('hidden');
+      } else {
+        cornerImg.classList.add('hidden');
+        cornerDef.classList.remove('hidden');
+      }
+    }
+
+    const bubbleImg = $('anabul-bubble-logo-img');
+    const bubbleDef = $('anabul-bubble-default-icon');
+    if (bubbleImg && bubbleDef) {
+      if (hasLogo) {
+        bubbleImg.src = cfg.logoUrl;
+        bubbleImg.classList.remove('hidden');
+        bubbleDef.classList.add('hidden');
+      } else {
+        bubbleImg.classList.add('hidden');
+        bubbleDef.classList.remove('hidden');
+      }
+    }
+
+    const toggleImg = $('anabul-toggle-logo-img');
+    const toggleDef = $('anabul-toggle-default-icon');
+    if (toggleImg && toggleDef) {
+      if (hasLogo) {
+        toggleImg.src = cfg.logoUrl;
+        toggleImg.classList.remove('hidden');
+        toggleDef.classList.add('hidden');
+      } else {
+        toggleImg.classList.add('hidden');
+        toggleDef.classList.remove('hidden');
+      }
+    }
   }
 
   function initCursorAndAnabul() {
@@ -566,7 +987,7 @@
       ringY += (mouseY - ringY) * 0.24;
       ring.style.transform = 'translate3d(' + ringX.toFixed(1) + 'px, ' + ringY.toFixed(1) + 'px, 0)';
 
-      // Smooth Lerp Physics untuk Kucing Imut Anabul (offset sedikit di kanan-bawah kursor agar tidak menghalangi teks)
+      // Smooth Lerp Physics untuk Kucing Imut Anabul
       const targetCatX = mouseX + 22;
       const targetCatY = mouseY + 16;
       const dx = targetCatX - catX;
@@ -597,6 +1018,7 @@
     const secs = state.pub.sections || {};
     const tokens = Array.isArray(state.pub.tokens) ? state.pub.tokens : [];
     const tutorials = Array.isArray(state.pub.tutorials) ? state.pub.tutorials : [];
+    const mascotCfg = getMascotConfig();
 
     // --- A. HERO & BRANDING (sec_greeting) ---
     const sGreet = secs.sec_greeting || {};
@@ -616,8 +1038,16 @@
     if ($('hero-body-text')) $('hero-body-text').textContent = sGreet.content_body || '';
     if ($('hero-rating-text')) $('hero-rating-text').textContent = mGreet.rating_text || '500+ Alumni Puas';
     if ($('hero-extra-count')) $('hero-extra-count').textContent = mGreet.extra_count || '+480';
-    if ($('anabul-bubble-title') && mGreet.anabul_greeting) $('anabul-bubble-title').textContent = mGreet.anabul_greeting;
-    if ($('anabul-bubble-text') && mGreet.anabul_subtext) $('anabul-bubble-text').textContent = mGreet.anabul_subtext;
+
+    if ($('anabul-bubble-title')) {
+      const rawTitle = mGreet.anabul_greeting || ('Halo, Saya ' + mascotCfg.name + '! 🐾');
+      $('anabul-bubble-title').textContent = mascotCfg.name !== 'Anabul' && rawTitle === 'Halo, Saya Anabul! 🐾'
+        ? ('Halo, Saya ' + mascotCfg.name + '! ✨')
+        : rawTitle;
+    }
+    if ($('anabul-bubble-text') && mGreet.anabul_subtext) {
+      $('anabul-bubble-text').textContent = mGreet.anabul_subtext;
+    }
     applyAnabulVisibility();
 
     // --- B. MULTI-VIDEO YOUTUBE TUTORIALS (sec_tutorials + tbl_tutorials) ---
@@ -666,7 +1096,7 @@
     const tokGrid = $('public-tokens-grid');
     if (tokGrid) {
       if (tokens.length === 0) {
-        tokGrid.innerHTML = '<div class="col-span-full nimbus-card rounded-3xl p-6 text-center text-sm text-on-surface-variant">Belum ada token aktif yang ditampilkan oleh Admin. Silakan langsung klik tombol Buka Portal di atas.</div>';
+        tokGrid.innerHTML = '<div class="col-span-full nimbus-card rounded-3xl p-6 text-center text-sm text-on-surface-variant">Belum ada token aktif yang ditampilkan oleh Admin untuk kelas ini. Silakan langsung klik tombol Buka Portal di atas.</div>';
       } else {
         const icons = ['key', 'folder_special', 'confirmation_number', 'workspace_premium'];
         tokGrid.innerHTML = tokens.map(function (tk, idx) {
@@ -775,7 +1205,7 @@
       commGrid.innerHTML = cardsHtml.join('');
     }
 
-    // --- E. SECTION 3: MEDIA SOSIAL MENTOR (sec_social) ---
+    // --- E. SECTION 3: MEDIA SOSIAL MENTOR (WALLPAPER UPLOAD + 2 LOGO: FOTO PROFIL & LOGO PLATFORM) ---
     const sSoc = secs.sec_social || {};
     const mSoc = sSoc.metadata || {};
     const socEl = $('medsos');
@@ -788,31 +1218,77 @@
     if (socGrid) {
       const channels = Array.isArray(mSoc.channels) ? mSoc.channels : [];
       const styleMap = {
-        instagram: { ring: 'from-amber-400 via-pink-500 to-purple-600', icon: 'photo_camera', btn: 'bg-pink-50 hover:bg-pink-100 text-pink-700 border-pink-200' },
-        youtube:   { ring: 'from-red-500 to-red-700', icon: 'smart_display', btn: 'bg-red-50 hover:bg-red-100 text-red-700 border-red-200' },
-        tiktok:    { ring: 'from-slate-800 via-slate-900 to-cyan-500', icon: 'music_note', btn: 'bg-slate-100 hover:bg-slate-200 text-slate-900 border-slate-300' }
+        instagram: {
+          ring: 'from-amber-400 via-pink-500 to-purple-600',
+          bannerGrad: 'from-pink-500 via-rose-500 to-amber-400',
+          icon: 'person',
+          label: 'Instagram',
+          btn: 'bg-pink-50 hover:bg-pink-100 text-pink-700 border-pink-200'
+        },
+        youtube: {
+          ring: 'from-red-500 to-red-700',
+          bannerGrad: 'from-red-600 via-rose-600 to-amber-500',
+          icon: 'person',
+          label: 'YouTube',
+          btn: 'bg-red-50 hover:bg-red-100 text-red-700 border-red-200'
+        },
+        tiktok: {
+          ring: 'from-slate-800 via-slate-900 to-cyan-500',
+          bannerGrad: 'from-slate-900 via-slate-800 to-cyan-600',
+          icon: 'person',
+          label: 'TikTok',
+          btn: 'bg-slate-100 hover:bg-slate-200 text-slate-900 border-slate-300'
+        }
       };
+
       socGrid.innerHTML = channels.map(function (ch) {
         const key = String(ch.platform || 'instagram').toLowerCase();
         const st = styleMap[key] || styleMap.instagram;
+        const wallUrl = String(ch.wallpaper_url || '').trim();
+        const avaUrl = String(ch.avatar_url || '').trim();
+        const brandSvg = getSocialPlatformSvg(key);
+
         return '' +
-          '<div class="nimbus-card p-6 rounded-3xl flex flex-col items-center text-center justify-between space-y-4">' +
-            '<div class="space-y-3 flex flex-col items-center">' +
-              '<div class="w-16 h-16 rounded-2xl bg-gradient-to-tr ' + st.ring + ' p-0.5 shadow-md">' +
-                '<div class="w-full h-full bg-white rounded-[14px] flex items-center justify-center text-on-surface">' +
-                  '<span class="material-symbols-outlined text-[30px]">' + st.icon + '</span>' +
+          '<div class="nimbus-card rounded-3xl overflow-hidden flex flex-col justify-between group" data-interactive="true">' +
+            '<div>' +
+              '<!-- Background Wallpaper 1 Foto -->' +
+              '<div class="social-wallpaper-banner bg-gradient-to-tr ' + st.bannerGrad + '">' +
+                (wallUrl
+                  ? '<img src="' + escHtml(wallUrl) + '" alt="Wallpaper ' + escHtml(ch.name || st.label) + '" loading="lazy" />'
+                  : '<div class="w-full h-full opacity-30 bg-[radial-gradient(circle_at_top_right,#ffffff,transparent_65%)]"></div>') +
+                '<span class="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md text-white text-[10px] font-extrabold uppercase tracking-wider">' + escHtml(st.label) + '</span>' +
+              '</div>' +
+
+              '<!-- 2 Logo di Kartu: (1) Foto Profil Akun & (2) Logo Resmi Platform -->' +
+              '<div class="px-6 -mt-8 relative z-10 flex items-end justify-between gap-3">' +
+                '<div class="w-16 h-16 rounded-2xl bg-gradient-to-tr ' + st.ring + ' p-0.5 shadow-lg ring-4 ring-white shrink-0" title="Foto Profil ' + escHtml(st.label) + '">' +
+                  '<div class="w-full h-full bg-white rounded-[14px] overflow-hidden flex items-center justify-center text-primary">' +
+                    (avaUrl
+                      ? '<img src="' + escHtml(avaUrl) + '" alt="Foto Profil ' + escHtml(ch.handle || ch.name || st.label) + '" class="w-full h-full object-cover" loading="lazy" />'
+                      : '<span class="material-symbols-outlined text-[30px]">' + st.icon + '</span>') +
+                  '</div>' +
+                '</div>' +
+                '<div class="w-12 h-12 rounded-2xl bg-white shadow-md border border-sky-100 flex items-center justify-center p-2 shrink-0 transition-transform duration-300 group-hover:scale-110" title="Logo Resmi ' + escHtml(st.label) + '">' +
+                  brandSvg +
                 '</div>' +
               '</div>' +
-              '<div>' +
-                '<h4 class="text-lg font-bold text-on-surface">' + escHtml(ch.name || ch.platform) + '</h4>' +
-                '<p class="text-xs font-bold text-primary">' + escHtml(ch.handle || '') + '</p>' +
+
+              '<!-- Konten Informasi Kanal -->' +
+              '<div class="px-6 pt-3.5 pb-4 space-y-2 text-left">' +
+                '<div>' +
+                  '<h4 class="text-lg font-extrabold text-on-surface leading-snug">' + escHtml(ch.name || st.label) + '</h4>' +
+                  '<p class="text-xs font-bold text-primary">' + escHtml(ch.handle || '') + '</p>' +
+                '</div>' +
+                '<p class="text-xs sm:text-sm text-on-surface-variant leading-relaxed">' + escHtml(ch.pitch || '') + '</p>' +
               '</div>' +
-              '<p class="text-xs sm:text-sm text-on-surface-variant leading-relaxed">' + escHtml(ch.pitch || '') + '</p>' +
             '</div>' +
-            '<a href="' + escHtml(ch.url || '#') + '" target="_blank" rel="noopener noreferrer" data-track-type="FOLLOW_SOCMED" data-track-target="' + escHtml((ch.platform || '') + ': ' + (ch.handle || ch.name || '')) + '" class="btn-tracked-link nimbus-btn w-full py-2.5 px-5 rounded-full border text-xs font-extrabold flex items-center justify-center gap-1.5 ' + st.btn + '">' +
-              '<span>' + escHtml(ch.cta_label || 'Follow Sekarang') + '</span>' +
-              '<span class="material-symbols-outlined text-[15px]">open_in_new</span>' +
-            '</a>' +
+
+            '<div class="px-6 pb-6 pt-1">' +
+              '<a href="' + escHtml(ch.url || '#') + '" target="_blank" rel="noopener noreferrer" data-track-type="FOLLOW_SOCMED" data-track-target="' + escHtml((ch.platform || '') + ': ' + (ch.handle || ch.name || '')) + '" class="btn-tracked-link nimbus-btn w-full py-2.5 px-5 rounded-full border text-xs font-extrabold flex items-center justify-center gap-1.5 ' + st.btn + '">' +
+                '<span>' + escHtml(ch.cta_label || 'Follow Sekarang') + '</span>' +
+                '<span class="material-symbols-outlined text-[15px]">open_in_new</span>' +
+              '</a>' +
+            '</div>' +
           '</div>';
       }).join('');
     }
@@ -849,12 +1325,12 @@
       }).join('');
     }
 
-    // --- G. SECTION 5: DISCLAIMER HAK CIPTA & ANTI-PEMBAJAKAN (sec_disclaimer) ---
+    // --- G. SECTION 5: DISCLAIMER HAK CIPTA & ANTI-PEMBAJAKAN (MENYALA INTERAKTIF) ---
     const sDisc = secs.sec_disclaimer || {};
     const mDisc = sDisc.metadata || {};
     const discEl = $('disclaimer');
     if (discEl) discEl.classList.toggle('hidden', sDisc.is_active === false);
-    if ($('disc-sec-subtitle')) $('disc-sec-subtitle').textContent = sDisc.section_subtitle || 'Langkah 05';
+    if ($('disc-sec-subtitle')) $('disc-sec-subtitle').textContent = sDisc.section_subtitle || 'Langkah 05 • Wajib Dipatuhi';
     if ($('disc-sec-title')) $('disc-sec-title').textContent = sDisc.section_title || 'Ketentuan Lisensi & Anti-Pembajakan';
     if ($('disc-badge-text')) $('disc-badge-text').textContent = mDisc.badge_text || 'Peringatan Hak Cipta & Lisensi Resmi';
     if ($('disc-headline')) $('disc-headline').textContent = mDisc.headline || 'Larangan Keras Menyebarluaskan / Menjual Kembali Tanpa Izin';
@@ -866,11 +1342,23 @@
       discList.innerHTML = pts.map(function (pt, idx) {
         const ic = idx % 2 === 0 ? 'block' : 'gavel';
         return '' +
-          '<div class="flex items-start gap-2 p-3 rounded-2xl bg-white/80 border border-red-200/70 text-xs font-semibold text-on-surface">' +
-            '<span class="material-symbols-outlined text-error text-[18px] shrink-0">' + ic + '</span>' +
+          '<div data-disc-point="' + idx + '" class="disc-point-interactive flex items-start gap-2.5 p-3.5 rounded-2xl text-xs font-bold text-on-surface select-none">' +
+            '<span class="material-symbols-outlined text-error text-[19px] shrink-0">' + ic + '</span>' +
             '<span>' + escHtml(pt) + '</span>' +
           '</div>';
       }).join('');
+    }
+
+    const ackBtn = $('btn-ack-disclaimer');
+    if (ackBtn) {
+      const acked = localStorage.getItem(STORAGE_KEYS.DISC_ACK) === '1';
+      ackBtn.classList.toggle('bg-tertiary', acked);
+      ackBtn.classList.toggle('hover:bg-emerald-700', acked);
+      ackBtn.classList.toggle('bg-red-600', !acked);
+      ackBtn.classList.toggle('hover:bg-red-700', !acked);
+      if ($('ack-disclaimer-label')) {
+        $('ack-disclaimer-label').textContent = acked ? 'Lisensi Telah Dipahami & Disetujui ✓' : 'Saya Memahami & Patuh Lisensi';
+      }
     }
 
     // --- H. SECTION 6: UCAPAN SELAMAT BERGABUNG & MOTIVASI (sec_closing) ---
@@ -884,6 +1372,36 @@
     if ($('close-sec-body')) $('close-sec-body').textContent = sClose.content_body || '';
     if ($('close-helper-text')) $('close-helper-text').textContent = mClose.helper_text || '';
     if ($('close-cta-label')) $('close-cta-label').textContent = sClose.cta_label || 'Unduh Rangkuman PDF';
+
+    // --- I. SECTION KONTAK BANTUAN ADMIN (WHATSAPP & EMAIL — sec_contact) ---
+    const defContact = getDefaultBootData().sections.sec_contact;
+    const sContact = secs.sec_contact || defContact;
+    const mContact = Object.assign({}, defContact.metadata, sContact.metadata || {});
+    const contactSec = $('contact-admin-section');
+    const waOn = mContact.wa_enabled !== false;
+    const emailOn = mContact.email_enabled !== false;
+    if (contactSec) {
+      contactSec.classList.toggle('hidden', sContact.is_active === false || (!waOn && !emailOn));
+    }
+    if ($('contact-sec-subtitle')) $('contact-sec-subtitle').textContent = sContact.section_subtitle || 'Pusat Bantuan Member Resmi';
+    if ($('contact-sec-title')) $('contact-sec-title').textContent = sContact.section_title || 'Butuh Bantuan Kendala Akses? Hubungi Admin';
+    if ($('contact-sec-body')) $('contact-sec-body').textContent = sContact.content_body || '';
+
+    const waBtn = $('btn-contact-admin-wa');
+    if (waBtn) {
+      waBtn.classList.toggle('hidden', !waOn);
+      waBtn.href = buildWhatsAppUrl(mContact.wa_number || sContact.cta_url || '6281234567890', mContact.wa_message || '');
+      if ($('contact-wa-label')) $('contact-wa-label').textContent = mContact.wa_label || 'Hubungi via WhatsApp';
+    }
+
+    const emailBtn = $('btn-contact-admin-email');
+    if (emailBtn) {
+      emailBtn.classList.toggle('hidden', !emailOn);
+      const addr = String(mContact.email_address || 'support@productreceiver.com').trim();
+      const subj = String(mContact.email_subject || 'Bantuan Akses Member').trim();
+      emailBtn.href = 'mailto:' + encodeURIComponent(addr) + (subj ? ('?subject=' + encodeURIComponent(subj)) : '');
+      if ($('contact-email-label')) $('contact-email-label').textContent = mContact.email_label || 'Kirim Email ke Admin';
+    }
   }
 
   function renderActiveYoutubePlayer(tutorials) {
@@ -1064,6 +1582,20 @@
     const authCfg = (state.pub && state.pub.authConfig) || {};
     const clientId = String(authCfg.googleClientId || '').trim();
 
+    if (!clientId && isGasConfigured() && !state._authCfgFetched) {
+      state._authCfgFetched = true;
+      container.innerHTML = '<p class="text-xs text-outline py-2">Memuat konfigurasi Google OAuth 2.0...</p>';
+      api('auth.config', {}, { get: true }).then(function (res) {
+        if (res && res.data) {
+          state.pub.authConfig = res.data;
+        }
+        initGoogleOAuthButton();
+      }).catch(function () {
+        initGoogleOAuthButton();
+      });
+      return;
+    }
+
     if (!clientId) {
       container.innerHTML =
         '<div class="w-full p-3.5 rounded-2xl bg-sky-50 border border-sky-200 text-xs text-on-surface-variant text-center leading-relaxed">' +
@@ -1159,6 +1691,66 @@
     loadAdminBoot();
   }
 
+  // Helper Kelas Aktif di Dashboard Admin
+  function getActiveAdminClass() {
+    const list = state.adminData.classes || [];
+    const found = list.find(function (c) { return c.class_id === state.activeClassId; });
+    if (found) return found;
+    if (list.length) {
+      state.activeClassId = list[0].class_id;
+      return list[0];
+    }
+    return {
+      class_id: DEFAULT_CLASS_ID,
+      class_slug: 'kelasA',
+      class_name: 'Kelas A (Paket Utama)',
+      access_key: '',
+      require_key: false,
+      description: 'Halaman serah terima paket kelas utama',
+      is_active: true
+    };
+  }
+
+  function ensureAdminClassSections(classId) {
+    const cid = classId || state.activeClassId || DEFAULT_CLASS_ID;
+    state.adminData.sectionsByClass = state.adminData.sectionsByClass || {};
+    if (!state.adminData.sectionsByClass[cid]) {
+      const cls = (state.adminData.classes || []).find(function (c) { return c.class_id === cid; }) || {};
+      const defBoot = getDefaultBootData(cls.class_name || 'Kelas Baru', cls.class_slug || 'kelasBaru', cid);
+      state.adminData.sectionsByClass[cid] = JSON.parse(JSON.stringify(defBoot.sections));
+    }
+    state.adminData.sections = state.adminData.sectionsByClass[cid];
+    return state.adminData.sections;
+  }
+
+  function getActiveClassTokens() {
+    const cid = state.activeClassId || DEFAULT_CLASS_ID;
+    return (state.adminData.tokens || []).filter(function (t) {
+      return (t.class_id || DEFAULT_CLASS_ID) === cid;
+    });
+  }
+
+  function getActiveClassTutorials() {
+    const cid = state.activeClassId || DEFAULT_CLASS_ID;
+    return (state.adminData.tutorials || []).filter(function (v) {
+      return (v.class_id || DEFAULT_CLASS_ID) === cid;
+    });
+  }
+
+  function switchActiveAdminClass(newClassId, silent) {
+    if (!newClassId) return;
+    collectCurrentCmsForm();
+    state.activeClassId = newClassId;
+    ensureAdminClassSections(newClassId);
+    state.activeVideoIdx = 0;
+    syncAdminStateToPublicPreview();
+    renderAllAdminViews();
+    if (!silent) {
+      const cls = getActiveAdminClass();
+      showToast('Mengelola Paket: ' + cls.class_name + ' (/' + cls.class_slug + ')');
+    }
+  }
+
   function enterLocalDemoAdmin() {
     state.isDemoAdmin = true;
     state.adminUser = {
@@ -1167,18 +1759,30 @@
       picture: '',
       darurat: false
     };
-    // Kloning data publik ke state admin agar seluruh editor langsung hidup
-    state.adminData.sections = JSON.parse(JSON.stringify(state.pub.sections || {}));
-    state.adminData.tokens = JSON.parse(JSON.stringify(state.pub.tokens || []));
-    state.adminData.tutorials = JSON.parse(JSON.stringify(state.pub.tutorials || []));
+
+    const store = initOrLoadLocalDemoStore();
+    state.adminData.classes = JSON.parse(JSON.stringify(store.classes || []));
+    state.adminData.sectionsByClass = JSON.parse(JSON.stringify(store.sectionsByClass || {}));
+    state.adminData.tokens = JSON.parse(JSON.stringify(store.tokens || []));
+    state.adminData.tutorials = JSON.parse(JSON.stringify(store.tutorials || []));
+
+    if (state.currentSlug) {
+      const matchCls = state.adminData.classes.find(function (c) {
+        return String(c.class_slug || '').toLowerCase() === state.currentSlug.toLowerCase();
+      });
+      if (matchCls) state.activeClassId = matchCls.class_id;
+    }
+    ensureAdminClassSections(state.activeClassId);
+
     state.adminData.analytics.recentLogs = [
-      { event_id: 'EVT-DEMO1', event_type: 'COPY_TOKEN', event_target: 'KELASPRO-2026-VIP', device_info: 'iPhone / iOS • Safari', status_label: 'Berhasil Disalin', timestamp: new Date().toISOString() },
+      { event_id: 'EVT-DEMO1', event_type: 'COPY_TOKEN', event_target: 'KELASA-2026-VIP', device_info: 'iPhone / iOS • Safari', status_label: 'Berhasil Disalin', timestamp: new Date().toISOString() },
       { event_id: 'EVT-DEMO2', event_type: 'WATCH_TUTORIAL', event_target: '1. Panduan Masuk Portal', device_info: 'Android Mobile • Chrome', status_label: 'Video Diputar', timestamp: new Date(Date.now() - 420000).toISOString() },
-      { event_id: 'EVT-DEMO3', event_type: 'JOIN_WA', event_target: 'WhatsApp Community VIP', device_info: 'Windows PC • Chrome', status_label: 'Grup WA Terbuka', timestamp: new Date(Date.now() - 1200000).toISOString() },
-      { event_id: 'EVT-DEMO4', event_type: 'CLICK_PORTAL', event_target: 'Portal Belajar Utama', device_info: 'macOS • Safari', status_label: 'Portal Terbuka', timestamp: new Date(Date.now() - 2800000).toISOString() }
+      { event_id: 'EVT-DEMO3', event_type: 'CONTACT_WA', event_target: 'WhatsApp Admin', device_info: 'Windows PC • Chrome', status_label: 'Chat Admin Dibuka', timestamp: new Date(Date.now() - 900000).toISOString() },
+      { event_id: 'EVT-DEMO4', event_type: 'ACK_DISCLAIMER', event_target: 'Setuju Lisensi Anti-Pembajakan', device_info: 'macOS • Safari', status_label: 'Lisensi Disetujui', timestamp: new Date(Date.now() - 2800000).toISOString() }
     ];
+    syncAdminStateToPublicPreview();
     closeAuthModal();
-    showToast('Mode Pratinjau Lokal Aktif — Silakan uji semua fitur CRUD!');
+    showToast('Mode Pratinjau Lokal Multi-Kelas Aktif — Silakan uji semua fitur!');
     showAdminView();
     renderAllAdminViews();
   }
@@ -1192,14 +1796,19 @@
     state.isDemoAdmin = false;
     localStorage.removeItem(STORAGE_KEYS.SESSION_TOKEN);
     localStorage.removeItem(STORAGE_KEYS.SESSION_USER);
-    showPublicView();
+    if (state.currentSlug) {
+      showPublicView();
+    } else {
+      showOriginGate('ORIGIN');
+    }
     showToast('Sesi Super Admin telah diakhiri.');
   }
 
   // ==========================================================================
-  // 6. SHELL SUPER ADMIN & SINKRONISASI DATA BACKEND
+  // 6. SHELL SUPER ADMIN & SINKRONISASI DATA BACKEND MULTI-KELAS
   // ==========================================================================
   function showAdminView() {
+    hideOriginGate();
     if ($('public-view')) $('public-view').classList.add('hidden');
     if ($('admin-view')) $('admin-view').classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1208,6 +1817,14 @@
   }
 
   function showPublicView() {
+    if (!isSuperAdminLoggedIn() && !state.currentSlug) {
+      showOriginGate('ORIGIN');
+      return;
+    }
+    hideOriginGate();
+    if (isSuperAdminLoggedIn()) {
+      syncAdminStateToPublicPreview();
+    }
     if ($('admin-view')) $('admin-view').classList.add('hidden');
     if ($('public-view')) $('public-view').classList.remove('hidden');
     renderPublicPortal();
@@ -1272,7 +1889,11 @@
       return;
     }
     if (!state.sessionToken) {
-      showPublicView();
+      if (state.currentSlug) {
+        showPublicView();
+      } else {
+        showOriginGate('ORIGIN');
+      }
       openAuthModal(false);
       return;
     }
@@ -1287,7 +1908,35 @@
         state.adminUser = d.user;
         localStorage.setItem(STORAGE_KEYS.SESSION_USER, JSON.stringify(d.user));
       }
-      state.adminData.sections = d.sections || {};
+
+      const rawClasses = Array.isArray(d.classes) && d.classes.length ? d.classes : [{
+        class_id: DEFAULT_CLASS_ID,
+        class_slug: 'kelasA',
+        class_name: 'Kelas A (Paket Utama)',
+        access_key: '',
+        require_key: false,
+        description: 'Halaman serah terima paket kelas utama',
+        is_active: true
+      }];
+      state.adminData.classes = rawClasses;
+
+      const byClass = d.sectionsByClass && Object.keys(d.sectionsByClass).length
+        ? d.sectionsByClass
+        : { 'CLS-UTAMA': d.sections || {} };
+      state.adminData.sectionsByClass = byClass;
+
+      // Pastikan activeClassId mengarah ke kelas yang valid (atau cocok dengan URL saat ini)
+      if (state.currentSlug && !rawClasses.some(function (c) { return c.class_id === state.activeClassId; })) {
+        const slugMatch = rawClasses.find(function (c) {
+          return String(c.class_slug || '').toLowerCase() === state.currentSlug.toLowerCase();
+        });
+        if (slugMatch) state.activeClassId = slugMatch.class_id;
+      }
+      if (!rawClasses.some(function (c) { return c.class_id === state.activeClassId; })) {
+        state.activeClassId = rawClasses[0].class_id;
+      }
+      ensureAdminClassSections(state.activeClassId);
+
       state.adminData.tokens = Array.isArray(d.tokens) ? d.tokens : [];
       state.adminData.tutorials = Array.isArray(d.tutorials) ? d.tutorials : [];
       state.adminData.analytics = d.analytics || state.adminData.analytics;
@@ -1306,13 +1955,25 @@
   }
 
   function syncAdminStateToPublicPreview() {
+    const activeCls = getActiveAdminClass();
+    ensureAdminClassSections(activeCls.class_id);
+
+    state.pub.classInfo = {
+      class_id: activeCls.class_id,
+      class_slug: activeCls.class_slug,
+      class_name: activeCls.class_name,
+      description: activeCls.description || ''
+    };
     state.pub.sections = JSON.parse(JSON.stringify(state.adminData.sections || {}));
-    state.pub.tokens = (state.adminData.tokens || []).filter(function (t) { return t.is_active !== false; });
-    state.pub.tutorials = (state.adminData.tutorials || [])
+    state.pub.tokens = getActiveClassTokens().filter(function (t) { return t.is_active !== false; });
+    state.pub.tutorials = getActiveClassTutorials()
       .filter(function (v) { return v.is_active !== false; })
       .sort(function (a, b) { return (Number(a.sort_order) || 99) - (Number(b.sort_order) || 99); });
+
+    persistLocalDemoStore();
     try {
-      localStorage.setItem(STORAGE_KEYS.PUB_CACHE, JSON.stringify({
+      const slugKey = String(activeCls.class_slug || 'kelasA').toLowerCase();
+      localStorage.setItem(STORAGE_KEYS.PUB_CACHE + slugKey, JSON.stringify({
         savedAt: Date.now(),
         data: state.pub
       }));
@@ -1320,8 +1981,22 @@
   }
 
   function renderAllAdminViews() {
-    const activeTokCount = (state.adminData.tokens || []).filter(function (t) { return t.is_active !== false; }).length;
-    const activeVidCount = (state.adminData.tutorials || []).filter(function (v) { return v.is_active !== false; }).length;
+    const classes = state.adminData.classes || [];
+    ensureAdminClassSections(state.activeClassId);
+
+    // Populate Dropdown Kelas Aktif di Header Atas Admin
+    const clsSelect = $('admin-active-class-select');
+    if (clsSelect) {
+      clsSelect.innerHTML = classes.map(function (c) {
+        const sel = c.class_id === state.activeClassId ? ' selected' : '';
+        const offLbl = c.is_active === false ? ' [Non-Aktif]' : '';
+        return '<option value="' + escHtml(c.class_id) + '"' + sel + '>' + escHtml(c.class_name) + ' (/' + escHtml(c.class_slug) + ')' + offLbl + '</option>';
+      }).join('');
+    }
+
+    const activeTokCount = getActiveClassTokens().filter(function (t) { return t.is_active !== false; }).length;
+    const activeVidCount = getActiveClassTutorials().filter(function (v) { return v.is_active !== false; }).length;
+    if ($('sidebar-cls-count')) $('sidebar-cls-count').textContent = String(classes.length);
     if ($('sidebar-tok-count')) $('sidebar-tok-count').textContent = String(activeTokCount);
     if ($('sidebar-vid-count')) $('sidebar-vid-count').textContent = String(activeVidCount);
 
@@ -1337,11 +2012,224 @@
       }
     }
 
+    renderAdminClasses();
     renderAdminAnalytics();
     renderCmsEditor();
     renderAdminTutorials();
     renderAdminTokens();
     renderAdminSecretsStatus();
+  }
+
+  // ==========================================================================
+  // 6B. TAB MULTI-KELAS & ISOLASI URL LANDING PAGE (/kelasA, /kelasB, dst.)
+  // ==========================================================================
+  function renderAdminClasses() {
+    const grid = $('admin-classes-grid');
+    if (!grid) return;
+    const classes = state.adminData.classes || [];
+    if (!classes.length) {
+      grid.innerHTML = '<div class="col-span-full nimbus-card rounded-3xl p-8 text-center text-sm text-outline">Belum ada paket kelas terdaftar.</div>';
+      return;
+    }
+
+    grid.innerHTML = classes.map(function (cls) {
+      const isCurrent = cls.class_id === state.activeClassId;
+      const isAct = cls.is_active !== false;
+      const shareUrl = buildClassPublicUrl(cls);
+      const tokCnt = (state.adminData.tokens || []).filter(function (t) { return (t.class_id || DEFAULT_CLASS_ID) === cls.class_id && t.is_active !== false; }).length;
+      const vidCnt = (state.adminData.tutorials || []).filter(function (v) { return (v.class_id || DEFAULT_CLASS_ID) === cls.class_id && v.is_active !== false; }).length;
+
+      return '' +
+        '<div class="nimbus-card rounded-3xl p-6 flex flex-col justify-between gap-4 ' + (isCurrent ? 'ring-2 ring-primary border-primary/40' : '') + '">' +
+          '<div class="space-y-3">' +
+            '<div class="flex flex-wrap items-center justify-between gap-2">' +
+              '<div class="flex flex-wrap items-center gap-1.5">' +
+                '<span class="px-3 py-1 rounded-full font-mono text-xs font-extrabold bg-sky-100 text-primary">/' + escHtml(cls.class_slug) + '</span>' +
+                (isCurrent ? '<span class="px-2.5 py-0.5 rounded-full bg-primary text-white text-[10px] font-bold">Sedang Diedit</span>' : '') +
+                (cls.require_key ? '<span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">🔒 Kunci URL Aktif</span>' : '<span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-tertiary text-[10px] font-bold">Link Langsung</span>') +
+              '</div>' +
+              '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ' + (isAct ? 'bg-emerald-50 text-tertiary' : 'bg-slate-100 text-outline') + '">' + (isAct ? 'Aktif' : 'Non-Aktif') + '</span>' +
+            '</div>' +
+
+            '<div>' +
+              '<h3 class="text-lg font-extrabold text-on-surface">' + escHtml(cls.class_name) + '</h3>' +
+              '<p class="text-xs text-on-surface-variant mt-0.5">' + escHtml(cls.description || 'Landing page serah terima khusus pembeli paket ini.') + '</p>' +
+            '</div>' +
+
+            '<div class="p-3 rounded-2xl bg-surface-container-low border border-sky-100 space-y-2">' +
+              '<div class="flex items-center justify-between text-[11px] font-bold text-on-surface-variant">' +
+                '<span>Alamat URL Serah Terima (Tempel di Lynk.id):</span>' +
+              '</div>' +
+              '<div class="flex items-center gap-2">' +
+                '<input type="text" readonly value="' + escHtml(shareUrl) + '" class="w-full px-3 py-2 rounded-xl bg-white border border-sky-100 font-mono text-[11px] text-primary font-bold focus:outline-none select-all" />' +
+                '<button type="button" data-cls-copy-url="' + escHtml(cls.class_id) + '" class="px-3.5 py-2 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold shrink-0 flex items-center gap-1 transition">' +
+                  '<span class="material-symbols-outlined text-[15px]">content_copy</span>' +
+                  '<span>Salin</span>' +
+                '</button>' +
+              '</div>' +
+            '</div>' +
+
+            '<div class="flex flex-wrap items-center gap-3 text-xs font-semibold text-on-surface-variant pt-1">' +
+              '<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-primary">key</span> ' + tokCnt + ' Token Aktif</span>' +
+              '<span>•</span>' +
+              '<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-red-500">smart_display</span> ' + vidCnt + ' Video YT</span>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="pt-3 border-t border-sky-100 flex flex-wrap items-center justify-between gap-2">' +
+            '<div class="flex flex-wrap items-center gap-1.5">' +
+              '<button type="button" data-cls-select="' + escHtml(cls.class_id) + '" class="px-3.5 py-2 rounded-xl ' + (isCurrent ? 'bg-sky-100 text-primary' : 'bg-primary text-white hover:bg-primary-container') + ' text-xs font-bold transition">' +
+                (isCurrent ? '✓ Kelas Aktif' : 'Kelola Konten & Token') +
+              '</button>' +
+              '<button type="button" data-cls-preview="' + escHtml(cls.class_id) + '" class="px-3 py-2 rounded-xl bg-surface-container-low hover:bg-sky-50 text-primary text-xs font-bold transition flex items-center gap-1">' +
+                '<span class="material-symbols-outlined text-[15px]">visibility</span>' +
+                '<span>Pratinjau</span>' +
+              '</button>' +
+            '</div>' +
+            '<div class="flex items-center gap-1">' +
+              '<button type="button" data-cls-edit="' + escHtml(cls.class_id) + '" class="px-3 py-2 rounded-xl bg-white border border-sky-100 hover:bg-sky-50 text-on-surface text-xs font-bold transition">Edit URL</button>' +
+              (cls.class_id !== DEFAULT_CLASS_ID
+                ? '<button type="button" data-cls-del="' + escHtml(cls.class_id) + '" class="p-2 rounded-xl hover:bg-red-50 text-error transition" title="Hapus Kelas"><span class="material-symbols-outlined text-[18px]">delete</span></button>'
+                : '') +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function copyClassShareUrl(classId) {
+    const cls = (state.adminData.classes || []).find(function (c) { return c.class_id === classId; }) || getActiveAdminClass();
+    const url = buildClassPublicUrl(cls);
+    const done = function () {
+      showToast('URL Kelas "/' + cls.class_slug + '" disalin! Siap ditempel di Lynk.id.');
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done).catch(function () { fallbackCopyText(url, done); });
+    } else {
+      fallbackCopyText(url, done);
+    }
+  }
+
+  function openClassModal(classId) {
+    const modal = $('class-modal');
+    if (!modal) return;
+    const classes = state.adminData.classes || [];
+    const existing = classId ? classes.find(function (c) { return c.class_id === classId; }) : null;
+
+    if ($('cls-modal-title')) $('cls-modal-title').textContent = existing ? 'Edit Paket Kelas & Alamat URL' : 'Buat Paket Kelas & URL Baru';
+    if ($('cls-form-id')) $('cls-form-id').value = existing ? existing.class_id : '';
+    if ($('cls-form-name')) $('cls-form-name').value = existing ? existing.class_name : '';
+    const nextSlug = existing ? existing.class_slug : ('kelas' + String.fromCharCode(65 + Math.min(25, classes.length)));
+    if ($('cls-form-slug')) $('cls-form-slug').value = nextSlug;
+    if ($('cls-slug-preview')) $('cls-slug-preview').textContent = '/' + normalizeSlug(nextSlug);
+    if ($('cls-form-desc')) $('cls-form-desc').value = existing ? (existing.description || '') : '';
+    if ($('cls-form-reqkey')) $('cls-form-reqkey').checked = existing ? !!existing.require_key : false;
+    if ($('cls-form-key')) $('cls-form-key').value = existing ? (existing.access_key || '') : '';
+    if ($('cls-key-input-wrap')) $('cls-key-input-wrap').classList.toggle('hidden', !(existing && existing.require_key));
+    if ($('cls-form-active')) $('cls-form-active').checked = existing ? (existing.is_active !== false) : true;
+
+    const cloneWrap = $('cls-clone-wrap');
+    const cloneSel = $('cls-form-clone');
+    if (cloneWrap) cloneWrap.classList.toggle('hidden', !!existing);
+    if (cloneSel) {
+      cloneSel.innerHTML = classes.map(function (c) {
+        return '<option value="' + escHtml(c.class_id) + '">' + escHtml(c.class_name) + ' (/' + escHtml(c.class_slug) + ')</option>';
+      }).join('') + '<option value="__DEFAULT__">Template Kosong Standar</option>';
+    }
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(function () { if ($('cls-form-name')) $('cls-form-name').focus(); }, 80);
+  }
+
+  function closeClassModal() {
+    const modal = $('class-modal');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  async function handleClassFormSubmit(e) {
+    e.preventDefault();
+    const idVal = $('cls-form-id') ? $('cls-form-id').value.trim() : '';
+    const nameVal = $('cls-form-name') ? $('cls-form-name').value.trim() : '';
+    const slugVal = normalizeSlug($('cls-form-slug') ? $('cls-form-slug').value : '');
+    const descVal = $('cls-form-desc') ? $('cls-form-desc').value.trim() : '';
+    const reqKey = $('cls-form-reqkey') ? $('cls-form-reqkey').checked : false;
+    let keyVal = $('cls-form-key') ? $('cls-form-key').value.trim().replace(/\s+/g, '') : '';
+    const isAct = $('cls-form-active') ? $('cls-form-active').checked : true;
+    const cloneFrom = $('cls-form-clone') ? $('cls-form-clone').value : DEFAULT_CLASS_ID;
+
+    if (!nameVal || !slugVal) {
+      showToast('Nama Paket Kelas dan Alamat Slug URL wajib diisi!', true);
+      return;
+    }
+    const reserved = ['admin', 'login', 'api', 'index', 'darurat'];
+    if (reserved.indexOf(slugVal.toLowerCase()) !== -1) {
+      showToast('Slug "' + slugVal + '" dicadangkan sistem. Gunakan nama seperti kelasA, kelasB, vip1.', true);
+      return;
+    }
+    const dup = (state.adminData.classes || []).find(function (c) {
+      return c.class_id !== idVal && String(c.class_slug || '').toLowerCase() === slugVal.toLowerCase();
+    });
+    if (dup) {
+      showToast('Alamat URL "/' + slugVal + '" sudah dipakai oleh ' + dup.class_name + '!', true);
+      return;
+    }
+    if (reqKey && !keyVal) {
+      keyVal = 'KLS-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+    }
+
+    const payload = {
+      class_id: idVal,
+      class_name: nameVal,
+      class_slug: slugVal,
+      description: descVal,
+      require_key: reqKey,
+      access_key: keyVal,
+      is_active: isAct,
+      clone_from_class_id: (!idVal && cloneFrom !== '__DEFAULT__') ? cloneFrom : ''
+    };
+
+    try {
+      if (!state.isDemoAdmin) {
+        const res = await api('admin.saveClass', payload);
+        const savedId = (res.data && res.data.class_id) || idVal || state.activeClassId;
+        state.activeClassId = savedId;
+        closeClassModal();
+        showToast(res.message || 'Paket kelas berhasil disimpan!');
+        await loadAdminBoot();
+      } else {
+        const now = new Date().toISOString();
+        let targetId = idVal;
+        if (targetId) {
+          const idx = state.adminData.classes.findIndex(function (c) { return c.class_id === targetId; });
+          if (idx > -1) {
+            state.adminData.classes[idx] = Object.assign({}, state.adminData.classes[idx], payload, { updated_at: now });
+          }
+        } else {
+          targetId = 'CLS-' + Date.now().toString().slice(-5);
+          const newCls = Object.assign({}, payload, { class_id: targetId, created_at: now, updated_at: now });
+          state.adminData.classes.push(newCls);
+          if (payload.clone_from_class_id && state.adminData.sectionsByClass[payload.clone_from_class_id]) {
+            state.adminData.sectionsByClass[targetId] = JSON.parse(JSON.stringify(state.adminData.sectionsByClass[payload.clone_from_class_id]));
+            if (state.adminData.sectionsByClass[targetId].sec_benefits && state.adminData.sectionsByClass[targetId].sec_benefits.metadata) {
+              state.adminData.sectionsByClass[targetId].sec_benefits.metadata.package_title = nameVal;
+            }
+          } else {
+            state.adminData.sectionsByClass[targetId] = getDefaultBootData(nameVal, slugVal, targetId).sections;
+          }
+        }
+        state.activeClassId = targetId;
+        ensureAdminClassSections(targetId);
+        syncAdminStateToPublicPreview();
+        closeClassModal();
+        renderAllAdminViews();
+        showToast('Paket Kelas "/' + slugVal + '" siap digunakan (Mode Lokal)!');
+      }
+    } catch (err) {
+      showToast(err.message || 'Gagal menyimpan paket kelas.', true);
+    }
   }
 
   // ==========================================================================
@@ -1463,12 +2351,12 @@
   function renderTopTokensLeaderboard() {
     const wrap = $('admin-top-tokens-list');
     if (!wrap) return;
-    const sorted = (state.adminData.tokens || []).slice().sort(function (a, b) {
+    const sorted = getActiveClassTokens().slice().sort(function (a, b) {
       return (Number(b.copy_count) || 0) - (Number(a.copy_count) || 0);
     }).slice(0, 4);
 
     if (!sorted.length) {
-      wrap.innerHTML = '<p class="text-xs text-outline py-4 text-center">Belum ada token di katalog.</p>';
+      wrap.innerHTML = '<p class="text-xs text-outline py-4 text-center">Belum ada token di kelas aktif ini.</p>';
       return;
     }
 
@@ -1525,6 +2413,9 @@
       JOIN_WA: 'bg-emerald-100 text-emerald-700',
       JOIN_TG: 'bg-cyan-100 text-cyan-800',
       FOLLOW_SOCMED: 'bg-pink-100 text-pink-700',
+      CONTACT_WA: 'bg-emerald-100 text-emerald-800',
+      CONTACT_EMAIL: 'bg-sky-100 text-sky-800',
+      ACK_DISCLAIMER: 'bg-rose-100 text-rose-800',
       DOWNLOAD_PDF: 'bg-amber-100 text-amber-800',
       PAGE_VIEW: 'bg-slate-100 text-slate-700'
     };
@@ -1582,10 +2473,12 @@
   }
 
   // ==========================================================================
-  // 8. TAB 2: CMS CONTENT EDITOR (CRUD PENUH SECTION 1 S.D. 6 + HERO & ANABUL)
+  // 8. TAB 2: CMS CONTENT EDITOR (CRUD PENUH SECTION 1 S.D. 7 + HERO & MASKOT)
   // ==========================================================================
   function getAdminSec(secId) {
-    const defaults = getDefaultBootData().sections;
+    ensureAdminClassSections(state.activeClassId);
+    const activeCls = getActiveAdminClass();
+    const defaults = getDefaultBootData(activeCls.class_name, activeCls.class_slug, activeCls.class_id).sections;
     if (!state.adminData.sections[secId]) {
       state.adminData.sections[secId] = JSON.parse(JSON.stringify(defaults[secId] || {
         section_id: secId, section_title: '', section_subtitle: '', content_body: '',
@@ -1654,7 +2547,7 @@
     if (sub === 'sec_greeting') {
       html =
         '<div class="nimbus-card rounded-3xl p-6 space-y-4" data-cms-rendered="sec_greeting">' +
-          renderCmsToggleHeader('Sapaan Terima Kasih & Hero Utama', 'Sambutan pertama ketika pembeli dari Lynk.id membuka halaman serah terima.', s.is_active) +
+          renderCmsToggleHeader('Sapaan Terima Kasih & Hero Utama', 'Sambutan pertama ketika pembeli dari Lynk.id membuka halaman serah terima kelas ini.', s.is_active) +
           '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
             renderCmsField('cms-g-brand', 'Nama Brand di Navbar', m.brand_name || 'ProductReceiver') +
             renderCmsField('cms-g-verified', 'Label Lencana Terverifikasi', m.verified_pill || 'Terverifikasi Lynk.id') +
@@ -1671,7 +2564,7 @@
     } else if (sub === 'sec_portal') {
       html =
         '<div class="nimbus-card rounded-3xl p-6 space-y-4" data-cms-rendered="sec_portal">' +
-          renderCmsToggleHeader('Section 1: Akses Portal Kelas Utama', 'Pandu member klik URL Portal Kelas. Untuk menempel kode token, kelola di menu Token Akses.', s.is_active) +
+          renderCmsToggleHeader('Section 1: Akses Portal Kelas Utama', 'Pandu member klik URL Portal Kelas. Untuk menempel kode token kelas ini, kelola di menu Token Akses.', s.is_active) +
           '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
             renderCmsField('cms-p-subtitle', 'Label Langkah', s.section_subtitle || 'Langkah 01') +
             renderCmsField('cms-p-title', 'Judul Seksi 1', s.section_title) +
@@ -1698,7 +2591,7 @@
       html =
         '<div class="space-y-5" data-cms-rendered="sec_community">' +
           '<div class="nimbus-card rounded-3xl p-6 space-y-4">' +
-            renderCmsToggleHeader('Section 2: Panduan Masuk Grup WhatsApp & Telegram', 'Arahkan member bergabung ke grup diskusi WA atau channel update Telegram.', s.is_active) +
+            renderCmsToggleHeader('Section 2: Panduan Masuk Grup WhatsApp & Telegram', 'Arahkan member bergabung ke grup diskusi WA atau channel update Telegram khusus kelas ini.', s.is_active) +
             '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
               renderCmsField('cms-c-subtitle', 'Label Langkah', s.section_subtitle || 'Langkah 02') +
               renderCmsField('cms-c-title', 'Judul Seksi Komunitas', s.section_title) +
@@ -1745,7 +2638,7 @@
       html =
         '<div class="space-y-5" data-cms-rendered="sec_social">' +
           '<div class="nimbus-card rounded-3xl p-6 space-y-4">' +
-            renderCmsToggleHeader('Section 3: Follow Instagram, Subscribe YouTube & TikTok', 'Tulis kalimat persuasif yang menarik agar member bersemangat mengikuti kanal media sosial Anda.', s.is_active) +
+            renderCmsToggleHeader('Section 3: Follow Instagram, Subscribe YouTube & TikTok', 'Unggah 1 foto Background Wallpaper serta Foto Profil Akun yang akan disandingkan dengan Logo Resmi Instagram, YouTube, dan TikTok.', s.is_active) +
             '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
               renderCmsField('cms-s-subtitle', 'Label Langkah', s.section_subtitle || 'Langkah 03') +
               renderCmsField('cms-s-title', 'Judul Seksi Medsos', s.section_title) +
@@ -1753,11 +2646,70 @@
             renderCmsField('cms-s-body', 'Kalimat Pengantar Medsos', s.content_body, { type: 'textarea', rows: 2 }) +
           '</div>' +
           channels.map(function (ch, idx) {
+            const pKey = String(ch.platform || 'instagram').toLowerCase();
+            const wallUrl = String(ch.wallpaper_url || '').trim();
+            const avaUrl = String(ch.avatar_url || '').trim();
+            const brandSvg = getSocialPlatformSvg(pKey);
+            const fallbackGrad = pKey === 'youtube'
+              ? 'from-red-600 via-rose-500 to-orange-400'
+              : (pKey === 'tiktok' ? 'from-slate-900 via-slate-800 to-cyan-500' : 'from-pink-500 via-purple-500 to-amber-400');
+
             return '' +
-              '<div class="nimbus-card rounded-3xl p-6 space-y-3 cms-soc-card" data-soc-platform="' + escHtml(ch.platform || 'instagram') + '">' +
-                '<div class="flex items-center justify-between">' +
-                  '<span class="px-3 py-1 rounded-full bg-sky-100 text-primary text-xs font-extrabold uppercase">' + escHtml(ch.platform || ('Kanal ' + (idx + 1))) + '</span>' +
+              '<div class="nimbus-card rounded-3xl p-6 space-y-4 cms-soc-card" data-soc-platform="' + escHtml(pKey) + '">' +
+                '<div class="flex items-center justify-between gap-2">' +
+                  '<div class="flex items-center gap-2">' +
+                    '<div class="w-9 h-9 rounded-xl bg-white border border-sky-100 shadow-xs flex items-center justify-center">' + brandSvg + '</div>' +
+                    '<span class="px-3 py-1 rounded-full bg-sky-100 text-primary text-xs font-extrabold uppercase">' + escHtml(pKey) + '</span>' +
+                  '</div>' +
+                  '<span class="text-[11px] font-bold text-tertiary">2 Logo + 1 Wallpaper Aktif</span>' +
                 '</div>' +
+
+                /* Upload 1 Foto Background Wallpaper & Foto Profil + Logo Platform */
+                '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-2xl bg-sky-50/70 border border-sky-100">' +
+                  /* Kolom 1: Background Wallpaper 1 Foto */
+                  '<div class="space-y-2">' +
+                    '<p class="text-[11px] font-extrabold text-on-surface">1. Background Wallpaper Kartu (1 Foto)</p>' +
+                    '<div class="h-20 rounded-xl overflow-hidden border border-sky-200 relative bg-gradient-to-tr ' + fallbackGrad + '">' +
+                      (wallUrl ? '<img src="' + escHtml(wallUrl) + '" alt="Wallpaper" class="w-full h-full object-cover" />' : '<div class="w-full h-full flex items-center justify-center text-white/90 text-[11px] font-bold">Default Gradient</div>') +
+                    '</div>' +
+                    '<input type="hidden" id="cms-soc-wall-' + idx + '" class="cms-live-input" value="' + escHtml(wallUrl) + '" />' +
+                    '<input type="file" id="cms-soc-wall-file-' + idx + '" data-soc-wall-file="' + idx + '" accept="image/*" class="hidden" />' +
+                    '<div class="flex items-center gap-1.5">' +
+                      '<button type="button" data-upload-soc-wall="' + idx + '" class="px-3 py-1.5 rounded-xl bg-primary hover:bg-primary-container text-white text-[11px] font-bold flex items-center gap-1 transition">' +
+                        '<span class="material-symbols-outlined text-[15px]">upload</span><span>Upload Wallpaper</span>' +
+                      '</button>' +
+                      (wallUrl ? '<button type="button" data-clear-soc-wall="' + idx + '" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-red-50 text-error text-[11px] font-bold border border-sky-100">Reset</button>' : '') +
+                    '</div>' +
+                  '</div>' +
+
+                  /* Kolom 2: 2 Logo di Card (Foto Profil Akun + Logo Resmi IG/YT/TikTok) */
+                  '<div class="space-y-2">' +
+                    '<p class="text-[11px] font-extrabold text-on-surface">2. Dua Logo di Kartu (Foto Profil + Logo Brand)</p>' +
+                    '<div class="h-20 rounded-xl bg-white border border-sky-200 px-3 flex items-center justify-between gap-2">' +
+                      '<div class="flex items-center gap-2">' +
+                        '<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-sky-200 bg-sky-50 flex items-center justify-center shrink-0">' +
+                          (avaUrl ? '<img src="' + escHtml(avaUrl) + '" alt="Avatar" class="w-full h-full object-cover" />' : '<span class="material-symbols-outlined text-primary text-[22px]">account_circle</span>') +
+                        '</div>' +
+                        '<div class="text-[10px] leading-tight text-on-surface-variant">' +
+                          '<p class="font-bold text-on-surface">Logo #1: Profil</p>' +
+                          '<p>Foto Akun Anda</p>' +
+                        '</div>' +
+                      '</div>' +
+                      '<div class="flex items-center gap-1.5 pl-2 border-l border-sky-100">' +
+                        '<div class="w-10 h-10 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0">' + brandSvg + '</div>' +
+                      '</div>' +
+                    '</div>' +
+                    '<input type="hidden" id="cms-soc-ava-' + idx + '" class="cms-live-input" value="' + escHtml(avaUrl) + '" />' +
+                    '<input type="file" id="cms-soc-ava-file-' + idx + '" data-soc-ava-file="' + idx + '" accept="image/*" class="hidden" />' +
+                    '<div class="flex items-center gap-1.5">' +
+                      '<button type="button" data-upload-soc-ava="' + idx + '" class="px-3 py-1.5 rounded-xl bg-white hover:bg-sky-100 text-primary border border-sky-200 text-[11px] font-bold flex items-center gap-1 transition">' +
+                        '<span class="material-symbols-outlined text-[15px]">add_a_photo</span><span>Upload Foto Profil</span>' +
+                      '</button>' +
+                      (avaUrl ? '<button type="button" data-clear-soc-ava="' + idx + '" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-red-50 text-error text-[11px] font-bold border border-sky-100">Reset</button>' : '') +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+
                 '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">' +
                   renderCmsField('cms-soc-name-' + idx, 'Judul Kartu Kanal', ch.name || '') +
                   renderCmsField('cms-soc-handle-' + idx, 'Username / Nama Channel', ch.handle || '') +
@@ -1774,7 +2726,7 @@
       const items = Array.isArray(m.items) ? m.items : [];
       html =
         '<div class="nimbus-card rounded-3xl p-6 space-y-4" data-cms-rendered="sec_benefits">' +
-          renderCmsToggleHeader('Section 4: Penjelasan Hak & Fasilitas Sesuai Paket', 'Rincikan semua hak akses, bonus modul, dan fasilitas yang didapatkan pembeli.', s.is_active) +
+          renderCmsToggleHeader('Section 4: Penjelasan Hak & Fasilitas Sesuai Paket', 'Rincikan semua hak akses, bonus modul, dan fasilitas yang didapatkan pembeli kelas ini.', s.is_active) +
           '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
             renderCmsField('cms-b-subtitle', 'Label Langkah', s.section_subtitle || 'Langkah 04') +
             renderCmsField('cms-b-title', 'Judul Seksi Hak Paket', s.section_title) +
@@ -1815,21 +2767,23 @@
       const pts = Array.isArray(m.points) ? m.points : [];
       html =
         '<div class="nimbus-card rounded-3xl p-6 space-y-4" data-cms-rendered="sec_disclaimer">' +
-          renderCmsToggleHeader('Section 5: Pengumuman Disclaimer & Larangan Menjual Kembali', 'Tegaskan perlindungan hak cipta dan larangan menyebarluaskan/resell produk tanpa izin.', s.is_active) +
+          renderCmsToggleHeader('Section 5: Ketentuan Lisensi & Anti-Pembajakan (Menyala Interaktif)', 'Kartu ini tampil dengan efek highlight menyala-nyala (glowing) interaktif di landing page.', s.is_active) +
           '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
             renderCmsField('cms-d-subtitle', 'Label Langkah', s.section_subtitle || 'Langkah 05') +
             renderCmsField('cms-d-title', 'Judul Seksi Disclaimer', s.section_title) +
           '</div>' +
           '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
-            renderCmsField('cms-d-badge', 'Teks Lencana Peringatan Merah', m.badge_text || 'Peringatan Hak Cipta & Lisensi Resmi') +
+            renderCmsField('cms-d-badge', 'Teks Lencana Peringatan Merah Menyala', m.badge_text || 'Peringatan Hak Cipta & Lisensi Resmi') +
             renderCmsField('cms-d-headline', 'Headline Larangan Utama', m.headline || 'Larangan Keras Menyebarluaskan / Menjual Kembali Tanpa Izin') +
           '</div>' +
           renderCmsField('cms-d-body', 'Isi Paragraf Ketentuan Hukum & Hak Cipta', s.content_body, { type: 'textarea', rows: 4 }) +
-          renderCmsField('cms-d-points', 'Kotak Poin Sanksi / Larangan (1 baris per kotak)', pts.join('\n'), { type: 'textarea', rows: 3 }) +
+          renderCmsField('cms-d-points', 'Kotak Poin Sanksi / Larangan Interaktif (1 baris per kotak)', pts.join('\n'), { type: 'textarea', rows: 3 }) +
         '</div>';
     } else if (sub === 'sec_closing') {
       const sGreet = getAdminSec('sec_greeting');
       const mg = sGreet.metadata || {};
+      const mName = mg.mascot_name || 'Anabul';
+      const mLogo = String(mg.mascot_logo_url || '').trim();
       html =
         '<div class="space-y-5" data-cms-rendered="sec_closing">' +
           '<div class="nimbus-card rounded-3xl p-6 space-y-4">' +
@@ -1846,21 +2800,84 @@
             '</div>' +
           '</div>' +
           '<div class="nimbus-card rounded-3xl p-6 space-y-4 border-2 border-sky-200">' +
-            '<div class="flex items-center justify-between">' +
+            '<div class="flex flex-wrap items-center justify-between gap-2">' +
               '<div class="flex items-center gap-2.5">' +
                 '<span class="material-symbols-outlined text-primary text-[24px]">pets</span>' +
                 '<div>' +
-                  '<h4 class="text-sm font-extrabold text-on-surface">Pengaturan Maskot Kucing Imut ANABUL</h4>' +
-                  '<p class="text-xs text-on-surface-variant">Karakter kucing menggemaskan yang mengikuti kursor di landing page.</p>' +
+                  '<h4 class="text-sm font-extrabold text-on-surface">Kustomisasi Logo Pojok Kanan &amp; Nama Maskot</h4>' +
+                  '<p class="text-xs text-on-surface-variant">Ganti nama Anabul menjadi nama brand/maskot Anda dan upload logo kustom untuk pojok kanan bawah.</p>' +
                 '</div>' +
               '</div>' +
               '<label class="inline-flex items-center gap-2 text-xs font-bold cursor-pointer">' +
-                '<input id="cms-anabul-on" type="checkbox" ' + (mg.anabul_enabled !== false ? 'checked' : '') + ' class="cms-live-input rounded text-primary" /> Aktifkan Anabul' +
+                '<input id="cms-anabul-on" type="checkbox" ' + (mg.anabul_enabled !== false ? 'checked' : '') + ' class="cms-live-input rounded text-primary" /> Aktifkan Maskot' +
               '</label>' +
             '</div>' +
+
+            /* Upload Logo Kustom Pojok Kanan & Ganti Nama Maskot */
+            '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-2xl bg-sky-50/70 border border-sky-100 items-center">' +
+              '<div>' +
+                renderCmsField('cms-mascot-name', 'Nama Maskot / Asisten (Pengganti "Anabul")', mName, { placeholder: 'Contoh: Mimi / BrandBot / Anabul' }) +
+                '<p class="text-[11px] text-outline mt-1">Tampil pada tombol atas dan widget sapaan pojok kanan bawah.</p>' +
+              '</div>' +
+              '<div class="space-y-2">' +
+                '<p class="text-xs font-bold text-on-surface">Logo Kustom Pojok Kanan Bawah</p>' +
+                '<div class="flex items-center gap-3">' +
+                  '<div class="w-14 h-14 rounded-full bg-white border-2 border-sky-200 shadow-sm overflow-hidden flex items-center justify-center shrink-0">' +
+                    (mLogo
+                      ? '<img src="' + escHtml(mLogo) + '" alt="Logo Maskot" class="w-full h-full object-cover" />'
+                      : '<span class="material-symbols-outlined text-primary text-[28px]">pets</span>') +
+                  '</div>' +
+                  '<div class="space-y-1.5">' +
+                    '<input type="hidden" id="cms-mascot-logo-url" class="cms-live-input" value="' + escHtml(mLogo) + '" />' +
+                    '<input type="file" id="cms-mascot-logo-file" accept="image/*" class="hidden" />' +
+                    '<div class="flex flex-wrap items-center gap-1.5">' +
+                      '<button type="button" id="btn-upload-mascot-logo" class="px-3.5 py-2 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold flex items-center gap-1 transition">' +
+                        '<span class="material-symbols-outlined text-[16px]">upload</span><span>Upload Logo Saya</span>' +
+                      '</button>' +
+                      (mLogo ? '<button type="button" id="btn-reset-mascot-logo" class="px-3 py-2 rounded-xl bg-white hover:bg-red-50 text-error text-xs font-bold border border-sky-100">Reset Default</button>' : '') +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+
             '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
-              renderCmsField('cms-anabul-title', 'Judul Sapaan Balon Anabul', mg.anabul_greeting || 'Halo, Saya Anabul! 🐾') +
-              renderCmsField('cms-anabul-msg', 'Pesan Panduan Awal Anabul', mg.anabul_subtext || 'Klik tombol Salin pada kartu Token ya!') +
+              renderCmsField('cms-anabul-title', 'Judul Sapaan Balon Pojok Kanan', mg.anabul_greeting || ('Halo, Saya ' + mName + '! 🐾')) +
+              renderCmsField('cms-anabul-msg', 'Pesan Panduan Awal di Balon', mg.anabul_subtext || 'Klik tombol Salin pada kartu Token ya!') +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    } else if (sub === 'sec_contact') {
+      html =
+        '<div class="space-y-5" data-cms-rendered="sec_contact">' +
+          '<div class="nimbus-card rounded-3xl p-6 space-y-4">' +
+            renderCmsToggleHeader('Section 7: Tombol Menghubungi Admin (WhatsApp & Email)', 'Munculkan tombol bantuan langsung ke WhatsApp & Email Admin apabila member mengalami kendala.', s.is_active) +
+            '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+              renderCmsField('cms-ct-subtitle', 'Badge Atas Pusat Bantuan', s.section_subtitle || 'Pusat Bantuan Member Resmi') +
+              renderCmsField('cms-ct-title', 'Judul Kartu Hubungi Admin', s.section_title || 'Butuh Bantuan Kendala Akses? Hubungi Admin Resmi') +
+            '</div>' +
+            renderCmsField('cms-ct-body', 'Deskripsi Pengantar Bantuan Admin', s.content_body || '', { type: 'textarea', rows: 2 }) +
+          '</div>' +
+
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">' +
+            '<div class="nimbus-card rounded-3xl p-6 space-y-3.5 border-l-4 border-emerald-500">' +
+              '<div class="flex items-center justify-between">' +
+                '<h4 class="text-sm font-extrabold text-tertiary">Tombol 1: WhatsApp Admin</h4>' +
+                '<label class="inline-flex items-center gap-2 text-xs font-bold cursor-pointer"><input id="cms-ct-wa-on" type="checkbox" ' + (m.wa_enabled !== false ? 'checked' : '') + ' class="cms-live-input rounded text-tertiary" /> Aktifkan</label>' +
+              '</div>' +
+              renderCmsField('cms-ct-wa-num', 'Nomor WhatsApp Admin (Format 628xxx)', m.wa_number || s.cta_url || '6281234567890', { mono: true, placeholder: '6281234567890' }) +
+              renderCmsField('cms-ct-wa-lbl', 'Teks Tombol WhatsApp', m.wa_label || 'Hubungi via WhatsApp') +
+              renderCmsField('cms-ct-wa-msg', 'Pesan Otomatis Saat Member Klik WA', m.wa_message || '', { type: 'textarea', rows: 2 }) +
+            '</div>' +
+
+            '<div class="nimbus-card rounded-3xl p-6 space-y-3.5 border-l-4 border-sky-500">' +
+              '<div class="flex items-center justify-between">' +
+                '<h4 class="text-sm font-extrabold text-primary">Tombol 2: Email Admin</h4>' +
+                '<label class="inline-flex items-center gap-2 text-xs font-bold cursor-pointer"><input id="cms-ct-em-on" type="checkbox" ' + (m.email_enabled !== false ? 'checked' : '') + ' class="cms-live-input rounded text-primary" /> Aktifkan</label>' +
+              '</div>' +
+              renderCmsField('cms-ct-em-addr', 'Alamat Email Support Admin', m.email_address || 'support@productreceiver.com', { mono: true, placeholder: 'admin@domainanda.com' }) +
+              renderCmsField('cms-ct-em-lbl', 'Teks Tombol Email', m.email_label || 'Kirim Email ke Admin') +
+              renderCmsField('cms-ct-em-subj', 'Subjek Email Otomatis', m.email_subject || 'Bantuan Akses Member') +
             '</div>' +
           '</div>' +
         '</div>';
@@ -1936,7 +2953,9 @@
           handle: val('cms-soc-handle-' + idx),
           pitch: val('cms-soc-pitch-' + idx),
           cta_label: val('cms-soc-cta-' + idx),
-          url: val('cms-soc-url-' + idx)
+          url: val('cms-soc-url-' + idx),
+          wallpaper_url: val('cms-soc-wall-' + idx),
+          avatar_url: val('cms-soc-ava-' + idx)
         });
       });
       m.channels = nextChannels;
@@ -1976,8 +2995,24 @@
 
       const sg = getAdminSec('sec_greeting');
       sg.metadata.anabul_enabled = chk('cms-anabul-on');
+      sg.metadata.mascot_name = val('cms-mascot-name').trim() || 'Anabul';
+      sg.metadata.mascot_logo_url = val('cms-mascot-logo-url').trim();
       sg.metadata.anabul_greeting = val('cms-anabul-title');
       sg.metadata.anabul_subtext = val('cms-anabul-msg');
+    } else if (rendered === 'sec_contact') {
+      s.section_subtitle = val('cms-ct-subtitle');
+      s.section_title = val('cms-ct-title');
+      s.content_body = val('cms-ct-body');
+      s.cta_label = val('cms-ct-wa-lbl');
+      s.cta_url = val('cms-ct-wa-num');
+      m.wa_enabled = chk('cms-ct-wa-on');
+      m.wa_number = val('cms-ct-wa-num').trim();
+      m.wa_label = val('cms-ct-wa-lbl').trim();
+      m.wa_message = val('cms-ct-wa-msg');
+      m.email_enabled = chk('cms-ct-em-on');
+      m.email_address = val('cms-ct-em-addr').trim();
+      m.email_label = val('cms-ct-em-lbl').trim();
+      m.email_subject = val('cms-ct-em-subj').trim();
     }
 
     s.metadata = m;
@@ -1986,12 +3021,13 @@
   function renderCmsMiniPreview() {
     const box = $('cms-mini-preview');
     if (!box) return;
+    const activeCls = getActiveAdminClass();
     const s = getAdminSec(state.activeCmsSub || 'sec_greeting');
     box.innerHTML =
       '<div class="p-3 rounded-xl bg-white border border-sky-100 space-y-1.5">' +
-        '<div class="flex items-center justify-between">' +
-          '<span class="text-[10px] font-bold uppercase text-primary">' + escHtml(s.section_subtitle || s.section_id) + '</span>' +
-          '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold ' + (s.is_active !== false ? 'bg-emerald-50 text-tertiary' : 'bg-slate-100 text-outline') + '">' + (s.is_active !== false ? 'Ditampilkan' : 'Disembunyikan') + '</span>' +
+        '<div class="flex items-center justify-between gap-1">' +
+          '<span class="text-[10px] font-bold uppercase text-primary truncate">/' + escHtml(activeCls.class_slug) + ' • ' + escHtml(s.section_subtitle || s.section_id) + '</span>' +
+          '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0 ' + (s.is_active !== false ? 'bg-emerald-50 text-tertiary' : 'bg-slate-100 text-outline') + '">' + (s.is_active !== false ? 'Ditampilkan' : 'Disembunyikan') + '</span>' +
         '</div>' +
         '<p class="font-extrabold text-on-surface text-sm leading-snug">' + escHtml(s.section_title || '(Tanpa Judul)') + '</p>' +
         '<p class="text-[11px] text-on-surface-variant line-clamp-3 leading-relaxed">' + escHtml(s.content_body || '') + '</p>' +
@@ -2005,11 +3041,15 @@
     if (btn) btn.disabled = true;
 
     try {
+      const cls = getActiveAdminClass();
       if (!state.isDemoAdmin) {
-        const res = await api('admin.saveSections', { sections: state.adminData.sections });
-        showToast(res.message || 'Konten CMS berhasil disimpan!');
+        const res = await api('admin.saveSections', {
+          class_id: state.activeClassId,
+          sections: state.adminData.sections
+        });
+        showToast(res.message || ('Konten CMS "/' + cls.class_slug + '" berhasil disimpan!'));
       } else {
-        showToast('Perubahan CMS disimpan ke Pratinjau Lokal!');
+        showToast('Perubahan CMS "/' + cls.class_slug + '" disimpan ke Pratinjau Lokal!');
       }
       syncAdminStateToPublicPreview();
       renderCmsMiniPreview();
@@ -2021,7 +3061,7 @@
   }
 
   // ==========================================================================
-  // 9. TAB 3: MANAJEMEN MULTI-VIDEO TUTORIAL YOUTUBE (CRUD PENUH)
+  // 9. TAB 3: MANAJEMEN MULTI-VIDEO TUTORIAL YOUTUBE PER KELAS (CRUD PENUH)
   // ==========================================================================
   function parseTimecodesText(raw) {
     return String(raw || '').split('\n').map(function (line) {
@@ -2050,12 +3090,13 @@
 
     const grid = $('admin-tutorials-grid');
     if (!grid) return;
-    const list = (state.adminData.tutorials || []).slice().sort(function (a, b) {
+    const activeCls = getActiveAdminClass();
+    const list = getActiveClassTutorials().slice().sort(function (a, b) {
       return (Number(a.sort_order) || 99) - (Number(b.sort_order) || 99);
     });
 
     if (!list.length) {
-      grid.innerHTML = '<div class="col-span-full nimbus-card rounded-3xl p-8 text-center text-sm text-outline">Belum ada video panduan YouTube. Klik tombol <strong>+ Tambah Video YouTube Baru</strong> di kanan atas untuk menempelkan video pertama Anda.</div>';
+      grid.innerHTML = '<div class="col-span-full nimbus-card rounded-3xl p-8 text-center text-sm text-outline">Belum ada video panduan YouTube untuk <strong>' + escHtml(activeCls.class_name) + ' (/' + escHtml(activeCls.class_slug) + ')</strong>. Klik tombol <strong>+ Tambah Video YouTube Baru</strong> di kanan atas untuk menempelkan video kelas ini.</div>';
       return;
     }
 
@@ -2103,17 +3144,18 @@
   function openTutorialModal(videoId) {
     const modal = $('tutorial-modal');
     if (!modal) return;
-    const list = state.adminData.tutorials || [];
-    const existing = videoId ? list.find(function (v) { return v.video_id === videoId; }) : null;
+    const allList = state.adminData.tutorials || [];
+    const clsList = getActiveClassTutorials();
+    const existing = videoId ? allList.find(function (v) { return v.video_id === videoId; }) : null;
 
-    if ($('tut-modal-title')) $('tut-modal-title').textContent = existing ? 'Edit Video Panduan YouTube' : 'Tambah Video Panduan YouTube';
+    if ($('tut-modal-title')) $('tut-modal-title').textContent = existing ? 'Edit Video Panduan YouTube' : 'Tambah Video Panduan (' + getActiveAdminClass().class_name + ')';
     if ($('vid-form-id')) $('vid-form-id').value = existing ? existing.video_id : '';
     if ($('vid-form-url')) $('vid-form-url').value = existing ? existing.youtube_url : '';
     if ($('vid-form-title')) $('vid-form-title').value = existing ? existing.title : '';
     if ($('vid-form-desc')) $('vid-form-desc').value = existing ? (existing.description || '') : '';
     if ($('vid-form-duration')) $('vid-form-duration').value = existing ? (existing.duration || '05:00') : '05:00';
     if ($('vid-form-badge')) $('vid-form-badge').value = existing ? (existing.badge_label || 'Panduan') : 'Wajib Ditonton';
-    if ($('vid-form-order')) $('vid-form-order').value = existing ? (existing.sort_order || 1) : (list.length + 1);
+    if ($('vid-form-order')) $('vid-form-order').value = existing ? (existing.sort_order || 1) : (clsList.length + 1);
     if ($('vid-form-timecodes')) $('vid-form-timecodes').value = existing ? formatTimecodesText(existing.timecodes) : '';
     if ($('vid-form-active')) $('vid-form-active').checked = existing ? (existing.is_active !== false) : true;
 
@@ -2155,7 +3197,10 @@
 
     try {
       if (!state.isDemoAdmin) {
-        await api('admin.saveSections', { sections: { sec_tutorials: sTut } });
+        await api('admin.saveSections', {
+          class_id: state.activeClassId,
+          sections: { sec_tutorials: sTut }
+        });
       }
       syncAdminStateToPublicPreview();
       showToast('Header seksi video panduan berhasil disimpan!');
@@ -2175,6 +3220,7 @@
 
     const payload = {
       video_id: $('vid-form-id') ? $('vid-form-id').value.trim() : '',
+      class_id: state.activeClassId || DEFAULT_CLASS_ID,
       youtube_url: urlVal,
       youtube_id: ytId,
       title: $('vid-form-title') ? $('vid-form-title').value.trim() : '',
@@ -2212,7 +3258,7 @@
   }
 
   async function reorderTutorialItem(index, dir) {
-    const list = (state.adminData.tutorials || []).slice().sort(function (a, b) {
+    const list = getActiveClassTutorials().slice().sort(function (a, b) {
       return (Number(a.sort_order) || 99) - (Number(b.sort_order) || 99);
     });
     const targetIdx = index + dir;
@@ -2226,7 +3272,6 @@
       v.sort_order = idx + 1;
       return { video_id: v.video_id, sort_order: idx + 1 };
     });
-    state.adminData.tutorials = list;
     syncAdminStateToPublicPreview();
     renderAdminTutorials();
 
@@ -2241,10 +3286,11 @@
   }
 
   // ==========================================================================
-  // 10. TAB 4: KATALOG TOKEN AKSES MANUAL (TEMPEL SENDIRI OLEH ADMIN)
+  // 10. TAB 4: KATALOG TOKEN AKSES MANUAL PER KELAS (TEMPEL SENDIRI OLEH ADMIN)
   // ==========================================================================
   function renderAdminTokens() {
-    const all = state.adminData.tokens || [];
+    const activeCls = getActiveAdminClass();
+    const all = getActiveClassTokens();
     const activeCnt = all.filter(function (t) { return t.is_active !== false; }).length;
     const inactiveCnt = all.length - activeCnt;
     const totalCopies = all.reduce(function (s, t) { return s + Number(t.copy_count || 0); }, 0);
@@ -2276,7 +3322,7 @@
     const tbody = $('admin-tokens-tbody');
     if (!tbody) return;
     if (!list.length) {
-      tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-outline">Belum ada token yang cocok. Klik <strong>+ Tempel Token Baru</strong> untuk menambahkan kode token buatan Anda.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-outline">Belum ada token untuk <strong>' + escHtml(activeCls.class_name) + ' (/' + escHtml(activeCls.class_slug) + ')</strong>. Klik <strong>+ Tempel Token Baru</strong> untuk menambahkan kode token kelas ini.</td></tr>';
       return;
     }
 
@@ -2316,7 +3362,7 @@
     if (!modal) return;
     const existing = tokenId ? (state.adminData.tokens || []).find(function (t) { return t.token_id === tokenId; }) : null;
 
-    if ($('token-modal-title')) $('token-modal-title').textContent = existing ? 'Edit Token Akses Kelas' : 'Tempel Token Akses Baru';
+    if ($('token-modal-title')) $('token-modal-title').textContent = existing ? 'Edit Token Akses Kelas' : ('Tempel Token Baru — ' + getActiveAdminClass().class_name);
     if ($('tok-form-id')) $('tok-form-id').value = existing ? existing.token_id : '';
     if ($('tok-form-code')) $('tok-form-code').value = existing ? existing.token_code : '';
     if ($('tok-form-tab')) $('tok-form-tab').value = existing ? (existing.tab_badge || 'Token Utama') : 'Token Utama';
@@ -2349,6 +3395,7 @@
 
     const payload = {
       token_id: $('tok-form-id') ? $('tok-form-id').value.trim() : '',
+      class_id: state.activeClassId || DEFAULT_CLASS_ID,
       token_code: rawCode,
       tab_badge: ($('tok-form-tab') ? $('tok-form-tab').value.trim() : '') || 'Token Akses',
       token_label: label,
@@ -2455,13 +3502,15 @@
       });
 
       const d = res.data || {};
-      const tables = d.tables || {};
-      const rowsHtml = Object.keys(tables).map(function (tbl) {
-        const info = tables[tbl];
+      const tableEntries = Array.isArray(d.tables)
+        ? d.tables
+        : Object.keys(d.tables || {}).map(function (k) { return Object.assign({ sheet: k }, d.tables[k]); });
+      const rowsHtml = tableEntries.map(function (info) {
+        const tblName = info.sheet || 'tbl';
         if (info.skipped) {
-          return '<div class="flex justify-between py-1 border-b border-sky-100"><span>' + escHtml(tbl) + '</span><span class="text-outline">Dilewati (' + escHtml(info.reason || 'tidak ada di sumber') + ')</span></div>';
+          return '<div class="flex justify-between py-1 border-b border-sky-100"><span>' + escHtml(tblName) + '</span><span class="text-outline">Dilewati (' + escHtml(info.reason || 'tidak ada di sumber') + ')</span></div>';
         }
-        return '<div class="flex justify-between py-1 border-b border-sky-100"><span class="font-mono font-bold">' + escHtml(tbl) + '</span><span>+' + (info.inserted || 0) + ' baru • ' + (info.updated || 0) + ' update • ' + (info.unchanged || 0) + ' tetap</span></div>';
+        return '<div class="flex justify-between py-1 border-b border-sky-100"><span class="font-mono font-bold">' + escHtml(tblName) + '</span><span>+' + (info.inserted || 0) + ' baru • ' + (info.updated || 0) + ' update • ' + (info.unchanged || 0) + ' tetap</span></div>';
       }).join('');
 
       if (box) {
@@ -2484,7 +3533,7 @@
   }
 
   // ==========================================================================
-  // 12. EVENT LISTENERS GLOBAL, SWR BOOTSTRAP & PUBLIC EXPORT
+  // 12. EVENT LISTENERS GLOBAL, SWR BOOTSTRAP MULTI-KELAS & PUBLIC EXPORT
   // ==========================================================================
   function bindEvents() {
     // Delegasi klik terpusat agar elemen dinamis tetap super responsif
@@ -2534,6 +3583,38 @@
         return;
       }
 
+      // 4B. Interaksi Highlight Poin Lisensi & Anti-Pembajakan (Section 5 Menyala)
+      const discPt = t.closest('.disc-point-interactive');
+      if (discPt) {
+        discPt.classList.toggle('disc-point-active');
+        return;
+      }
+
+      if (t.closest('#btn-ack-disclaimer')) {
+        localStorage.setItem(STORAGE_KEYS.DISC_ACK, '1');
+        const ackBtn = $('btn-ack-disclaimer');
+        const ackLbl = $('ack-disclaimer-label');
+        if (ackLbl) ackLbl.textContent = 'Lisensi Dipahami & Disetujui ✓';
+        if (ackBtn) {
+          ackBtn.classList.remove('from-red-600', 'to-rose-600');
+          ackBtn.classList.add('from-emerald-600', 'to-teal-600');
+        }
+        trackEvent('ACK_DISCLAIMER', 'Setuju Lisensi Anti-Pembajakan');
+        celebrateAnabul('Terima kasih sudah berkomitmen menjaga lisensi resmi kelas ini! 🛡️✨');
+        showToast('Terima kasih! Komitmen lisensi Anda telah tercatat.');
+        return;
+      }
+
+      // 4C. Simulasi Buka Kelas dari Gerbang Lokal (Saat GAS_URL belum diisi)
+      const demoClsBtn = t.closest('.btn-demo-open-class');
+      if (demoClsBtn) {
+        const demoSlug = normalizeSlug(demoClsBtn.getAttribute('data-demo-slug') || 'kelasA');
+        localStorage.setItem(STORAGE_KEYS.LOCKED_SLUG, demoSlug.toLowerCase());
+        const baseClean = window.location.href.split('?')[0].split('#')[0];
+        window.location.href = baseClean + '?kelas=' + encodeURIComponent(demoSlug);
+        return;
+      }
+
       // 5. Navigasi Tab Sidebar Admin
       const navBtn = t.closest('.admin-nav-btn');
       if (navBtn) {
@@ -2545,6 +3626,106 @@
       const cmsSubBtn = t.closest('.cms-sub-btn');
       if (cmsSubBtn) {
         switchCmsSub(cmsSubBtn.getAttribute('data-cms-sub'));
+        return;
+      }
+
+      // 6B. Tombol Upload Logo Maskot & Media Sosial di CMS
+      if (t.closest('#btn-upload-mascot-logo')) {
+        if ($('cms-mascot-logo-file')) $('cms-mascot-logo-file').click();
+        return;
+      }
+      if (t.closest('#btn-reset-mascot-logo')) {
+        if ($('cms-mascot-logo-url')) $('cms-mascot-logo-url').value = '';
+        collectCurrentCmsForm();
+        syncAdminStateToPublicPreview();
+        applyAnabulVisibility();
+        renderCmsEditor();
+        showToast('Logo pojok kanan dikembalikan ke ikon default.');
+        return;
+      }
+
+      const upWallBtn = t.closest('[data-upload-soc-wall]');
+      if (upWallBtn) {
+        const idx = upWallBtn.getAttribute('data-upload-soc-wall');
+        if ($('cms-soc-wall-file-' + idx)) $('cms-soc-wall-file-' + idx).click();
+        return;
+      }
+      const clrWallBtn = t.closest('[data-clear-soc-wall]');
+      if (clrWallBtn) {
+        const idx = clrWallBtn.getAttribute('data-clear-soc-wall');
+        if ($('cms-soc-wall-' + idx)) $('cms-soc-wall-' + idx).value = '';
+        collectCurrentCmsForm();
+        syncAdminStateToPublicPreview();
+        renderCmsEditor();
+        showToast('Wallpaper kartu direset ke gradien bawaan.');
+        return;
+      }
+
+      const upAvaBtn = t.closest('[data-upload-soc-ava]');
+      if (upAvaBtn) {
+        const idx = upAvaBtn.getAttribute('data-upload-soc-ava');
+        if ($('cms-soc-ava-file-' + idx)) $('cms-soc-ava-file-' + idx).click();
+        return;
+      }
+      const clrAvaBtn = t.closest('[data-clear-soc-ava]');
+      if (clrAvaBtn) {
+        const idx = clrAvaBtn.getAttribute('data-clear-soc-ava');
+        if ($('cms-soc-ava-' + idx)) $('cms-soc-ava-' + idx).value = '';
+        collectCurrentCmsForm();
+        syncAdminStateToPublicPreview();
+        renderCmsEditor();
+        showToast('Foto profil akun direset.');
+        return;
+      }
+
+      // 6C. Aksi Kartu Paket Kelas & URL Terpisah di Admin
+      const clsCopyBtn = t.closest('[data-cls-copy-url]');
+      if (clsCopyBtn) {
+        copyClassShareUrl(clsCopyBtn.getAttribute('data-cls-copy-url'));
+        return;
+      }
+      const clsSelectBtn = t.closest('[data-cls-select]');
+      if (clsSelectBtn) {
+        switchActiveAdminClass(clsSelectBtn.getAttribute('data-cls-select'));
+        switchAdminTab('cms');
+        return;
+      }
+      const clsPrevBtn = t.closest('[data-cls-preview]');
+      if (clsPrevBtn) {
+        switchActiveAdminClass(clsPrevBtn.getAttribute('data-cls-preview'), true);
+        showPublicView();
+        return;
+      }
+      const clsEditBtn = t.closest('[data-cls-edit]');
+      if (clsEditBtn) {
+        openClassModal(clsEditBtn.getAttribute('data-cls-edit'));
+        return;
+      }
+      const clsDelBtn = t.closest('[data-cls-del]');
+      if (clsDelBtn) {
+        const cid = clsDelBtn.getAttribute('data-cls-del');
+        if (cid === DEFAULT_CLASS_ID) {
+          showToast('Kelas Utama tidak dapat dihapus (cukup ubah nama/slug-nya).', true);
+          return;
+        }
+        if (!window.confirm('Hapus Paket Kelas & URL ini beserta token/video di dalamnya?')) return;
+        try {
+          if (!state.isDemoAdmin) {
+            await api('admin.deleteClass', { class_id: cid });
+            if (state.activeClassId === cid) state.activeClassId = DEFAULT_CLASS_ID;
+            await loadAdminBoot();
+          } else {
+            state.adminData.classes = (state.adminData.classes || []).filter(function (c) { return c.class_id !== cid; });
+            delete state.adminData.sectionsByClass[cid];
+            state.adminData.tokens = (state.adminData.tokens || []).filter(function (tk) { return tk.class_id !== cid; });
+            state.adminData.tutorials = (state.adminData.tutorials || []).filter(function (vd) { return vd.class_id !== cid; });
+            if (state.activeClassId === cid) state.activeClassId = DEFAULT_CLASS_ID;
+            ensureAdminClassSections(state.activeClassId);
+            syncAdminStateToPublicPreview();
+            renderAllAdminViews();
+          }
+          showToast('Paket kelas berhasil dihapus.');
+        } catch (err) { showToast(err.message, true); }
         return;
       }
 
@@ -2623,10 +3804,70 @@
       }
     });
 
-    // Delegasi perubahan checkbox toggle (Token & Video) + Live Preview CMS
+    // Delegasi perubahan checkbox toggle (Token & Video) + Input File Upload Gambar
     document.addEventListener('change', async function (e) {
       const t = e.target;
       if (!t) return;
+
+      // Upload File Logo Kustom Maskot Pojok Kanan
+      if (t.id === 'cms-mascot-logo-file' && t.files && t.files[0]) {
+        const file = t.files[0];
+        showToast('Memproses & mengunggah logo maskot...');
+        try {
+          const uploadedUrl = await uploadCustomImageFile(file, 'mascot_logo', { maxW: 400, maxH: 400, preferPng: true });
+          if ($('cms-mascot-logo-url')) $('cms-mascot-logo-url').value = uploadedUrl;
+          collectCurrentCmsForm();
+          syncAdminStateToPublicPreview();
+          applyAnabulVisibility();
+          renderCmsEditor();
+          showToast('Logo kustom berhasil diunggah! Jangan lupa klik Simpan Semua Perubahan.');
+        } catch (err) {
+          showToast(err.message || 'Gagal mengunggah logo maskot.', true);
+        } finally {
+          t.value = '';
+        }
+        return;
+      }
+
+      // Upload File Background Wallpaper 1 Foto pada Kartu Medsos
+      if (t.hasAttribute('data-soc-wall-file') && t.files && t.files[0]) {
+        const idx = t.getAttribute('data-soc-wall-file');
+        const file = t.files[0];
+        showToast('Mengunggah background wallpaper kartu...');
+        try {
+          const uploadedUrl = await uploadCustomImageFile(file, 'soc_wallpaper', { maxW: 1100, maxH: 600, preferPng: false });
+          if ($('cms-soc-wall-' + idx)) $('cms-soc-wall-' + idx).value = uploadedUrl;
+          collectCurrentCmsForm();
+          syncAdminStateToPublicPreview();
+          renderCmsEditor();
+          showToast('Background wallpaper berhasil dipasang! Klik Simpan Semua Perubahan untuk menyimpan.');
+        } catch (err) {
+          showToast(err.message || 'Gagal mengunggah wallpaper.', true);
+        } finally {
+          t.value = '';
+        }
+        return;
+      }
+
+      // Upload File Foto Profil Akun pada Kartu Medsos
+      if (t.hasAttribute('data-soc-ava-file') && t.files && t.files[0]) {
+        const idx = t.getAttribute('data-soc-ava-file');
+        const file = t.files[0];
+        showToast('Mengunggah foto profil akun...');
+        try {
+          const uploadedUrl = await uploadCustomImageFile(file, 'soc_avatar', { maxW: 360, maxH: 360, preferPng: true });
+          if ($('cms-soc-ava-' + idx)) $('cms-soc-ava-' + idx).value = uploadedUrl;
+          collectCurrentCmsForm();
+          syncAdminStateToPublicPreview();
+          renderCmsEditor();
+          showToast('Foto profil akun berhasil dipasang! Klik Simpan Semua Perubahan untuk menyimpan.');
+        } catch (err) {
+          showToast(err.message || 'Gagal mengunggah foto profil.', true);
+        } finally {
+          t.value = '';
+        }
+        return;
+      }
 
       if (t.hasAttribute('data-tok-toggle')) {
         const tokId = t.getAttribute('data-tok-toggle');
@@ -2670,13 +3911,36 @@
       }
     });
 
+    // Spotlight Interaktif Mengikuti Kursor di Kartu Lisensi & Anti-Pembajakan
+    const discCard = $('disclaimer-card');
+    if (discCard) {
+      discCard.addEventListener('mousemove', function (e) {
+        const rect = discCard.getBoundingClientRect();
+        discCard.style.setProperty('--glow-x', (e.clientX - rect.left) + 'px');
+        discCard.style.setProperty('--glow-y', (e.clientY - rect.top) + 'px');
+      });
+    }
+
+    // Pelacakan Tombol Hubungi Admin (WhatsApp & Email)
+    if ($('btn-contact-admin-wa')) {
+      $('btn-contact-admin-wa').addEventListener('click', function () {
+        trackEvent('CONTACT_WA', 'WhatsApp Admin');
+      });
+    }
+    if ($('btn-contact-admin-email')) {
+      $('btn-contact-admin-email').addEventListener('click', function () {
+        trackEvent('CONTACT_EMAIL', 'Email Admin');
+      });
+    }
+
     // Tombol-tombol statis utama
     if ($('btn-toggle-anabul')) {
       $('btn-toggle-anabul').addEventListener('click', function () {
         state.anabulOn = !state.anabulOn;
         localStorage.setItem(STORAGE_KEYS.ANABUL_ACTIVE, state.anabulOn ? '1' : '0');
         applyAnabulVisibility();
-        showToast(state.anabulOn ? 'Anabul bangun & mengikuti kursormu lagi! 🐾' : 'Anabul istirahat dulu ya~ 💤');
+        const mName = getMascotConfig().name;
+        showToast(state.anabulOn ? (mName + ' aktif kembali menemani kamu! 🐾') : (mName + ' istirahat dulu ya~ 💤'));
       });
     }
 
@@ -2685,7 +3949,7 @@
         'Tips #1: Tonton video panduan di atas supaya tidak bingung saat aktivasi kelas ya! 🎬🐾',
         'Tips #2: Klik tombol Salin pada kartu Token, lalu tempel di Portal Kelas! 🔑🐾',
         'Tips #3: Jangan lupa gabung Grup WhatsApp & Channel Telegram agar dapat info Zoom Live! 💬🐾',
-        'Tips #4: Follow Instagram, YouTube & TikTok Mentor untuk update materi daging gratis! ✨🐾'
+        'Tips #4: Butuh bantuan? Klik tombol Hubungi Admin via WhatsApp di bagian bawah ya! 💬✨'
       ];
       let tipIdx = 0;
       $('btn-anabul-corner').addEventListener('click', function () {
@@ -2742,7 +4006,41 @@
       });
     }
 
-    // Pembuka Modal Login Admin + Pemicu Jalur Darurat Tersembunyi
+    // Gerbang Proteksi Origin & Pembuka Modal Login Admin
+    if ($('btn-gate-open-auth')) {
+      $('btn-gate-open-auth').addEventListener('click', function () { openAuthModal(false); });
+    }
+    if ($('btn-gate-admin-override')) {
+      $('btn-gate-admin-override').addEventListener('click', function () { openAuthModal(false); });
+    }
+    if ($('btn-return-my-class')) {
+      $('btn-return-my-class').addEventListener('click', function () {
+        const lockedSlug = localStorage.getItem(STORAGE_KEYS.LOCKED_SLUG) || '';
+        if (!lockedSlug) return;
+        let savedKey = '';
+        try {
+          const map = JSON.parse(localStorage.getItem(STORAGE_KEYS.AUTH_KEYS) || '{}');
+          savedKey = map[lockedSlug.toLowerCase()] || '';
+        } catch (e) { /* abaikan */ }
+        window.location.href = buildClassPublicUrl({
+          class_slug: lockedSlug,
+          require_key: !!savedKey,
+          access_key: savedKey
+        });
+      });
+    }
+    if ($('gate-shield-trigger')) {
+      $('gate-shield-trigger').addEventListener('click', function () {
+        state.shieldClicks++;
+        clearTimeout(state.shieldTimer);
+        state.shieldTimer = setTimeout(function () { state.shieldClicks = 0; }, 2200);
+        if (state.shieldClicks >= 5) {
+          state.shieldClicks = 0;
+          openAuthModal(true);
+        }
+      });
+    }
+
     if ($('btn-open-admin-auth')) {
       $('btn-open-admin-auth').addEventListener('click', function () { openAuthModal(false); });
     }
@@ -2778,13 +4076,44 @@
       $('emergency-login-form').addEventListener('submit', handleEmergencySubmit);
     }
 
-    // Shell Admin Controls
+    // Shell Admin Controls & Multi-Class Switcher
     if ($('btn-open-sidebar')) $('btn-open-sidebar').addEventListener('click', function () { toggleMobileSidebar(true); });
     if ($('btn-close-sidebar')) $('btn-close-sidebar').addEventListener('click', function () { toggleMobileSidebar(false); });
     if ($('admin-sidebar-backdrop')) $('admin-sidebar-backdrop').addEventListener('click', function () { toggleMobileSidebar(false); });
     if ($('btn-switch-to-public')) $('btn-switch-to-public').addEventListener('click', showPublicView);
     if ($('btn-admin-logout')) $('btn-admin-logout').addEventListener('click', logoutAdmin);
     if ($('btn-admin-sync')) $('btn-admin-sync').addEventListener('click', loadAdminBoot);
+
+    if ($('admin-active-class-select')) {
+      $('admin-active-class-select').addEventListener('change', function () {
+        switchActiveAdminClass(this.value);
+      });
+    }
+    if ($('btn-copy-active-class-url')) {
+      $('btn-copy-active-class-url').addEventListener('click', function () {
+        copyClassShareUrl(state.activeClassId);
+      });
+    }
+    if ($('btn-open-add-class')) {
+      $('btn-open-add-class').addEventListener('click', function () { openClassModal(''); });
+    }
+    if ($('btn-open-add-class-top')) {
+      $('btn-open-add-class-top').addEventListener('click', function () { openClassModal(''); });
+    }
+    if ($('form-class-item')) {
+      $('form-class-item').addEventListener('submit', handleClassFormSubmit);
+    }
+    if ($('cls-form-slug')) {
+      $('cls-form-slug').addEventListener('input', function () {
+        const clean = normalizeSlug(this.value) || 'kelasBaru';
+        if ($('cls-slug-preview')) $('cls-slug-preview').textContent = '/' + clean;
+      });
+    }
+    if ($('cls-form-reqkey')) {
+      $('cls-form-reqkey').addEventListener('change', function () {
+        if ($('cls-key-input-wrap')) $('cls-key-input-wrap').classList.toggle('hidden', !this.checked);
+      });
+    }
 
     // Filter & Paginasi Log Analitik
     if ($('log-search-input')) $('log-search-input').addEventListener('input', function () { state.logsPage = 1; renderAdminLogsTable(); });
@@ -2814,10 +4143,11 @@
     if ($('tok-sort-filter')) $('tok-sort-filter').addEventListener('change', renderAdminTokens);
     if ($('btn-export-tokens-csv')) {
       $('btn-export-tokens-csv').addEventListener('click', function () {
-        const rows = (state.adminData.tokens || []).map(function (tk) {
-          return [tk.token_id, tk.token_code, tk.tab_badge, tk.token_label, tk.batch_info, tk.copy_count || 0, tk.is_active !== false ? 'AKTIF' : 'NON-AKTIF'];
+        const activeCls = getActiveAdminClass();
+        const rows = getActiveClassTokens().map(function (tk) {
+          return [tk.token_id, activeCls.class_slug, tk.token_code, tk.tab_badge, tk.token_label, tk.batch_info, tk.copy_count || 0, tk.is_active !== false ? 'AKTIF' : 'NON-AKTIF'];
         });
-        exportCsvFile('ProductReceiver_Katalog_Token.csv', ['ID', 'Kode Token', 'Tab', 'Label Paket', 'Batch', 'Disalin', 'Status'], rows);
+        exportCsvFile('ProductReceiver_Token_' + activeCls.class_slug + '.csv', ['ID', 'Slug Kelas', 'Kode Token', 'Tab', 'Label Paket', 'Batch', 'Disalin', 'Status'], rows);
       });
     }
 
@@ -2846,25 +4176,19 @@
     }
   }
 
-  // Bootstrapping SWR (Stale-While-Revalidate): Instan <50ms dari LocalStorage lalu sinkronisasi background!
+  // Bootstrapping Multi-Kelas + Proteksi Origin + SWR Cache per Slug
   async function bootApplication() {
     try {
       const savedUser = localStorage.getItem(STORAGE_KEYS.SESSION_USER);
       if (savedUser) state.adminUser = JSON.parse(savedUser);
     } catch (e) { /* abaikan */ }
 
-    // 1. Render instan dari LocalStorage Cache jika tersedia
-    try {
-      const rawCache = localStorage.getItem(STORAGE_KEYS.PUB_CACHE);
-      if (rawCache) {
-        const parsed = JSON.parse(rawCache);
-        if (parsed && parsed.data && parsed.data.sections) {
-          state.pub = parsed.data;
-        }
-      }
-    } catch (e) { /* abaikan */ }
+    // Pulihkan path SPA (jika masuk via 404.html di GitHub Pages) lalu baca konteks rute URL
+    restoreSpaRedirectPath();
+    const route = resolveRouteContext();
+    state.currentSlug = route.slug;
+    state.currentKey = route.key;
 
-    renderPublicPortal();
     initCursorAndAnabul();
     bindEvents();
 
@@ -2875,28 +4199,134 @@
       openAuthModal(false);
     }
 
-    // 2. Revalidasi di latar belakang ke REST API Google Apps Script
+    // KASUS A: PENGUNJUNG MEMBUKA ROOT ORIGIN (misal https://panduanawal.vercel.app/)
+    // Wajib Login Google OAuth 2.0 Super Admin (Customer terblokir dari halaman Origin)
+    if (!route.slug) {
+      if (isGasConfigured() && state.sessionToken) {
+        showAdminView();
+        loadAdminBoot();
+        return;
+      }
+      showOriginGate('ORIGIN');
+      if (isGasConfigured()) {
+        api('auth.config', {}, { get: true }).then(function (res) {
+          if (res && res.data) {
+            state.pub.authConfig = res.data;
+            state._authCfgFetched = true;
+          }
+        }).catch(function () { /* abaikan */ });
+      }
+      return;
+    }
+
+    // KASUS B: CUSTOMER MEMBUKA URL KHUSUS KELAS (misal /kelasA, /kelasB, dst.)
+    const slugLower = route.slug.toLowerCase();
+    let savedKeysMap = {};
+    try {
+      savedKeysMap = JSON.parse(localStorage.getItem(STORAGE_KEYS.AUTH_KEYS) || '{}') || {};
+    } catch (e) { savedKeysMap = {}; }
+    const effectiveKey = route.key || savedKeysMap[slugLower] || '';
+
+    // Kunci Isolasi Lintas-Kelas: Customer Kelas A dilarang pindah ke /kelasB tanpa link berkunci baru
+    const lockedSlug = localStorage.getItem(STORAGE_KEYS.LOCKED_SLUG) || '';
+    if (!isSuperAdminLoggedIn() && lockedSlug && lockedSlug.toLowerCase() !== slugLower && !route.key) {
+      showOriginGate(
+        'BLOCKED',
+        'Akses Anda tercatat khusus untuk paket kelas "/' + lockedSlug + '". Demi keamanan token & grup eksklusif, Anda tidak dapat membuka URL paket kelas lain.'
+      );
+      return;
+    }
+
     if (isGasConfigured()) {
+      const cacheKey = STORAGE_KEYS.PUB_CACHE + slugLower;
+      let hasCachedPortal = false;
       try {
-        const res = await api('public.boot', {}, { get: true });
-        if (res && res.data) {
-          state.pub = res.data;
-          localStorage.setItem(STORAGE_KEYS.PUB_CACHE, JSON.stringify({
-            savedAt: Date.now(),
-            data: res.data
-          }));
-          renderPublicPortal();
+        const rawCache = localStorage.getItem(cacheKey);
+        if (rawCache) {
+          const parsed = JSON.parse(rawCache);
+          if (parsed && parsed.data && parsed.data.sections && !parsed.data.blocked) {
+            state.pub = parsed.data;
+            hasCachedPortal = true;
+            hideOriginGate();
+            if ($('public-view')) $('public-view').classList.remove('hidden');
+            renderPublicPortal();
+          }
+        }
+      } catch (e) { /* abaikan */ }
+
+      try {
+        const res = await api('public.boot', { slug: route.slug, key: effectiveKey }, { get: true });
+        const bootData = res && res.data ? res.data : null;
+        if (!bootData || res.blocked || bootData.blocked) {
+          localStorage.removeItem(cacheKey);
+          showOriginGate('BLOCKED', (res && res.message) || (bootData && bootData.message) || 'Halaman kelas tidak ditemukan atau membutuhkan link resmi pembelian.');
+          return;
+        }
+
+        state.pub = bootData;
+        if (!isSuperAdminLoggedIn()) {
+          localStorage.setItem(STORAGE_KEYS.LOCKED_SLUG, slugLower);
+        }
+        if (effectiveKey) {
+          savedKeysMap[slugLower] = effectiveKey;
+          try { localStorage.setItem(STORAGE_KEYS.AUTH_KEYS, JSON.stringify(savedKeysMap)); } catch (e) { /* abaikan */ }
+        }
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), data: bootData }));
+        } catch (e) { /* abaikan */ }
+
+        hideOriginGate();
+        if ($('public-view')) $('public-view').classList.remove('hidden');
+        renderPublicPortal();
+
+        const viewedKey = STORAGE_KEYS.VIEWED_SESSION + slugLower;
+        if (!sessionStorage.getItem(viewedKey)) {
+          sessionStorage.setItem(viewedKey, '1');
+          trackEvent('PAGE_VIEW', 'Landing Page /' + route.slug);
         }
       } catch (err) {
-        // Tetap tampil mulus menggunakan cache/default tanpa error mengganggu pembeli
-        console.warn('[ProductReceiver] Background sync info:', err.message);
+        if (!hasCachedPortal) {
+          showOriginGate('BLOCKED', err.message || 'Alamat URL kelas tidak ditemukan atau tidak dapat diakses.');
+        } else {
+          console.warn('[ProductReceiver] Background sync info:', err.message);
+        }
+      }
+    } else {
+      // Mode Pratinjau Lokal Multi-Kelas (ketika GAS_URL belum diisi)
+      const store = initOrLoadLocalDemoStore();
+      const cls = (store.classes || []).find(function (c) {
+        return c.is_active !== false && String(c.class_slug || '').toLowerCase() === slugLower;
+      });
+      if (!cls) {
+        showOriginGate('BLOCKED', 'Alamat URL kelas "/' + route.slug + '" tidak terdaftar atau sedang dinonaktifkan oleh Admin.');
+        return;
+      }
+      if (cls.require_key && cls.access_key && effectiveKey !== cls.access_key && !isSuperAdminLoggedIn()) {
+        showOriginGate('BLOCKED', 'Halaman kelas "/' + cls.class_slug + '" dilindungi Kunci Rahasia URL. Gunakan link utuh dari bukti pembelian Anda.');
+        return;
       }
 
-      // Catat 1x PAGE_VIEW per sesi tab browser pembeli
-      if (!sessionStorage.getItem(STORAGE_KEYS.VIEWED_SESSION)) {
-        sessionStorage.setItem(STORAGE_KEYS.VIEWED_SESSION, '1');
-        trackEvent('PAGE_VIEW', 'Landing Page Serah Terima');
+      if (!isSuperAdminLoggedIn()) {
+        localStorage.setItem(STORAGE_KEYS.LOCKED_SLUG, slugLower);
       }
+      const clsSecs = (store.sectionsByClass && store.sectionsByClass[cls.class_id]) || getDefaultBootData(cls.class_name, cls.class_slug, cls.class_id).sections;
+      state.pub = {
+        classInfo: {
+          class_id: cls.class_id,
+          class_slug: cls.class_slug,
+          class_name: cls.class_name,
+          description: cls.description || ''
+        },
+        sections: clsSecs,
+        tokens: (store.tokens || []).filter(function (tk) { return (tk.class_id || DEFAULT_CLASS_ID) === cls.class_id && tk.is_active !== false; }),
+        tutorials: (store.tutorials || [])
+          .filter(function (vd) { return (vd.class_id || DEFAULT_CLASS_ID) === cls.class_id && vd.is_active !== false; })
+          .sort(function (a, b) { return (Number(a.sort_order) || 99) - (Number(b.sort_order) || 99); }),
+        authConfig: { googleClientId: '', hasOAuth: false, emergencyLocked: false }
+      };
+      hideOriginGate();
+      if ($('public-view')) $('public-view').classList.remove('hidden');
+      renderPublicPortal();
     }
   }
 
@@ -2908,7 +4338,9 @@
     openTokenModal: openTokenModal,
     closeTokenModal: closeTokenModal,
     openTutorialModal: openTutorialModal,
-    closeTutorialModal: closeTutorialModal
+    closeTutorialModal: closeTutorialModal,
+    openClassModal: openClassModal,
+    closeClassModal: closeClassModal
   };
 
   if (document.readyState === 'loading') {
